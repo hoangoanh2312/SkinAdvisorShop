@@ -8,6 +8,9 @@ const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 const variantRoutes = require("./routes/variantRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+const voucherRoutes = require("./routes/voucherRoutes");
+const { orderRouter, adminOrderRouter } = require("./routes/orderRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +21,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/variants", variantRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/vouchers", voucherRoutes);
+app.use("/api/orders", orderRouter);
+app.use("/api/admin/orders", adminOrderRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({

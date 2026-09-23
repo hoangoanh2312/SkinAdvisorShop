@@ -8,6 +8,7 @@
     "test:models": "node scripts/testModels.js",
     "test:auth": "node scripts/testAuth.js",
     "test:catalog": "node scripts/testCatalogApi.js",
+    "test:commerce": "node scripts/testCommerceApi.js",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
