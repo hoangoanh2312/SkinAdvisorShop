@@ -9,6 +9,7 @@
     "test:auth": "node scripts/testAuth.js",
     "test:catalog": "node scripts/testCatalogApi.js",
     "test:commerce": "node scripts/testCommerceApi.js",
+    "test:ai": "node scripts/testAiApi.js",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },

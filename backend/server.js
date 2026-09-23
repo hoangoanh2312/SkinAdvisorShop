@@ -11,6 +11,7 @@ const variantRoutes = require("./routes/variantRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const voucherRoutes = require("./routes/voucherRoutes");
 const { orderRouter, adminOrderRouter } = require("./routes/orderRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,6 +26,7 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/vouchers", voucherRoutes);
 app.use("/api/orders", orderRouter);
 app.use("/api/admin/orders", adminOrderRouter);
+app.use("/api/ai", aiRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
