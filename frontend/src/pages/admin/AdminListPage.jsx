@@ -1,77 +1,16 @@
-import { Plus, Search } from "lucide-react";
-const content = {
-  categories: [
-    "Danh mục",
-    "Quản lý nhóm sản phẩm",
-    ["Sữa rửa mặt", "Toner", "Serum", "Kem dưỡng", "Kem chống nắng", "Mặt nạ"],
-  ],
-  orders: [
-    "Đơn hàng",
-    "Theo dõi và xử lý đơn hàng",
-    [
-      "#SKN-1048 — Đang giao",
-      "#SKN-1047 — Đã xác nhận",
-      "#SKN-1046 — Hoàn thành",
-    ],
-  ],
-  users: [
-    "Khách hàng",
-    "Quản lý tài khoản khách hàng",
-    ["Nguyễn Minh Anh", "Trần Hoàng My", "Lê Thu Hà"],
-  ],
-  vouchers: [
-    "Mã giảm giá",
-    "Chương trình ưu đãi",
-    [
-      "SKINORA10 — Giảm 10%",
-      "FREESHIP — Miễn phí vận chuyển",
-      "WELCOME15 — Giảm 15%",
-    ],
-  ],
+import { Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import axiosClient from "../../api/axiosClient";
+import { formatCurrency, formatDate, orderStatusLabel } from "../../utils/formatters";
+const config = {
+  categories: { title: "Danh mục", path: "/categories", key: "categories", label: (item) => item.name, detail: (item) => item.slug },
+  orders: { title: "Đơn hàng", path: "/admin/orders", key: "orders", label: (item) => `#${item._id.slice(-8).toUpperCase()}`, detail: (item) => `${formatCurrency(item.total)} · ${orderStatusLabel[item.orderStatus]}` },
+  vouchers: { title: "Mã giảm giá", path: "/vouchers", key: "vouchers", label: (item) => item.code, detail: (item) => `${item.discountValue}${item.discountType === "percent" ? "%" : "đ"}` },
 };
 export default function AdminListPage({ type }) {
-  const [title, desc, items] = content[type];
-  return (
-    <section className="admin-table-card">
-      <div className="table-title">
-        <div>
-          <h3>{title}</h3>
-          <p>{desc}</p>
-        </div>
-        <button className="btn btn-dark btn-small">
-          <Plus /> Thêm mới
-        </button>
-      </div>
-      <div className="admin-search">
-        <Search />
-        <input placeholder={`Tìm kiếm ${title.toLowerCase()}...`} />
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Tên / mã</th>
-            <th>Trạng thái</th>
-            <th>Cập nhật</th>
-            <th>Thao tác</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((x, i) => (
-            <tr key={x}>
-              <td>
-                <strong>{x}</strong>
-              </td>
-              <td>
-                <span className="status">Đang hoạt động</span>
-              </td>
-              <td>{15 + i}/09/2026</td>
-              <td>
-                <button className="text-link">Chỉnh sửa</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  );
+  const current = config[type]; const [items, setItems] = useState([]); const [query, setQuery] = useState(""); const [loading, setLoading] = useState(Boolean(current)); const [error, setError] = useState("");
+  useEffect(() => { if (!current) return; axiosClient.get(current.path, { sessionProtected: true }).then(({ data }) => setItems(data.data[current.key])).catch((requestError) => setError(requestError.response?.data?.message || "Không thể tải dữ liệu.")).finally(() => setLoading(false)); }, [current]);
+  if (!current) return <section className="admin-table-card"><h3>Khách hàng</h3><div className="empty"><p>Backend chưa có API quản lý người dùng. Không hiển thị dữ liệu giả.</p></div></section>;
+  const visible = items.filter((item) => `${current.label(item)} ${current.detail(item)}`.toLowerCase().includes(query.toLowerCase()));
+  return <section className="admin-table-card"><div className="table-title"><div><h3>{current.title}</h3><p>Dữ liệu trực tiếp từ backend</p></div></div><div className="admin-search"><Search /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={`Tìm kiếm ${current.title.toLowerCase()}...`} /></div>{loading ? <div className="empty">Đang tải...</div> : error ? <div className="empty">{error}</div> : visible.length ? <table><thead><tr><th>Tên / mã</th><th>Chi tiết</th><th>Cập nhật</th></tr></thead><tbody>{visible.map((item) => <tr key={item._id}><td><strong>{current.label(item)}</strong></td><td>{current.detail(item)}</td><td>{formatDate(item.updatedAt || item.createdAt)}</td></tr>)}</tbody></table> : <div className="empty">Chưa có dữ liệu.</div>}</section>;
 }

@@ -19,6 +19,8 @@ import CategoriesAdmin from "../pages/admin/CategoriesAdmin";
 import OrdersAdmin from "../pages/admin/OrdersAdmin";
 import UsersAdmin from "../pages/admin/UsersAdmin";
 import VouchersAdmin from "../pages/admin/VouchersAdmin";
+import OrderDetail from "../pages/OrderDetail";
+import { AdminRoute, ProtectedRoute } from "../components/common/RouteGuards";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -30,10 +32,14 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<OrderDetail />} />
+        </Route>
       </Route>
+      <Route element={<AdminRoute />}>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="products" element={<ProductsAdmin />} />
@@ -43,6 +49,7 @@ export default function AppRoutes() {
         <Route path="orders" element={<OrdersAdmin />} />
         <Route path="users" element={<UsersAdmin />} />
         <Route path="vouchers" element={<VouchersAdmin />} />
+      </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

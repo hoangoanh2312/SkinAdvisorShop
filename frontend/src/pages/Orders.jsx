@@ -1,26 +1,6 @@
 import { PackageSearch } from "lucide-react";
-import { formatPrice, recentOrders } from "../data/mockData";
-export default function Orders() {
-  return (
-    <div className="container orders-page">
-      <div className="page-intro compact">
-        <span className="eyebrow">LỊCH SỬ ĐƠN HÀNG</span>
-        <h1>Đơn hàng của tôi</h1>
-      </div>
-      <div className="order-cards">
-        {recentOrders.slice(0, 2).map((o) => (
-          <article key={o.id}>
-            <PackageSearch />
-            <div>
-              <strong>{o.id}</strong>
-              <span>Ngày đặt: {o.date}</span>
-            </div>
-            <b>{formatPrice(o.total)}</b>
-            <em>{o.status}</em>
-          </article>
-        ))}
-      </div>
-      <p className="demo-note">Dữ liệu đơn hàng hiện là dữ liệu minh họa.</p>
-    </div>
-  );
-}
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axiosClient from "../api/axiosClient";
+import { formatCurrency, formatDate, orderStatusLabel } from "../utils/formatters";
+export default function Orders() { const [orders, setOrders] = useState([]); const [loading, setLoading] = useState(true); const [error, setError] = useState(""); useEffect(() => { axiosClient.get("/orders/my-orders", { sessionProtected: true }).then(({ data }) => setOrders(data.data.orders)).catch((requestError) => setError(requestError.response?.data?.message || "Không thể tải đơn hàng.")).finally(() => setLoading(false)); }, []); return <div className="container orders-page"><div className="page-intro compact"><span className="eyebrow">LỊCH SỬ ĐƠN HÀNG</span><h1>Đơn hàng của tôi</h1></div>{loading ? <div className="empty"><p>Đang tải đơn hàng...</p></div> : error ? <div className="empty"><p>{error}</p></div> : orders.length ? <div className="order-cards">{orders.map((order) => <Link to={`/orders/${order._id}`} key={order._id}><article><PackageSearch /><div><strong>#{order._id.slice(-8).toUpperCase()}</strong><span>{formatDate(order.createdAt)} · {order.items.length} sản phẩm</span></div><b>{formatCurrency(order.total)}</b><em>{orderStatusLabel[order.orderStatus] || order.orderStatus}</em></article></Link>)}</div> : <div className="empty"><h2>Chưa có đơn hàng</h2><Link to="/products">Bắt đầu mua sắm</Link></div>}</div>; }

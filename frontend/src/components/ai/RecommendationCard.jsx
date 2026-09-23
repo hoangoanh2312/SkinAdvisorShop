@@ -1,6 +1,6 @@
 import { ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
-import { formatPrice } from "../../data/mockData";
+import { formatCurrency } from "../../utils/formatters";
 import { useCart } from "../../contexts/CartContext";
 export default function RecommendationCard({ product, reason }) {
   const { addToCart } = useCart();
@@ -10,7 +10,7 @@ export default function RecommendationCard({ product, reason }) {
       <div>
         <span>{product.brand}</span>
         <strong>{product.name}</strong>
-        <b>{formatPrice(product.salePrice)}</b>
+        <b>{formatCurrency(product.salePrice)}</b>
         <p>{reason}</p>
         <div>
           <Link to={`/products/${product.id}`}>Xem chi tiết</Link>

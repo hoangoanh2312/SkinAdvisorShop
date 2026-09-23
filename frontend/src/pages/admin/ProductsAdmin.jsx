@@ -1,61 +1,7 @@
-import { Edit3, Plus, Search, Trash2 } from "lucide-react";
+import { Edit3, Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { formatPrice, productData } from "../../data/mockData";
-export default function ProductsAdmin() {
-  return (
-    <section className="admin-table-card">
-      <div className="table-title">
-        <div>
-          <h3>Quản lý sản phẩm</h3>
-          <p>{productData.length} sản phẩm trong cửa hàng</p>
-        </div>
-        <Link className="btn btn-dark btn-small" to="/admin/products/new">
-          <Plus /> Thêm sản phẩm
-        </Link>
-      </div>
-      <div className="admin-search">
-        <Search />
-        <input placeholder="Tìm tên hoặc thương hiệu..." />
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Sản phẩm</th>
-            <th>Danh mục</th>
-            <th>Giá</th>
-            <th>Tồn kho</th>
-            <th>Thao tác</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productData.slice(0, 8).map((p) => (
-            <tr key={p.id}>
-              <td>
-                <div className="table-product">
-                  <img src={p.images[0]} />
-                  <span>
-                    <strong>{p.name}</strong>
-                    <small>{p.brand}</small>
-                  </span>
-                </div>
-              </td>
-              <td>{p.category}</td>
-              <td>{formatPrice(p.salePrice)}</td>
-              <td>{p.variants.reduce((n, v) => n + v.stock, 0)}</td>
-              <td>
-                <div className="row-actions">
-                  <Link to={`/admin/products/${p.id}/edit`}>
-                    <Edit3 />
-                  </Link>
-                  <button>
-                    <Trash2 />
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  );
-}
+import axiosClient from "../../api/axiosClient";
+import { formatCurrency } from "../../utils/formatters";
+import { normalizeProduct } from "../../utils/productAdapter";
+export default function ProductsAdmin() { const [products, setProducts] = useState([]); const [query, setQuery] = useState(""); const [loading, setLoading] = useState(true); const [error, setError] = useState(""); useEffect(() => { axiosClient.get("/products", { params: { limit: 100 }, sessionProtected: true }).then(({ data }) => setProducts(data.data.products.map(normalizeProduct))).catch((requestError) => setError(requestError.response?.data?.message || "Không thể tải sản phẩm.")).finally(() => setLoading(false)); }, []); const visible = products.filter((item) => `${item.name} ${item.brand}`.toLowerCase().includes(query.toLowerCase())); return <section className="admin-table-card"><div className="table-title"><div><h3>Quản lý sản phẩm</h3><p>{products.length} sản phẩm active</p></div><Link className="btn btn-dark btn-small" to="/admin/products/new">Thêm sản phẩm</Link></div><div className="admin-search"><Search /><input value={query} onChange={(e) => setQuery(e.target.value)} /></div>{loading ? <div className="empty">Đang tải...</div> : error ? <div className="empty">{error}</div> : <table><thead><tr><th>Sản phẩm</th><th>Danh mục</th><th>Giá</th><th>Thao tác</th></tr></thead><tbody>{visible.map((product) => <tr key={product.id}><td><div className="table-product"><img src={product.images[0]} /><span><strong>{product.name}</strong><small>{product.brand}</small></span></div></td><td>{product.categoryName}</td><td>{formatCurrency(product.salePrice)}</td><td><Link to={`/admin/products/${product.id}/edit`}><Edit3 /></Link></td></tr>)}</tbody></table>}</section>; }

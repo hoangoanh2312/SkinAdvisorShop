@@ -1,143 +1,17 @@
-import { Banknote, CreditCard, LockKeyhole } from "lucide-react";
+import { Banknote, LockKeyhole } from "lucide-react";
 import { useState } from "react";
-import { formatPrice } from "../data/mockData";
+import { Link, useNavigate } from "react-router-dom";
+import axiosClient from "../api/axiosClient";
+import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
+import { formatCurrency } from "../utils/formatters";
 export default function Checkout() {
-  const { items, total } = useCart(),
-    [payment, setPayment] = useState("cod"),
-    [done, setDone] = useState(false);
-  const submit = (e) => {
-    e.preventDefault();
-    setDone(true);
-  };
-  if (done)
-    return (
-      <div className="container success-page">
-        <span>✓</span>
-        <h1>Đã ghi nhận đơn hàng minh họa</h1>
-        <p>
-          Đây là giao diện thử nghiệm. Chưa có giao dịch hoặc đơn hàng thật nào
-          được tạo.
-        </p>
-        <button className="btn btn-dark" onClick={() => setDone(false)}>
-          Quay lại thanh toán
-        </button>
-      </div>
-    );
-  return (
-    <div className="container checkout-page">
-      <div className="page-intro compact">
-          <span className="eyebrow">THANH TOÁN AN TOÀN</span>
-        <h1>Thanh toán</h1>
-      </div>
-      <form className="checkout-grid" onSubmit={submit}>
-        <section className="checkout-form">
-          <h2>Thông tin nhận hàng</h2>
-          <div className="form-grid">
-            <label className="wide">
-              Họ và tên
-              <input required placeholder="Nguyễn Minh Anh" />
-            </label>
-            <label>
-              Email
-              <input required type="email" placeholder="email@example.com" />
-            </label>
-            <label>
-              Số điện thoại
-              <input required placeholder="09xx xxx xxx" />
-            </label>
-            <label>
-              Tỉnh / thành
-              <select required>
-                <option value="">Chọn tỉnh / thành</option>
-                <option>TP. Hồ Chí Minh</option>
-                <option>Hà Nội</option>
-                <option>Đà Nẵng</option>
-              </select>
-            </label>
-            <label>
-              Quận / huyện
-              <input required placeholder="Quận / huyện" />
-            </label>
-            <label>
-              Phường / xã
-              <input required placeholder="Phường / xã" />
-            </label>
-            <label className="wide">
-              Địa chỉ
-              <input required placeholder="Số nhà, tên đường" />
-            </label>
-          </div>
-          <h2>Phương thức thanh toán</h2>
-          <label
-            className={`payment-option ${payment === "cod" ? "active" : ""}`}
-          >
-            <input
-              type="radio"
-              name="payment"
-              checked={payment === "cod"}
-              onChange={() => setPayment("cod")}
-            />
-            <Banknote />
-            <span>
-              <strong>Thanh toán khi nhận hàng (COD)</strong>
-              <small>
-                Thanh toán bằng tiền mặt khi đơn hàng được giao tới.
-              </small>
-            </span>
-          </label>
-          <label
-            className={`payment-option ${payment === "vnpay" ? "active" : ""}`}
-          >
-            <input
-              type="radio"
-              name="payment"
-              checked={payment === "vnpay"}
-              onChange={() => setPayment("vnpay")}
-            />
-            <CreditCard />
-            <span>
-              <strong>VNPay</strong>
-              <small>Giao diện minh họa — chưa tích hợp thanh toán thật.</small>
-            </span>
-          </label>
-        </section>
-        <aside className="order-summary">
-          <h2>Tóm tắt đơn hàng</h2>
-          {items.map((i) => (
-            <div className="checkout-item" key={i.key}>
-              <img src={i.product.images[0]} />
-              <span>
-                {i.product.name}
-                <small>
-                  {i.variant.size} × {i.quantity}
-                </small>
-              </span>
-              <strong>{formatPrice(i.variant.price * i.quantity)}</strong>
-            </div>
-          ))}
-          <div>
-            <span>Tạm tính</span>
-            <strong>{formatPrice(total)}</strong>
-          </div>
-          <div>
-            <span>Vận chuyển</span>
-            <strong>{total >= 500000 ? "Miễn phí" : formatPrice(30000)}</strong>
-          </div>
-          <div className="summary-total">
-            <span>Tổng cộng</span>
-            <strong>
-              {formatPrice(total + (total && total < 500000 ? 30000 : 0))}
-            </strong>
-          </div>
-          <button className="btn btn-dark full" disabled={!items.length}>
-            Đặt hàng
-          </button>
-          <small>
-            <LockKeyhole /> Thông tin của bạn được bảo mật an toàn.
-          </small>
-        </aside>
-      </form>
-    </div>
-  );
+  const { user } = useAuth(); const { items, total, clearCart } = useCart(); const navigate = useNavigate();
+  const [address, setAddress] = useState({ fullName: user?.fullName || "", phone: user?.phone || "", province: "", district: "", ward: "", addressLine: "" }); const [voucherCode, setVoucherCode] = useState(""); const [voucher, setVoucher] = useState(null); const [error, setError] = useState(""); const [loading, setLoading] = useState(false); const [orderId, setOrderId] = useState("");
+  const change = (event) => setAddress({ ...address, [event.target.name]: event.target.value });
+  const validateVoucher = async () => { setError(""); try { const { data } = await axiosClient.post("/vouchers/validate", { code: voucherCode, orderValue: total }, { sessionProtected: true }); setVoucher(data.data); } catch (requestError) { setVoucher(null); setError(requestError.response?.data?.message || "Không thể kiểm tra voucher."); } };
+  const submit = async (event) => { event.preventDefault(); if (!items.length) return; setLoading(true); setError(""); try { const { data } = await axiosClient.post("/orders", { items: items.map((item) => ({ variantId: item.variantId, quantity: item.quantity })), shippingAddress: address, voucherCode: voucher?.code || "", paymentMethod: "COD" }, { sessionProtected: true }); setOrderId(data.data.order._id); clearCart(); } catch (requestError) { setError(requestError.response?.data?.message || "Không thể tạo đơn hàng."); } finally { setLoading(false); } };
+  if (orderId) return <div className="container success-page"><span>✓</span><h1>Đặt hàng thành công</h1><p>Đơn hàng của bạn đã được ghi nhận.</p><button className="btn btn-dark" onClick={() => navigate(`/orders/${orderId}`)}>Xem đơn hàng</button></div>;
+  if (!items.length) return <div className="container empty"><h2>Giỏ hàng đang trống</h2><Link to="/products">Tiếp tục mua sắm</Link></div>;
+  return <div className="container checkout-page"><div className="page-intro compact"><span className="eyebrow">THANH TOÁN AN TOÀN</span><h1>Thanh toán COD</h1></div><form className="checkout-grid" onSubmit={submit}><section className="checkout-form"><h2>Thông tin nhận hàng</h2><div className="form-grid">{[["fullName","Họ và tên"],["phone","Số điện thoại"],["province","Tỉnh / thành"],["district","Quận / huyện"],["ward","Phường / xã"],["addressLine","Địa chỉ"]].map(([name,label]) => <label className={name === "addressLine" ? "wide" : ""} key={name}>{label}<input required name={name} value={address[name]} onChange={change} /></label>)}</div><h2>Phương thức thanh toán</h2><label className="payment-option active"><input type="radio" checked readOnly /><Banknote /><span><strong>Thanh toán khi nhận hàng (COD)</strong><small>VNPay sẽ được tích hợp ở phase riêng.</small></span></label></section><aside className="order-summary"><h2>Tóm tắt đơn hàng</h2>{items.map((item) => <div className="checkout-item" key={item.key}><img src={item.image} /><span>{item.productName}<small>{item.variantName} × {item.quantity}</small></span><strong>{formatCurrency(item.displayPrice * item.quantity)}</strong></div>)}<div><span>Tạm tính</span><strong>{formatCurrency(total)}</strong></div><label>Mã giảm giá</label><div className="voucher"><input value={voucherCode} onChange={(e) => { setVoucherCode(e.target.value); setVoucher(null); }} /><button type="button" onClick={validateVoucher}>Áp dụng</button></div>{voucher && <div><span>Giảm giá</span><strong>-{formatCurrency(voucher.discount)}</strong></div>}<div className="summary-total"><span>Tạm tính sau giảm</span><strong>{formatCurrency(voucher?.finalValue ?? total)}</strong></div>{error && <p className="form-error">{error}</p>}<button className="btn btn-dark full" disabled={loading}>{loading ? "Đang đặt hàng..." : "Đặt hàng"}</button><small><LockKeyhole /> Giá và tồn kho được backend xác nhận lại.</small></aside></form></div>;
 }

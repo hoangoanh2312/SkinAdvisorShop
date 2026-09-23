@@ -2,7 +2,8 @@ import { ArrowRight, Bot, Check, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/product/ProductCard";
 import SectionTitle from "../components/common/SectionTitle";
-import { brands, formatPrice, productData } from "../data/mockData";
+import { brands, productData } from "../data/mockData";
+import { formatCurrency } from "../utils/formatters";
 const concerns = [
   [
     "DA MỤN",
@@ -79,9 +80,9 @@ const reviews = [
     "GH",
   ],
 ];
-export default function HomeContentVi() {
+export default function HomeContentVi({ products = [], loading, error }) {
   const suggested = productData[0],
-    featured = productData[3];
+    featured = products[0];
   return (
     <div className="new-home">
       <section className="manifesto">
@@ -121,12 +122,10 @@ export default function HomeContentVi() {
           }
         />
         <div className="product-grid luxury-grid">
-          {productData
-            .filter((p) => p.featured)
-            .slice(0, 4)
-            .map((p) => (
+          {products.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
+          {!loading && !products.length && <div className="empty"><p>{error || "Chưa có sản phẩm nổi bật."}</p></div>}
         </div>
       </section>
       <section id="skin-concerns" className="concern-editorial">
@@ -219,7 +218,7 @@ export default function HomeContentVi() {
                   <span>
                     <b>★★★★★</b> {suggested.rating}
                   </span>
-                  <em>{formatPrice(suggested.salePrice)}</em>
+                  <em>{formatCurrency(suggested.salePrice)}</em>
                 </div>
                 <button aria-label="Thêm sản phẩm">+</button>
               </div>
@@ -267,7 +266,7 @@ export default function HomeContentVi() {
           </div>
         </div>
       </section>
-      <section className="featured-editorial">
+      {featured && <section className="featured-editorial">
         <div className="featured-image">
           <img src={featured.images[0]} alt={featured.name} />
           <span>CHĂM SÓC HÀNG RÀO DA</span>
@@ -292,14 +291,14 @@ export default function HomeContentVi() {
             <span>Hyaluronic Acid</span>
           </div>
           <div className="featured-buy">
-            <strong>{formatPrice(featured.salePrice)}</strong>
-            <del>{formatPrice(featured.price)}</del>
+            <strong>{formatCurrency(featured.salePrice)}</strong>
+            <del>{formatCurrency(featured.price)}</del>
           </div>
           <Link className="btn btn-burgundy" to={`/products/${featured.id}`}>
             Khám phá sản phẩm <ArrowRight />
           </Link>
         </div>
-      </section>
+      </section>}
       <section className="routine-section container">
         <div className="split-heading">
           <span className="eyebrow">QUY TRÌNH TƯ VẤN</span>
