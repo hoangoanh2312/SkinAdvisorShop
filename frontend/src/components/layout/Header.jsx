@@ -41,6 +41,7 @@ export default function Header() {
             <NavLink to="/skin-advisor" className="ai-nav">
               Skin Advisor AI
             </NavLink>
+            <NavLink to="/skin-analysis" className="ai-nav">Phân tích da</NavLink>
           </nav>
           <form className="header-search" onSubmit={submit}>
             <Search />

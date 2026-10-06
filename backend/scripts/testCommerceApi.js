@@ -81,11 +81,12 @@ const run = async () => {
     expect(await request("/api/vouchers/validate", "POST", { code: expiredCode, orderValue: 200000 }, customerToken), 400, "Expired voucher");
     console.log("Voucher tests: passed");
 
-    const address = { fullName: "Commerce Customer", phone: "0900000000", province: "Ha Noi", district: "Ba Dinh", ward: "Cong Vi", addressLine: "1 Test Street" };
+    const address = { fullName: "Commerce Customer", phone: "0900000000", province: "Ha Noi", ward: "Cong Vi", address: "1 Test Street" };
     const orderPayload = { items: [{ variantId: variant._id, quantity: 2, unitPrice: 1, subtotal: 1 }], shippingAddress: address, voucherCode: voucherPayload.code, paymentMethod: "COD", total: 1, discount: 999999 };
     const orderCreate = await request("/api/orders", "POST", orderPayload, customerToken);
     expect(orderCreate, 201, "Create COD order");
     const order = orderCreate.body.data.order;
+    assert(order.shippingAddress.address === address.address && order.shippingAddress.district === undefined, "New order address must not require or store district");
     assert(order.items[0].unitPrice === 90000 && order.subtotal === 180000 && order.discount === 10000 && order.total === 170000, "Server-side order calculation is wrong");
     let variants = (await request(`/api/products/${product._id}/variants`)).body.data.variants;
     assert(variants.find((item) => item._id === String(variant._id)).stock === 8, "Stock was not deducted");

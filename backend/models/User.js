@@ -38,12 +38,15 @@ const addressSchema = new mongoose.Schema(
     fullName: { type: String, trim: true },
     phone: { type: String, trim: true },
     province: { type: String, trim: true },
-    district: { type: String, trim: true },
     ward: { type: String, trim: true },
+    address: { type: String, trim: true },
+    label: { type: String, trim: true, default: "" },
+    // Legacy fields remain optional so historical saved addresses stay readable.
+    district: { type: String, trim: true },
     addressLine: { type: String, trim: true },
     isDefault: { type: Boolean, default: false },
   },
-  { _id: false }
+  { _id: true }
 );
 
 const userSchema = new mongoose.Schema(

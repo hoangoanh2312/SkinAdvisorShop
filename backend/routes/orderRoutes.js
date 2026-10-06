@@ -1,5 +1,5 @@
 const express = require("express");
-const { createOrder, getMyOrders, getOrder, cancelOrder, listAdminOrders, updateOrderStatus } = require("../controllers/orderController");
+const { createOrder, getMyOrders, getOrder, cancelOrder, listAdminOrders, getAdminOrder, verifyBankTransferPayment, updateOrderStatus } = require("../controllers/orderController");
 const { protect, authorize } = require("../middleware/authMiddleware");
 
 const orderRouter = express.Router();
@@ -12,6 +12,8 @@ orderRouter.get("/:id", getOrder);
 const adminOrderRouter = express.Router();
 adminOrderRouter.use(protect, authorize("admin"));
 adminOrderRouter.get("/", listAdminOrders);
+adminOrderRouter.get("/:id", getAdminOrder);
+adminOrderRouter.put("/:id/payment/verify", verifyBankTransferPayment);
 adminOrderRouter.put("/:id/status", updateOrderStatus);
 
 module.exports = { orderRouter, adminOrderRouter };

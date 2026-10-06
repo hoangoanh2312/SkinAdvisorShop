@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import "./pages.css";
 import "./admin.css";
+import "./admin-orders.css";
+import "./skin-analysis.css";
 import "./luxury.css";
 import "./phase12.css";
 import App from "./App.jsx";

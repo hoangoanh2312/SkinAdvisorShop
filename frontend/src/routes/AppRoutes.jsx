@@ -5,6 +5,7 @@ import Home from "../pages/HomePage";
 import Products from "../pages/Products";
 import ProductDetail from "../pages/ProductDetail";
 import SkinAdvisor from "../pages/SkinAdvisor";
+import SkinAnalysis from "../pages/SkinAnalysis";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Cart from "../pages/Cart";
@@ -17,9 +18,12 @@ import ProductsAdmin from "../pages/admin/ProductsAdmin";
 import ProductForm from "../pages/admin/ProductForm";
 import CategoriesAdmin from "../pages/admin/CategoriesAdmin";
 import OrdersAdmin from "../pages/admin/OrdersAdmin";
+import OrderAdminDetail from "../pages/admin/OrderAdminDetail";
 import UsersAdmin from "../pages/admin/UsersAdmin";
 import VouchersAdmin from "../pages/admin/VouchersAdmin";
 import OrderDetail from "../pages/OrderDetail";
+import PaymentResult from "../pages/PaymentResult";
+import BankTransfer from "../pages/BankTransfer";
 import { AdminRoute, ProtectedRoute } from "../components/common/RouteGuards";
 export default function AppRoutes() {
   return (
@@ -32,11 +36,14 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/payment/result" element={<PaymentResult />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
+          <Route path="/payment/bank-transfer/:orderId" element={<BankTransfer />} />
+          <Route path="/skin-analysis" element={<SkinAnalysis />} />
         </Route>
       </Route>
       <Route element={<AdminRoute />}>
@@ -47,6 +54,7 @@ export default function AppRoutes() {
         <Route path="products/:id/edit" element={<ProductForm />} />
         <Route path="categories" element={<CategoriesAdmin />} />
         <Route path="orders" element={<OrdersAdmin />} />
+        <Route path="orders/:id" element={<OrderAdminDetail />} />
         <Route path="users" element={<UsersAdmin />} />
         <Route path="vouchers" element={<VouchersAdmin />} />
       </Route>
