@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "test:role-navigation": "vitest run src/test/roleNavigation.test.jsx src/test/routeGuards.test.jsx src/test/authContext.test.jsx",
+    "test:product-image-ux": "vitest run src/test/productImageAutoUpload.test.jsx",
     "preview": "vite preview"
   },
   "dependencies": {
