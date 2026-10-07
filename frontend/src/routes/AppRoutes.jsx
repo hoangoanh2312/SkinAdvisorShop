@@ -24,7 +24,7 @@ import VouchersAdmin from "../pages/admin/VouchersAdmin";
 import OrderDetail from "../pages/OrderDetail";
 import PaymentResult from "../pages/PaymentResult";
 import BankTransfer from "../pages/BankTransfer";
-import { AdminRoute, ProtectedRoute } from "../components/common/RouteGuards";
+import { AdminRoute, CustomerRoute, ProtectedRoute } from "../components/common/RouteGuards";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -38,12 +38,14 @@ export default function AppRoutes() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment/result" element={<PaymentResult />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/skin-analysis" element={<SkinAnalysis />} />
+        </Route>
+        <Route element={<CustomerRoute />}>
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/payment/bank-transfer/:orderId" element={<BankTransfer />} />
-          <Route path="/skin-analysis" element={<SkinAnalysis />} />
         </Route>
       </Route>
       <Route element={<AdminRoute />}>
