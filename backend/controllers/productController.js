@@ -4,7 +4,7 @@ const Variant = require("../models/Variant");
 const { isValidObjectId, escapeRegex, pick, sendControllerError } = require("../utils/controllerHelpers");
 
 const PRODUCT_FIELDS = [
-  "name", "slug", "brand", "category", "description", "shortDescription", "images",
+  "name", "slug", "brand", "category", "description", "shortDescription",
   "skinTypes", "skinConcerns", "ingredients", "keyIngredients", "avoidFor", "usage",
   "warnings", "basePrice", "salePrice", "averageRating", "reviewCount", "soldCount",
   "isFeatured", "isActive",

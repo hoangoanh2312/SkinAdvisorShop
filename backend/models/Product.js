@@ -25,6 +25,14 @@ const ingredientSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const imageAssetSchema = new mongoose.Schema({
+  url: { type: String, required: true, trim: true },
+  publicId: { type: String, required: true, trim: true },
+  format: { type: String, default: "", trim: true },
+  width: { type: Number, default: null }, height: { type: Number, default: null },
+  bytes: { type: Number, default: null }, createdAt: { type: Date, default: Date.now },
+});
+
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -44,6 +52,7 @@ const productSchema = new mongoose.Schema(
     shortDescription: { type: String, default: "" },
     description: { type: String, default: "" },
     images: [{ type: String }],
+    imageAssets: { type: [imageAssetSchema], default: [] },
     skinTypes: [{ type: String, enum: PRODUCT_SKIN_TYPES }],
     skinConcerns: [{ type: String, enum: SKIN_CONCERNS }],
     ingredients: { type: [ingredientSchema], default: [] },

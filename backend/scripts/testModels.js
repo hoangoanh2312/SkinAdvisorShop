@@ -15,6 +15,7 @@ const models = [
   ["Voucher", require("../models/Voucher")],
   ["Order", require("../models/Order")],
   ["SkinAnalysis", require("../models/SkinAnalysis")],
+  ["ImageCleanupTask", require("../models/ImageCleanupTask")],
 ];
 
 const testModels = async () => {
