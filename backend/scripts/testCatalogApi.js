@@ -2,11 +2,12 @@ require("dotenv").config({ quiet: true });
 
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const { startTestServer } = require("../utils/testServer");
 const User = require("../models/User");
 
 mongoose.set("autoIndex", false);
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://127.0.0.1:5000";
+let API_BASE_URL;
 const uniquePart = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const adminEmail = `skinora.catalog.admin.${uniquePart}@example.com`;
 const customerEmail = `skinora.catalog.customer.${uniquePart}@example.com`;
@@ -46,7 +47,11 @@ const expectStatus = (result, status, label) => {
 };
 
 const run = async () => {
+  let testServer;
   try {
+    testServer = await startTestServer();
+    API_BASE_URL = testServer.baseUrl;
+    console.log(`Test database: ${testServer.databaseName}`);
     console.log(`Admin test email: ${adminEmail}`);
     console.log(`Customer test email: ${customerEmail}`);
 
@@ -60,14 +65,12 @@ const run = async () => {
     expectStatus(await jsonRequest("/api/products", "POST", {}), 401, "Product without token");
     console.log("No-token writes: passed (HTTP 401)");
 
-    await mongoose.connect(process.env.MONGO_URI);
     const admin = await User.create({
       fullName: "Skinora Catalog Admin Test",
       email: adminEmail,
       password: await bcrypt.hash(password, 12),
       role: "admin",
     });
-    await mongoose.connection.close();
     assert(admin.role === "admin", "Test admin was not created with admin role");
 
     const customerRegister = await jsonRequest("/api/auth/register", "POST", {
@@ -198,13 +201,13 @@ const run = async () => {
     assert(!postDeleteList.body.data.products.some((item) => item._id === productId), "Inactive product remained public");
     console.log("Soft delete and public exclusion: passed");
 
-    console.log(`Test data retained: admin=${adminEmail}, customer=${customerEmail}, category=${categoryId}, product=${productId}, variant=${variantId}`);
+    console.log(`Isolated test data verified: admin=${adminEmail}, customer=${customerEmail}, category=${categoryId}, product=${productId}, variant=${variantId}`);
     console.log("All catalog API tests passed");
   } catch (error) {
     console.error(`Catalog API test failed: ${error.message}`);
     process.exitCode = 1;
   } finally {
-    if (mongoose.connection.readyState !== 0) await mongoose.connection.close();
+    if (testServer) await testServer.close();
   }
 };
 

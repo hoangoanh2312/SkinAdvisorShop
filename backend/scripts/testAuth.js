@@ -2,11 +2,12 @@ require("dotenv").config({ quiet: true });
 
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const { startTestServer } = require("../utils/testServer");
 const User = require("../models/User");
 
 mongoose.set("autoIndex", false);
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://127.0.0.1:5000";
+let API_BASE_URL;
 const uniquePart = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const testEmail = `skinora.auth.test.${uniquePart}@example.com`;
 const testPassword = `Test-${uniquePart}`;
@@ -28,7 +29,11 @@ const request = async (path, options = {}) => {
 };
 
 const run = async () => {
+  let testServer;
   try {
+    testServer = await startTestServer();
+    API_BASE_URL = testServer.baseUrl;
+    console.log(`Test database: ${testServer.databaseName}`);
     console.log(`Test email: ${testEmail}`);
 
     const register = await request("/api/auth/register", {
@@ -85,7 +90,6 @@ const run = async () => {
     assert(duplicate.status === 409, `Duplicate email expected 409, received ${duplicate.status}`);
     console.log("Duplicate email: passed (HTTP 409)");
 
-    await mongoose.connect(process.env.MONGO_URI);
     const collections = await mongoose.connection.db.listCollections({ name: "users" }).toArray();
     const storedUser = await User.findOne({ email: testEmail }).select("+password").lean();
 
@@ -101,9 +105,7 @@ const run = async () => {
     console.error(`Authentication test failed: ${error.message}`);
     process.exitCode = 1;
   } finally {
-    if (mongoose.connection.readyState !== 0) {
-      await mongoose.connection.close();
-    }
+    if (testServer) await testServer.close();
   }
 };
 

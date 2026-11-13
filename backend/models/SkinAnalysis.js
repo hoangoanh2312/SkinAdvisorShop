@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const concernSchema = new mongoose.Schema({ key: { type: String, required: true }, label: { type: String, required: true }, confidence: { type: Number, min: 0, max: 1, required: true } }, { _id: false });
+const concernSchema = new mongoose.Schema({ key: { type: String, required: true }, label: { type: String, required: true }, confidence: { type: Number, min: 0, max: 1, required: true }, evidence: { type: String, maxlength: 180, default: "" } }, { _id: false });
 const recommendationSchema = new mongoose.Schema({ product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true }, score: { type: Number, min: 0, required: true }, reasons: [{ type: String, trim: true }] }, { _id: false });
 
 const skinAnalysisSchema = new mongoose.Schema({
@@ -10,7 +10,9 @@ const skinAnalysisSchema = new mongoose.Schema({
   result: {
     skinType: { type: String, enum: ["oily", "dry", "normal", "combination", "unknown"], required: true },
     skinTypeLabel: { type: String, required: true }, confidence: { type: Number, min: 0, max: 1, required: true },
-    concerns: { type: [concernSchema], default: [] }, recommendedIngredients: [{ type: String, trim: true }],
+    concerns: { type: [concernSchema], default: [] }, possibleConcerns: { type: [concernSchema], default: [] }, recommendedIngredients: [{ type: String, trim: true }],
+    ingredientGuidance: { type: [{ name: String, reason: String }], default: [] },
+    ingredientSuggestionSource: { type: String, default: "insufficient_evidence" },
     warnings: [{ type: String, trim: true }], analysisSource: { type: String, required: true },
   },
   recommendedProducts: { type: [recommendationSchema], default: [] },

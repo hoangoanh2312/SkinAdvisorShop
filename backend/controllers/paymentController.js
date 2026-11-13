@@ -1,3 +1,5 @@
+const { recordStockMovement } = require("../services/stockLedger");
+const { paymentCapabilities } = require("../services/paymentCapabilities");
 const mongoose = require("mongoose");
 const Order = require("../models/Order");
 const Variant = require("../models/Variant");
@@ -8,10 +10,13 @@ const { buildVietQrPayload, VietQrError } = require("../services/vietqrService")
 const publicOrderResult = (order, params) => ({
   orderId: String(order._id),
   paymentStatus: order.paymentStatus,
-  result: order.paymentStatus === "paid" ? "success" : params.vnp_ResponseCode === "00" ? "pending" : "failed",
+  result: order.paymentStatus === "paid" ? "success" :
+    order.orderStatus !== "pending" || ["failed", "refunded"].includes(order.paymentStatus)
+      ? "failed" : params.vnp_ResponseCode === "00" ? "pending" : "failed",
 });
 
 const createVnpayPayment = async (req, res) => {
+  if (!paymentCapabilities().VNPAY.available) return res.status(503).json({ success: false, message: "VNPay chưa sẵn sàng để thanh toán thực tế" });
   if (!isValidObjectId(req.body?.orderId)) return res.status(400).json({ success: false, message: "ID đơn hàng không hợp lệ" });
   try {
     const order = await Order.findById(req.body.orderId);
@@ -115,6 +120,11 @@ const vnpayReturn = async (req, res) => {
   }
 };
 
+// Only an unpaid, still-pending order may accept a new VNPay callback.
+// Cancelled orders must never consume inventory or be marked paid by a late IPN.
+const isVnpayOrderPayable = (order) => order?.paymentMethod === "VNPAY" &&
+  order.orderStatus === "pending" && order.paymentStatus === "unpaid";
+
 const saveCallbackDetails = (order, params) => {
   order.vnpayTransactionNo = params.vnp_TransactionNo || "";
   order.vnpayBankCode = params.vnp_BankCode || "";
@@ -130,6 +140,7 @@ const vnpayIpn = async (req, res) => {
     if (checked.error === "ORDER_NOT_FOUND") return res.status(200).json({ RspCode: "01", Message: "Order not found" });
     if (checked.error === "INVALID_AMOUNT") return res.status(200).json({ RspCode: "04", Message: "Invalid amount" });
     if (checked.order.paymentStatus === "paid") return res.status(200).json({ RspCode: "02", Message: "Order already confirmed" });
+    if (!isVnpayOrderPayable(checked.order)) return res.status(200).json({ RspCode: "02", Message: "Order no longer payable" });
 
     const successful = params.vnp_ResponseCode === "00" && params.vnp_TransactionStatus === "00";
     const session = await mongoose.startSession();
@@ -138,6 +149,7 @@ const vnpayIpn = async (req, res) => {
       await session.withTransaction(async () => {
         const order = await Order.findById(checked.order._id).select("+stockDeducted +stockRestored").session(session);
         if (order.paymentStatus === "paid") { duplicate = true; return; }
+        if (!isVnpayOrderPayable(order)) throw new Error("ORDER_NOT_PAYABLE");
         saveCallbackDetails(order, params);
         if (successful) {
           if (!order.stockDeducted) {
@@ -147,6 +159,7 @@ const vnpayIpn = async (req, res) => {
                 { $inc: { stock: -item.quantity } }, { session }
               );
               if (result.modifiedCount !== 1) throw new Error("INSUFFICIENT_STOCK");
+              await recordStockMovement({ item, kind: 'sale', delta: -item.quantity, note: 'Xuất kho sau VNPay IPN', reference: order.orderCode || order._id, session });
             }
             order.stockDeducted = true;
           }
@@ -161,10 +174,11 @@ const vnpayIpn = async (req, res) => {
     if (duplicate) return res.status(200).json({ RspCode: "02", Message: "Order already confirmed" });
     return res.status(200).json({ RspCode: "00", Message: "Confirm Success" });
   } catch (error) {
+    if (error.message === "ORDER_NOT_PAYABLE") return res.status(200).json({ RspCode: "02", Message: "Order no longer payable" });
     if (error instanceof VnpayError) return res.status(200).json({ RspCode: "99", Message: "Configuration error" });
     console.error(`VNPay IPN failed: ${error.message === "INSUFFICIENT_STOCK" ? "INSUFFICIENT_STOCK" : error.name || "Error"}`);
     return res.status(200).json({ RspCode: "99", Message: "Unknown error" });
   }
 };
 
-module.exports = { createVnpayPayment, vnpayReturn, vnpayIpn, getBankTransfer, confirmBankTransfer };
+module.exports = { createVnpayPayment, vnpayReturn, vnpayIpn, getBankTransfer, confirmBankTransfer, isVnpayOrderPayable, publicOrderResult };

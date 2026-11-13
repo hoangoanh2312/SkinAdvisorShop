@@ -1,0 +1,338 @@
+[
+  {
+    "index": 1,
+    "slug": "cosrx-advanced-snail-96-mucin-power-essence",
+    "name": "COSRX Advanced Snail 96 Mucin Power Essence",
+    "brand": "COSRX",
+    "file": null
+  },
+  {
+    "index": 2,
+    "slug": "cosrx-low-ph-good-morning-gel-cleanser",
+    "name": "COSRX Low pH Good Morning Gel Cleanser",
+    "brand": "COSRX",
+    "file": "anh/COSRX/02_cosrx_low_ph_good_morning_gel_cleanser.webp"
+  },
+  {
+    "index": 3,
+    "slug": "cosrx-bha-blackhead-power-liquid",
+    "name": "COSRX BHA Blackhead Power Liquid",
+    "brand": "COSRX",
+    "file": "anh/COSRX/03_cosrx_bha_blackhead_power_liquid.webp"
+  },
+  {
+    "index": 4,
+    "slug": "cosrx-advanced-snail-92-all-in-one-cream",
+    "name": "COSRX Advanced Snail 92 All In One Cream",
+    "brand": "COSRX",
+    "file": "anh/COSRX/04_cosrx_advanced_snail_92_all_in_one_cream.webp"
+  },
+  {
+    "index": 5,
+    "slug": "cosrx-aha-bha-clarifying-treatment-toner",
+    "name": "COSRX AHA/BHA Clarifying Treatment Toner",
+    "brand": "COSRX",
+    "file": "anh/COSRX/05_cosrx_aha_bha_clarifying_treatment_toner.webp"
+  },
+  {
+    "index": 6,
+    "slug": "cerave-hydrating-facial-cleanser",
+    "name": "CeraVe Hydrating Facial Cleanser",
+    "brand": "CeraVe",
+    "file": "anh/CeraVe/06_cerave_hydrating_facial_cleanser.webp"
+  },
+  {
+    "index": 7,
+    "slug": "cerave-foaming-facial-cleanser",
+    "name": "CeraVe Foaming Facial Cleanser",
+    "brand": "CeraVe",
+    "file": "anh/CeraVe/07_cerave_foaming_facial_cleanser.webp"
+  },
+  {
+    "index": 8,
+    "slug": "cerave-moisturizing-cream",
+    "name": "CeraVe Moisturizing Cream",
+    "brand": "CeraVe",
+    "file": "anh/CeraVe/08_cerave_moisturizing_cream.jpg"
+  },
+  {
+    "index": 9,
+    "slug": "cerave-pm-facial-moisturizing-lotion",
+    "name": "CeraVe PM Facial Moisturizing Lotion",
+    "brand": "CeraVe",
+    "file": "anh/CeraVe/09_cerave_pm_facial_moisturizing_lotion.webp"
+  },
+  {
+    "index": 10,
+    "slug": "cerave-resurfacing-retinol-serum",
+    "name": "CeraVe Resurfacing Retinol Serum",
+    "brand": "CeraVe",
+    "file": "anh/CeraVe/10_cerave_resurfacing_retinol_serum.webp"
+  },
+  {
+    "index": 11,
+    "slug": "la-roche-posay-toleriane-hydrating-gentle-facial-cleanser",
+    "name": "La Roche-Posay Toleriane Hydrating Gentle Facial Cleanser",
+    "brand": "La Roche-Posay",
+    "file": "anh/La_Roche_Posay/11.jpg"
+  },
+  {
+    "index": 12,
+    "slug": "la-roche-posay-effaclar-purifying-foaming-gel",
+    "name": "La Roche-Posay Effaclar Purifying Foaming Gel",
+    "brand": "La Roche-Posay",
+    "file": "anh/La_Roche_Posay/12.jpg"
+  },
+  {
+    "index": 13,
+    "slug": "la-roche-posay-cicaplast-balm-b5",
+    "name": "La Roche-Posay Cicaplast Balm B5+",
+    "brand": "La Roche-Posay",
+    "file": "anh/La_Roche_Posay/13_la_roche_posay_cicaplast_balm_b5.webp"
+  },
+  {
+    "index": 14,
+    "slug": "la-roche-posay-hyalu-b5-pure-hyaluronic-acid-serum",
+    "name": "La Roche-Posay Hyalu B5 Pure Hyaluronic Acid Serum",
+    "brand": "La Roche-Posay",
+    "file": "anh/La_Roche_Posay/14_la_roche_posay_hyalu_b5_pure_hyaluronic_acid_serum.jpg"
+  },
+  {
+    "index": 15,
+    "slug": "la-roche-posay-anthelios-ultra-light-fluid-facial-sunscreen-spf-60",
+    "name": "La Roche-Posay Anthelios Ultra-Light Fluid Facial Sunscreen SPF 60",
+    "brand": "La Roche-Posay",
+    "file": "anh/La_Roche_Posay/15.jpg"
+  },
+  {
+    "index": 16,
+    "slug": "bioderma-sensibio-h2o",
+    "name": "Bioderma Sensibio H2O",
+    "brand": "Bioderma",
+    "file": "anh/Bioderma/16.jpg"
+  },
+  {
+    "index": 17,
+    "slug": "bioderma-sensibio-gel-moussant",
+    "name": "Bioderma Sensibio Gel Moussant",
+    "brand": "Bioderma",
+    "file": "anh/Bioderma/17.jpg"
+  },
+  {
+    "index": 18,
+    "slug": "bioderma-sebium-gel-moussant",
+    "name": "Bioderma Sébium Gel Moussant",
+    "brand": "Bioderma",
+    "file": "anh/Bioderma/18_bioderma_sebium_gel_moussant.png"
+  },
+  {
+    "index": 19,
+    "slug": "bioderma-atoderm-intensive-baume",
+    "name": "Bioderma Atoderm Intensive Baume",
+    "brand": "Bioderma",
+    "file": "anh/Bioderma/19.jpg"
+  },
+  {
+    "index": 20,
+    "slug": "bioderma-sebium-mat-control",
+    "name": "Bioderma Sébium Mat Control",
+    "brand": "Bioderma",
+    "file": "anh/Bioderma/20_bioderma_sebium_mat_control.jpg"
+  },
+  {
+    "index": 21,
+    "slug": "hada-labo-advanced-nourish-hyaluronic-acid-serum",
+    "name": "Hada Labo ADVANCED NOURISH Hyaluronic Acid Serum",
+    "brand": "Hada Labo",
+    "file": "anh/Hada_Labo/21_hada_labo_advanced_nourish_hyaluronic_acid_serum.webp"
+  },
+  {
+    "index": 22,
+    "slug": "hada-labo-advanced-nourish-hyaluronic-acid-cream",
+    "name": "Hada Labo ADVANCED NOURISH Hyaluronic Acid Cream",
+    "brand": "Hada Labo",
+    "file": "anh/Hada_Labo/22_hada_labo_advanced_nourish_hyaluronic_acid_cream.jpg"
+  },
+  {
+    "index": 23,
+    "slug": "hada-labo-perfect-white-tranexamic-acid-serum",
+    "name": "Hada Labo PERFECT WHITE Tranexamic Acid Serum",
+    "brand": "Hada Labo",
+    "file": "anh/Hada_Labo/23_hada_labo_perfect_white_tranexamic_acid_serum.jpg"
+  },
+  {
+    "index": 24,
+    "slug": "hada-labo-acne-care-calming-gel-cream",
+    "name": "Hada Labo ACNE CARE Calming Gel Cream",
+    "brand": "Hada Labo",
+    "file": "anh/Hada_Labo/24.jpg"
+  },
+  {
+    "index": 25,
+    "slug": "hada-labo-advanced-nourish-hyaluronic-acid-lotion-oily-skin",
+    "name": "Hada Labo ADVANCED NOURISH Hyaluronic Acid Lotion (Oily Skin)",
+    "brand": "Hada Labo",
+    "file": "anh/Hada_Labo/25_hada_labo_advanced_nourish_hyaluronic_acid_lotion_oily_skin.jpg"
+  },
+  {
+    "index": 26,
+    "slug": "anessa-perfect-uv-sunscreen-skincare-milk-na-spf50-pa",
+    "name": "Anessa Perfect UV Sunscreen Skincare Milk NA SPF50+ PA++++",
+    "brand": "Anessa",
+    "file": "anh/anessa/anessa_perfect_uv_sunscreen_skincare_milk_na_60ml.png"
+  },
+  {
+    "index": 27,
+    "slug": "anessa-perfect-uv-sunscreen-mild-milk-na-spf50-pa",
+    "name": "Anessa Perfect UV Sunscreen Mild Milk NA SPF50+ PA++++",
+    "brand": "Anessa",
+    "file": "anh/anessa/anessa_perfect_uv_sunscreen_mild_milk_na_60ml.png"
+  },
+  {
+    "index": 28,
+    "slug": "anessa-perfect-uv-sunscreen-skincare-gel-nb-spf50-pa",
+    "name": "Anessa Perfect UV Sunscreen Skincare Gel NB SPF50+ PA++++",
+    "brand": "Anessa",
+    "file": "anh/anessa/anessa_perfect_uv_sunscreen_skincare_gel_nb_90g.png"
+  },
+  {
+    "index": 29,
+    "slug": "anessa-brightening-uv-sunscreen-gel-na-spf50-pa",
+    "name": "Anessa Brightening UV Sunscreen Gel NA SPF50+ PA++++",
+    "brand": "Anessa",
+    "file": "anh/anessa/anessa_brightening_uv_sunscreen_gel_na_90g.png"
+  },
+  {
+    "index": 30,
+    "slug": "skin1004-madagascar-centella-ampoule",
+    "name": "SKIN1004 Madagascar Centella Ampoule",
+    "brand": "SKIN1004",
+    "file": "anh/1004/skin1004_centella_ampoule_100ml.png"
+  },
+  {
+    "index": 31,
+    "slug": "skin1004-madagascar-centella-light-cleansing-oil",
+    "name": "SKIN1004 Madagascar Centella Light Cleansing Oil",
+    "brand": "SKIN1004",
+    "file": "anh/1004/skin1004_centella_light_cleansing_oil_200ml.png"
+  },
+  {
+    "index": 32,
+    "slug": "skin1004-madagascar-centella-ampoule-foam",
+    "name": "SKIN1004 Madagascar Centella Ampoule Foam",
+    "brand": "SKIN1004",
+    "file": "anh/1004/skin1004_centella_ampoule_foam_125ml.png"
+  },
+  {
+    "index": 33,
+    "slug": "skin1004-madagascar-centella-soothing-cream",
+    "name": "SKIN1004 Madagascar Centella Soothing Cream",
+    "brand": "SKIN1004",
+    "file": "anh/1004/skin1004_centella_soothing_cream_75ml.png"
+  },
+  {
+    "index": 34,
+    "slug": "skin1004-madagascar-centella-hyalu-cica-water-fit-sun-serum",
+    "name": "SKIN1004 Madagascar Centella Hyalu-Cica Water-Fit Sun Serum",
+    "brand": "SKIN1004",
+    "file": "anh/1004/skin1004_hyalu_cica_water_fit_sun_serum_uv_50ml.jpg"
+  },
+  {
+    "index": 35,
+    "slug": "paulas-choice-skin-perfecting-2-bha-liquid-exfoliant",
+    "name": "Paula's Choice Skin Perfecting 2% BHA Liquid Exfoliant",
+    "brand": "Paula's Choice",
+    "file": "anh/Paulas_Choice/paulas_choice_skin_perfecting_2_bha_liquid_exfoliant.jpg"
+  },
+  {
+    "index": 36,
+    "slug": "paulas-choice-10-niacinamide-booster",
+    "name": "Paula's Choice 10% Niacinamide Booster",
+    "brand": "Paula's Choice",
+    "file": "anh/Paulas_Choice/paulas_choice_10_niacinamide_booster.jpg"
+  },
+  {
+    "index": 37,
+    "slug": "paulas-choice-calm-ultra-gentle-cleanser",
+    "name": "Paula's Choice CALM Ultra-Gentle Cleanser",
+    "brand": "Paula's Choice",
+    "file": "anh/Paulas_Choice/paulas_choice_calm_ultra_gentle_cleanser.jpg"
+  },
+  {
+    "index": 38,
+    "slug": "paulas-choice-resist-barrier-repair-advanced-moisturizer",
+    "name": "Paula's Choice RESIST Barrier Repair Advanced Moisturizer",
+    "brand": "Paula's Choice",
+    "file": "anh/Paulas_Choice/paulas_choice_resist_barrier_repair_advanced_moisturizer.jpg"
+  },
+  {
+    "index": 39,
+    "slug": "the-ordinary-niacinamide-10-zinc-1",
+    "name": "The Ordinary Niacinamide 10% + Zinc 1%",
+    "brand": "The Ordinary",
+    "file": "anh/The_Ordinary/39_the_ordinary_niacinamide_10_zinc_1.webp"
+  },
+  {
+    "index": 40,
+    "slug": "the-ordinary-hyaluronic-acid-2-b5-with-ceramides",
+    "name": "The Ordinary Hyaluronic Acid 2% + B5 (with Ceramides)",
+    "brand": "The Ordinary",
+    "file": null
+  },
+  {
+    "index": 41,
+    "slug": "the-ordinary-glycolic-acid-7-exfoliating-toner",
+    "name": "The Ordinary Glycolic Acid 7% Exfoliating Toner",
+    "brand": "The Ordinary",
+    "file": "anh/The_Ordinary/41_the_ordinary_glycolic_acid_7_exfoliating_toner.jpg"
+  },
+  {
+    "index": 42,
+    "slug": "the-ordinary-azelaic-acid-suspension-10",
+    "name": "The Ordinary Azelaic Acid Suspension 10%",
+    "brand": "The Ordinary",
+    "file": "anh/The_Ordinary/42_the_ordinary_azelaic_acid_suspension_10.webp"
+  },
+  {
+    "index": 43,
+    "slug": "the-ordinary-natural-moisturizing-factors-ha",
+    "name": "The Ordinary Natural Moisturizing Factors + HA",
+    "brand": "The Ordinary",
+    "file": "anh/The_Ordinary/43_the_ordinary_natural_moisturizing_factors_ha.jpg"
+  },
+  {
+    "index": 44,
+    "slug": "cocoon-tinh-chat-bi-ao-n7",
+    "name": "Cocoon Tinh chất bí đao N7",
+    "brand": "Cocoon",
+    "file": "anh/cocoon/44_cocoon_tinh_chat_bi_dao_n7.png"
+  },
+  {
+    "index": 45,
+    "slug": "cocoon-nuoc-tay-trang-bi-ao",
+    "name": "Cocoon Nước tẩy trang bí đao",
+    "brand": "Cocoon",
+    "file": "anh/cocoon/45_cocoon_nuoc_tay_trang_bi_dao.jpg"
+  },
+  {
+    "index": 46,
+    "slug": "cocoon-sua-chong-nang-bi-ao",
+    "name": "Cocoon Sữa chống nắng bí đao",
+    "brand": "Cocoon",
+    "file": "anh/cocoon/46_cocoon_sua_chong_nang_bi_dao.jpg"
+  },
+  {
+    "index": 47,
+    "slug": "cocoon-nuoc-tay-trang-hoa-hong",
+    "name": "Cocoon Nước tẩy trang hoa hồng",
+    "brand": "Cocoon",
+    "file": "anh/cocoon/47_cocoon_nuoc_tay_trang_hoa_hong.webp"
+  },
+  {
+    "index": 48,
+    "slug": "cocoon-dau-tay-trang-hoa-hong",
+    "name": "Cocoon Dầu tẩy trang hoa hồng",
+    "brand": "Cocoon",
+    "file": "anh/cocoon/48_cocoon_dau_tay_trang_hoa_hong.jpg"
+  }
+]

@@ -1,5 +1,6 @@
 const Category = require("../models/Category");
-const { isValidObjectId, pick, sendControllerError } = require("../utils/controllerHelpers");
+const Product = require("../models/Product");
+const { escapeRegex, isValidObjectId, pick, sendControllerError } = require("../utils/controllerHelpers");
 
 const CATEGORY_FIELDS = ["name", "slug", "description", "image", "isActive"];
 
@@ -76,4 +77,17 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-module.exports = { getCategories, getCategory, createCategory, updateCategory, deleteCategory };
+const getAdminCategories = async (req, res) => {
+  try {
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1), limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 20, 1), 100);
+    const filter = {};
+    if (req.query.includeInactive !== "true") filter.isActive = true;
+    if (req.query.search?.trim()) { const pattern = new RegExp(escapeRegex(req.query.search.trim()), "i"); filter.$or = [{ name: pattern }, { slug: pattern }]; }
+    const [categories, total] = await Promise.all([Category.find(filter).sort({ name: 1 }).skip((page - 1) * limit).limit(limit).lean(), Category.countDocuments(filter)]);
+    const counts = await Product.aggregate([{ $match: { category: { $in: categories.map(item => item._id) } } }, { $group: { _id: "$category", count: { $sum: 1 } } }]);
+    const map = new Map(counts.map(item => [String(item._id), item.count]));
+    return res.json({ success: true, data: { categories: categories.map(item => ({ ...item, productCount: map.get(String(item._id)) || 0 })), pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } } });
+  } catch (error) { return sendControllerError(res, error, "Không thể lấy danh mục quản trị"); }
+};
+
+module.exports = { getCategories, getCategory, createCategory, updateCategory, deleteCategory, getAdminCategories };

@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container newsletter">
         <div>
-          <span className="eyebrow light">BẢN TIN SKINORA</span>
+          <span className="eyebrow light">BẢN TIN sandwich</span>
           <h2>Hiểu da để chăm sóc đúng hơn.</h2>
           <p>
             Nhận kiến thức chăm da, hoạt chất mới và ưu đãi được chọn riêng.
@@ -21,14 +21,14 @@ export default function Footer() {
       <div className="container footer-grid">
         <div>
           <Link to="/" className="logo logo-light">
-            SKINORA<span>.</span>
+            sandwich<span>.</span>
           </Link>
           <p>
             Chăm sóc da bắt đầu từ lựa chọn phù hợp với nhu cầu của bạn.
           </p>
           <div className="social">
             <Camera />
-            <span>@skinora.vn</span>
+            <span>Kênh mạng xã hội đang cập nhật</span>
           </div>
         </div>
         <div>
@@ -40,7 +40,7 @@ export default function Footer() {
         <div>
           <h4>KHÁM PHÁ</h4>
           <Link to="/skin-advisor">Skin Advisor AI</Link>
-          <a href="#">Câu chuyện SKINORA</a>
+          <a href="#">Câu chuyện sandwich</a>
           <a href="#">Cam kết của chúng tôi</a>
         </div>
         <div>
@@ -48,7 +48,7 @@ export default function Footer() {
           <a href="#">Giao hàng và đổi trả</a>
           <a href="#">Câu hỏi thường gặp</a>
           <p>
-            <Mail size={15} /> hello@skinora.vn
+            <Mail size={15} /> Email hỗ trợ: đang cập nhật
           </p>
         </div>
         <div>
@@ -56,15 +56,15 @@ export default function Footer() {
           <a href="#">Instagram</a>
           <a href="#">TikTok</a>
           <p>
-            <Phone size={15} /> 1900 6868
+            <Phone size={15} /> Hotline: đang cập nhật
           </p>
           <p>
-            <MapPin size={15} /> TP. Hồ Chí Minh
+            <MapPin size={15} /> Địa chỉ cửa hàng: chưa công bố
           </p>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 SKINORA. Bảo lưu mọi quyền.</span>
+        <span>© 2026 sandwich. Bảo lưu mọi quyền.</span>
         <span>Quyền riêng tư · Điều khoản · Khả năng truy cập</span>
       </div>
     </footer>

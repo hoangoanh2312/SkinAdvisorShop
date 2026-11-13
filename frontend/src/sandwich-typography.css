@@ -1,0 +1,45 @@
+/* sandwich – thống nhất kiểu chữ không chân, hỗ trợ Unicode tiếng Việt, không cần tải Google Fonts. */
+:root {
+  --sandwich-ui-font: "Segoe UI", Arial, "Noto Sans", system-ui, sans-serif;
+  font-family: var(--sandwich-ui-font);
+  font-synthesis: none;
+}
+html, body, #root { font-family: var(--sandwich-ui-font); }
+/* Các stylesheet cũ có nhiều khai báo font: ...; bảo đảm font vẫn đồng nhất. */
+#root, #root :where(*) { font-family: var(--sandwich-ui-font) !important; }
+#root :where(button, input, select, textarea) { font-family: var(--sandwich-ui-font) !important; }
+#root :where(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.28;
+  overflow-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
+  text-overflow: clip;
+}
+#root :where(p, label, span, button, input, select, textarea) {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+/* Không cắt dấu tiếng Việt khi căn tiêu đề và hiển thị nhãn AI. */
+#root :where(.skin-analysis-experience h1, .skin-analysis-experience h2,
+             .skin-analysis-experience h3, .skin-privacy-modal h2,
+             .product-name, .order-detail-page h1, .order-detail-page h2,
+             .admin-content h1, .admin-content h2) { line-height: 1.33; }
+#root :where(.skin-analysis-experience .analysis-results, .skin-analysis-experience .skin-tab-panel,
+             .skin-analysis-experience .result-grid > article, .skin-analysis-experience .routine-grid > article,
+             .skin-analysis-experience .skin-acne-status, .order-detail-page .order-panel) { min-width: 0; }
+#root .skin-analysis-experience .skin-result-tabs button {
+  white-space: normal;
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+#root .skin-analysis-experience .skin-acne-status p { line-height: 1.65; }
+#root .logo { letter-spacing: .10em; white-space: nowrap; font-weight: 700; }
+@media (max-width: 720px) {
+  #root :where(.skin-analysis-experience .result-grid, .skin-analysis-experience .routine-grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #root .skin-analysis-experience .skin-ai-stepper { flex-wrap: wrap; }
+  #root .skin-analysis-experience .skin-result-summary { min-width: 0; }
+  #root .skin-analysis-experience .skin-privacy-modal { max-width: 100%; }
+}

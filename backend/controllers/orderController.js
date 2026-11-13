@@ -4,9 +4,14 @@ const User = require("../models/User");
 const Product = require("../models/Product");
 const Variant = require("../models/Variant");
 const Voucher = require("../models/Voucher");
+const VoucherRedemption = require("../models/VoucherRedemption");
 const { isValidObjectId, escapeRegex, sendControllerError } = require("../utils/controllerHelpers");
 const { calculateVoucherDiscount } = require("../utils/commerceHelpers");
+const { assertPerUserEligibility } = require("../services/voucherEligibilityService");
 const { withOrderCodeRetry } = require("../services/orderCodeService");
+const { parseIdempotencyKey, fingerprintOrder, isIdempotencyCollision } = require("../services/orderIdempotency");
+const { recordStockMovement } = require("../services/stockLedger");
+const { paymentCapabilities } = require("../services/paymentCapabilities");
 
 const SHIPPING_FEE = 0;
 
@@ -27,13 +32,17 @@ const normalizeShippingAddress = (rawAddress) => {
 const commerceError = (res, error, fallback) => {
   const errors = {
     INVALID_ITEMS: [400, "Danh sách sản phẩm không hợp lệ"],
+    INVALID_IDEMPOTENCY_KEY: [400, "Mã xác nhận yêu cầu không hợp lệ"],
+    IDEMPOTENCY_CONFLICT: [409, "Yêu cầu đặt hàng đã được sử dụng cho một giỏ hàng khác"],
     VARIANT_NOT_FOUND: [400, "Phiên bản sản phẩm không tồn tại hoặc đã bị vô hiệu hóa"],
     PRODUCT_NOT_FOUND: [400, "Sản phẩm không tồn tại hoặc đã bị vô hiệu hóa"],
     INSUFFICIENT_STOCK: [400, "Sản phẩm không đủ tồn kho"],
+    PRODUCT_PRICE_UNAVAILABLE: [400, "Sản phẩm chưa có giá bán hợp lệ"],
     VOUCHER_INVALID: [400, "Voucher không hoạt động"],
     VOUCHER_EXPIRED: [400, "Voucher chưa có hiệu lực hoặc đã hết hạn"],
     VOUCHER_LIMIT: [400, "Voucher đã hết lượt sử dụng"],
     VOUCHER_MIN_ORDER: [400, "Đơn hàng chưa đạt giá trị tối thiểu"],
+    VOUCHER_USER_LIMIT: [400, "Bạn đã sử dụng hết lượt cho voucher này"],
     ORDER_NOT_FOUND: [404, "Không tìm thấy đơn hàng"],
     ORDER_FORBIDDEN: [403, "Bạn không có quyền truy cập đơn hàng này"],
     INVALID_TRANSITION: [400, "Trạng thái đơn hàng không thể chuyển đổi như yêu cầu"],
@@ -47,24 +56,50 @@ const commerceError = (res, error, fallback) => {
 };
 
 const createOrder = async (req, res) => {
-  const rawItems = req.body.items;
-  if (!Array.isArray(rawItems) || rawItems.length === 0) return res.status(400).json({ success: false, message: "Danh sách sản phẩm không hợp lệ" });
-  if (!["COD", "VNPAY", "BANK_TRANSFER"].includes(req.body.paymentMethod)) return res.status(400).json({ success: false, message: "Phương thức thanh toán không hợp lệ" });
+  const rawItems = req.body?.items;
+  if (!Array.isArray(rawItems) || rawItems.length === 0 || rawItems.length > 100) return res.status(400).json({ success: false, message: "Danh sách sản phẩm không hợp lệ" });
+  if (!["COD", "VNPAY", "BANK_TRANSFER"].includes(req.body?.paymentMethod)) return res.status(400).json({ success: false, message: "Phương thức thanh toán không hợp lệ" });
+  if (!paymentCapabilities()[req.body.paymentMethod].available) return res.status(503).json({ success: false, message: "Phương thức thanh toán này chưa được cấu hình để nhận đơn thực tế" });
 
-  const shippingAddress = normalizeShippingAddress(req.body.shippingAddress);
+  const shippingAddress = normalizeShippingAddress(req.body?.shippingAddress);
   if (!shippingAddress) {
     return res.status(400).json({ success: false, message: "Thông tin nhận hàng không hợp lệ" });
   }
 
   const quantities = new Map();
   for (const item of rawItems) {
+    if (!item || typeof item !== "object" || Array.isArray(item) || typeof item.variantId !== "string") {
+      return res.status(400).json({ success: false, message: "Danh sách sản phẩm không hợp lệ" });
+    }
     const quantity = Number(item.quantity);
-    if (!isValidObjectId(item.variantId) || !Number.isInteger(quantity) || quantity < 1) return res.status(400).json({ success: false, message: "Danh sách sản phẩm không hợp lệ" });
-    quantities.set(String(item.variantId), (quantities.get(String(item.variantId)) || 0) + quantity);
+    const combined = (quantities.get(item.variantId) || 0) + quantity;
+    if (!isValidObjectId(item.variantId) || !Number.isSafeInteger(quantity) || quantity < 1 ||
+        quantity > 1000 || !Number.isSafeInteger(combined) || combined > 1000) {
+      return res.status(400).json({ success: false, message: "Danh sách sản phẩm không hợp lệ" });
+    }
+    quantities.set(item.variantId, combined);
   }
 
   let orderId;
+  let idempotencyKey;
+  let requestFingerprint;
+  // The key is scoped to the authenticated user and the exact checkout payload.
+  // A retry after a lost response returns the existing order instead of decrementing stock again.
   try {
+    idempotencyKey = parseIdempotencyKey(req.get("Idempotency-Key"));
+    if (idempotencyKey) {
+      requestFingerprint = fingerprintOrder({
+        quantities, shippingAddress, voucherCode: req.body.voucherCode,
+        paymentMethod: req.body.paymentMethod, note: req.body.note,
+      });
+      const existing = await Order.findOne({ user: req.user._id, idempotencyKey })
+        .select("+requestFingerprint");
+      if (existing) {
+        if (existing.requestFingerprint !== requestFingerprint) throw new Error("IDEMPOTENCY_CONFLICT");
+        const order = await Order.findById(existing._id);
+        return res.status(200).json({ success: true, message: "Đơn hàng đã được ghi nhận", data: { order } });
+      }
+    }
     orderId = await withOrderCodeRetry(async (orderCode) => {
       const session = await mongoose.startSession();
       try {
@@ -76,7 +111,10 @@ const createOrder = async (req, res) => {
         if (!variant) throw new Error("VARIANT_NOT_FOUND");
         const product = await Product.findOne({ _id: variant.product, isActive: true }).session(session);
         if (!product) throw new Error("PRODUCT_NOT_FOUND");
-        const unitPrice = variant.salePrice !== null ? variant.salePrice : variant.price;
+        // A zero/malformed promotional price must never generate a free order.
+        if (!Number.isFinite(variant.price) || variant.price <= 0) throw new Error("PRODUCT_PRICE_UNAVAILABLE");
+        const unitPrice = Number.isFinite(variant.salePrice) && variant.salePrice > 0 && variant.salePrice <= variant.price
+          ? variant.salePrice : variant.price;
         const itemSubtotal = unitPrice * quantity;
         items.push({ product: product._id, variant: variant._id, productName: product.name, variantName: variant.name, sku: variant.sku, image: variant.image || product.images[0] || "", quantity, unitPrice, subtotal: itemSubtotal });
         subtotal += itemSubtotal;
@@ -96,11 +134,13 @@ const createOrder = async (req, res) => {
         voucher = await Voucher.findOne({ code: voucherCode }).session(session);
         if (!voucher) throw new Error("VOUCHER_INVALID");
         discount = calculateVoucherDiscount(voucher, subtotal);
+        await assertPerUserEligibility(voucher, req.user._id, session);
       }
 
       const [order] = await Order.create([{
         orderCode,
         user: req.user._id,
+        ...(idempotencyKey ? { idempotencyKey, requestFingerprint } : {}),
         items,
         shippingAddress,
         subtotal,
@@ -114,6 +154,11 @@ const createOrder = async (req, res) => {
         stockDeducted: req.body.paymentMethod === "COD",
       }], { session });
       orderId = order._id;
+      if (req.body.paymentMethod === "COD") {
+        for (const item of order.items) {
+          await recordStockMovement({ item, kind: 'sale', delta: -item.quantity, note: 'Xuất kho đặt hàng COD', reference: order.orderCode || order._id, session });
+        }
+      }
         });
         return orderId;
       } finally {
@@ -124,6 +169,16 @@ const createOrder = async (req, res) => {
     const order = await Order.findById(orderId);
     return res.status(201).json({ success: true, message: "Tạo đơn hàng thành công", data: { order } });
   } catch (error) {
+    if (idempotencyKey && isIdempotencyCollision(error)) {
+      // Resolve a racing checkout request that committed the same attempt first.
+      const existing = await Order.findOne({ user: req.user._id, idempotencyKey })
+        .select("+requestFingerprint");
+      if (existing) {
+        if (existing.requestFingerprint !== requestFingerprint) return commerceError(res, new Error("IDEMPOTENCY_CONFLICT"), "Không thể tạo đơn hàng");
+        const order = await Order.findById(existing._id);
+        return res.status(200).json({ success: true, message: "Đơn hàng đã được ghi nhận", data: { order } });
+      }
+    }
     return commerceError(res, error, "Không thể tạo đơn hàng");
   }
 };
@@ -159,7 +214,11 @@ const cancelOrderInternal = async (orderId, user, isAdmin) => {
       const cancellable = isAdmin ? ["pending", "confirmed"] : ["pending"];
       if (!cancellable.includes(order.orderStatus)) throw new Error("INVALID_TRANSITION");
       if (order.stockDeducted && !order.stockRestored) {
-        for (const item of order.items) await Variant.updateOne({ _id: item.variant }, { $inc: { stock: item.quantity } }, { session });
+        for (const item of order.items) {
+          const updated = await Variant.updateOne({ _id: item.variant }, { $inc: { stock: item.quantity } }, { session });
+          if (updated.modifiedCount !== 1) throw new Error('VARIANT_NOT_FOUND');
+          await recordStockMovement({ item, kind: 'cancellation', delta: item.quantity, note: 'Hoàn kho đơn đã hủy', reference: order.orderCode || order._id, session });
+        }
         order.stockRestored = true;
       }
       order.orderStatus = "cancelled";
@@ -184,6 +243,12 @@ const listAdminOrders = async (req, res) => {
     const filter = {};
     if (req.query.status) filter.orderStatus = req.query.status;
     if (req.query.paymentStatus) filter.paymentStatus = req.query.paymentStatus;
+    if (req.query.from || req.query.to) {
+      filter.createdAt = {};
+      if (req.query.from) { const from = new Date(req.query.from); if (Number.isNaN(from.getTime())) return res.status(400).json({ success: false, message: "Ngày bắt đầu không hợp lệ" }); filter.createdAt.$gte = from; }
+      if (req.query.to) { const to = new Date(req.query.to); if (Number.isNaN(to.getTime())) return res.status(400).json({ success: false, message: "Ngày kết thúc không hợp lệ" }); to.setUTCHours(23, 59, 59, 999); filter.createdAt.$lte = to; }
+      if (filter.createdAt.$gte && filter.createdAt.$lte && filter.createdAt.$gte > filter.createdAt.$lte) return res.status(400).json({ success: false, message: "Khoảng ngày không hợp lệ" });
+    }
     if (req.query.search?.trim()) {
       const search = req.query.search.trim();
       const expression = new RegExp(escapeRegex(search), "i");
@@ -233,6 +298,7 @@ const verifyBankTransferPayment = async (req, res) => {
             { session }
           );
           if (result.modifiedCount !== 1) throw new Error("INSUFFICIENT_STOCK");
+          await recordStockMovement({ item, kind: 'sale', delta: -item.quantity, note: 'Xuất kho sau xác nhận chuyển khoản', reference: order.orderCode || order._id, session });
         }
         order.stockDeducted = true;
       }
@@ -273,8 +339,10 @@ const updateOrderStatus = async (req, res) => {
         if (nextStatus === "confirmed" && order.voucher) {
           const voucher = await Voucher.findById(order.voucher).session(session);
           if (!voucher || (voucher.usageLimit !== null && voucher.usedCount >= voucher.usageLimit)) throw new Error("VOUCHER_LIMIT");
+          await assertPerUserEligibility(voucher, order.user, session);
           voucher.usedCount += 1;
           await voucher.save({ session });
+          await VoucherRedemption.updateOne({ voucher: voucher._id, order: order._id }, { $setOnInsert: { voucher: voucher._id, user: order.user, order: order._id } }, { upsert: true, session });
         }
         await order.save({ session });
       });

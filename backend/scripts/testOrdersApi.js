@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const { startTestServer } = require("../utils/testServer");
 const User = require("../models/User");
 const Category = require("../models/Category");
 const Product = require("../models/Product");
@@ -11,7 +12,7 @@ const { generateOrderCode, withOrderCodeRetry } = require("../services/orderCode
 
 mongoose.set("autoIndex", false);
 
-const BASE = process.env.API_BASE_URL || "http://127.0.0.1:5000";
+let BASE;
 const tag = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const password = `Orders-${tag}`;
 const emails = {
@@ -61,9 +62,10 @@ const testOrderCodeRetry = async () => {
 };
 
 const run = async () => {
+  let testServer;
   try {
     await testOrderCodeRetry();
-    await mongoose.connect(process.env.MONGO_URI);
+    testServer = await startTestServer(); BASE = testServer.baseUrl; console.log(`Test database: ${testServer.databaseName}`);
     const hash = await bcrypt.hash(password, 12);
     const [owner, other, category] = await Promise.all([
       User.create({ fullName: "Orders Owner Test", email: emails.owner, password: hash }),
@@ -72,7 +74,6 @@ const run = async () => {
     ]);
     const product = await Product.create({ name: `Orders Serum ${tag}`, slug: `orders-serum-${tag}`, brand: `OrdersBrand-${tag}`, category: category._id, basePrice: 120000, skinTypes: ["normal"], skinConcerns: ["dryness"] });
     const variant = await Variant.create({ product: product._id, name: "50 ml", sku: `ORD-${tag}`.toUpperCase(), size: "50", unit: "ml", price: 120000, salePrice: 99000, stock: 20 });
-    await mongoose.connection.close();
 
     const [ownerToken, otherToken] = await Promise.all([login(emails.owner), login(emails.other)]);
     const payload = { items: [{ variantId: variant._id, quantity: 1 }], shippingAddress, paymentMethod: "COD", orderCode: "CLIENT-CONTROLLED" };
@@ -101,7 +102,6 @@ const run = async () => {
     expectStatus(await request(`/api/orders/${first._id}`, "GET", undefined, otherToken), 403, "Other user order detail");
     expectStatus(await request(`/api/orders/${first._id}/cancel`, "PUT", {}, otherToken), 403, "Other user cancel");
 
-    await mongoose.connect(process.env.MONGO_URI);
     await Order.updateOne({ _id: second._id }, { $set: { orderStatus: "completed" } });
     const legacyInsert = await Order.collection.insertOne({
       user: owner._id,
@@ -122,7 +122,6 @@ const run = async () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    await mongoose.connection.close();
 
     const completedList = await request("/api/orders/my-orders?status=completed&limit=100", "GET", undefined, ownerToken);
     expectStatus(completedList, 200, "Filter completed orders");
@@ -131,7 +130,6 @@ const run = async () => {
     expectStatus(legacyResult, 200, "Read legacy order without orderCode");
     assert(legacyResult.body.data.order.orderCode === undefined, "Legacy read unexpectedly generated orderCode");
 
-    await mongoose.connect(process.env.MONGO_URI);
     const storedFirst = await Order.findById(first._id).lean();
     const storedSecond = await Order.findById(second._id).lean();
     assert(storedFirst.orderCode === first.orderCode, "Stored orderCode differs from API response");
@@ -143,12 +141,12 @@ const run = async () => {
     const afterImmutableSave = await Order.findById(first._id).lean();
     assert(afterImmutableSave.orderCode === first.orderCode, "orderCode changed after a normal document save");
     console.log("All Phase 2.9B order API tests passed");
-    console.log(`Test data retained: owner=${owner._id}, other=${other._id}, first=${first._id}, legacy=${legacyInsert.insertedId}`);
+    console.log(`Isolated test data verified: owner=${owner._id}, other=${other._id}, first=${first._id}, legacy=${legacyInsert.insertedId}`);
   } catch (error) {
     console.error(`Orders API test failed: ${error.message}`);
     process.exitCode = 1;
   } finally {
-    if (mongoose.connection.readyState !== 0) await mongoose.connection.close();
+    if (testServer) await testServer.close();
   }
 };
 

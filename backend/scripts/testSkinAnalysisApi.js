@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const express = require("express");
 const mongoose = require("mongoose");
+const { connectTestDatabase } = require("../utils/testDatabase");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Category = require("../models/Category");
@@ -17,7 +18,7 @@ let server;
 
 const run = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await connectTestDatabase(mongoose);
     const password = await bcrypt.hash(`Skin-${tag}`, 12);
     const [user, analysisUser] = await User.create([
       { fullName: "Skin Analysis Test", email: `skin.analysis.${tag}@example.com`, password },

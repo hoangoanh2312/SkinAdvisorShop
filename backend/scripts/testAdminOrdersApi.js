@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const express = require("express");
 const mongoose = require("mongoose");
+const { connectTestDatabase } = require("../utils/testDatabase");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Category = require("../models/Category");
@@ -19,7 +20,7 @@ let server;
 
 const run = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await connectTestDatabase(mongoose);
     const category = await Category.create({ name: `Admin Orders ${tag}`, slug: `admin-orders-${tag}` });
     const product = await Product.create({ name: `Admin Serum ${tag}`, slug: `admin-serum-${tag}`, brand: "Skinora Test", category: category._id, basePrice: 150000 });
     const variant = await Variant.create({ product: product._id, name: "30 ml", sku: `ADMIN-${tag}`.toUpperCase(), size: "30", unit: "ml", price: 150000, stock: 40 });

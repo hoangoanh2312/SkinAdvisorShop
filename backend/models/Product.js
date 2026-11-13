@@ -44,6 +44,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
     brand: { type: String, required: true, trim: true },
+    brandRef: { type: mongoose.Schema.Types.ObjectId, ref: "Brand", default: null },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
@@ -67,6 +68,9 @@ const productSchema = new mongoose.Schema(
     soldCount: { type: Number, default: 0, min: 0 },
     isFeatured: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
+    // Public product information may be shown before a SKU is sellable.
+    // Existing drafts remain private until an admin explicitly approves them.
+    isCatalogVisible: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

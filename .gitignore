@@ -25,3 +25,7 @@ npm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Private operational worksheets (operator-reviewed only)
+XAC_MINH_GIA_BAN_THAT_SKINORA.csv
+NHAP_TON_KHO_MO_BAN_SKINORA.csv

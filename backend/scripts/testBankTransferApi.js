@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const express = require("express");
 const mongoose = require("mongoose");
+const { connectTestDatabase } = require("../utils/testDatabase");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Category = require("../models/Category");
@@ -23,7 +24,7 @@ const run = async () => {
     process.env.BANK_CODE = "MB";
     process.env.BANK_ACCOUNT_NO = "0123456789";
     process.env.BANK_ACCOUNT_NAME = "SKINORA TEST";
-    await mongoose.connect(process.env.MONGO_URI);
+    await connectTestDatabase(mongoose);
 
     const category = await Category.create({ name: `Bank Test ${tag}`, slug: `bank-test-${tag}` });
     const product = await Product.create({ name: `Bank Product ${tag}`, slug: `bank-product-${tag}`, brand: "Skinora Test", category: category._id, basePrice: 180000 });

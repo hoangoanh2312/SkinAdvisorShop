@@ -1,8 +1,8 @@
 const Voucher = require("../models/Voucher");
 const { isValidObjectId, pick, sendControllerError } = require("../utils/controllerHelpers");
-const { calculateVoucherDiscount } = require("../utils/commerceHelpers");
+const { calculateVoucherDiscount, assertPerUserEligibility } = require("../services/voucherEligibilityService");
 
-const FIELDS = ["code", "description", "discountType", "discountValue", "minOrderValue", "maxDiscount", "startDate", "endDate", "usageLimit", "isActive"];
+const FIELDS = ["code", "description", "discountType", "discountValue", "minOrderValue", "maxDiscount", "startDate", "endDate", "usageLimit", "perUserLimit", "isActive"];
 
 const listVouchers = async (req, res) => {
   try {
@@ -46,9 +46,10 @@ const validateVoucher = async (req, res) => {
     const voucher = await Voucher.findOne({ code });
     if (!voucher) return res.status(404).json({ success: false, message: "Voucher không tồn tại" });
     const discount = calculateVoucherDiscount(voucher, orderValue);
+    await assertPerUserEligibility(voucher, req.user._id);
     return res.status(200).json({ success: true, data: { code, discount, finalValue: orderValue - discount } });
   } catch (error) {
-    const messages = { VOUCHER_INVALID: "Voucher không hoạt động", VOUCHER_EXPIRED: "Voucher chưa có hiệu lực hoặc đã hết hạn", VOUCHER_LIMIT: "Voucher đã hết lượt sử dụng", VOUCHER_MIN_ORDER: "Đơn hàng chưa đạt giá trị tối thiểu" };
+    const messages = { VOUCHER_INVALID: "Voucher không hoạt động", VOUCHER_EXPIRED: "Voucher chưa có hiệu lực hoặc đã hết hạn", VOUCHER_LIMIT: "Voucher đã hết lượt sử dụng", VOUCHER_USER_LIMIT: "Bạn đã sử dụng hết lượt cho voucher này", VOUCHER_MIN_ORDER: "Đơn hàng chưa đạt giá trị tối thiểu" };
     if (messages[error.message]) return res.status(400).json({ success: false, message: messages[error.message] });
     return sendControllerError(res, error, "Không thể kiểm tra voucher");
   }

@@ -1,4 +1,4 @@
-import { Check, Clock3, Landmark, MapPin, RotateCcw, WalletCards } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, Clock3, Landmark, MapPin, RotateCcw, WalletCards, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../api/axiosClient";
@@ -12,6 +12,11 @@ const timelineSteps = [
   { status: "completed", label: "Hoàn thành" },
 ];
 const statusRanks = { pending: 0, confirmed: 1, shipping: 2, completed: 3 };
+const paymentMethodNames = {
+  COD: "Thanh toán khi nhận hàng (COD)",
+  BANK_TRANSFER: "Chuyển khoản ngân hàng",
+  VNPAY: "VNPay",
+};
 
 export default function OrderDetail() {
   const { id } = useParams();
@@ -66,33 +71,91 @@ export default function OrderDetail() {
   };
 
   if (loading) return <div className="container empty">Đang tải đơn hàng...</div>;
-  if (!order) return <div className="container empty"><p>{error}</p><Link to="/orders">Quay lại</Link></div>;
+  if (!order) return <div className="container empty"><p>{error}</p><Link to="/orders">Quay lại đơn hàng</Link></div>;
 
   const currentRank = statusRanks[order.orderStatus] ?? -1;
   const address = order.shippingAddress || {};
   const addressParts = [address.address || address.addressLine, address.ward, address.district, address.province].filter(Boolean);
+  const cancelled = order.orderStatus === "cancelled";
+  const steps = [
+    { key: "placed", label: "Đã đặt hàng", done: true, date: formatDate(order.createdAt) },
+    ...(cancelled ? [{ key: "cancelled", label: "Đã hủy", cancelled: true }]
+      : timelineSteps.map((step) => ({
+        key: step.status,
+        label: step.label,
+        done: currentRank >= statusRanks[step.status],
+        current: currentRank === statusRanks[step.status],
+      }))),
+  ];
+  const statusTone = cancelled ? "cancelled" : order.orderStatus === "completed" ? "completed" : "active";
 
   return <div className="container orders-page order-detail-page">
-    <div className="page-intro compact"><span className="eyebrow">CHI TIẾT ĐƠN HÀNG</span><h1>#{displayOrderCode(order)}</h1><p>{formatDate(order.createdAt)}</p></div>
+    <header className="order-detail-hero">
+      <Link className="order-detail-back" to="/orders"><ArrowLeft size={16} aria-hidden="true" /> Tất cả đơn hàng</Link>
+      <div className="order-detail-hero-row">
+        <div className="order-detail-hero-copy">
+          <span className="eyebrow">sandwich · THEO DÕI ĐƠN HÀNG</span>
+          <h1>Chi tiết đơn hàng</h1>
+          <div className="order-meta-line">
+            <span className="order-code">#{displayOrderCode(order)}</span>
+            <span className="order-created"><CalendarDays size={15} aria-hidden="true" /> {formatDate(order.createdAt)}</span>
+          </div>
+        </div>
+        <span className={`order-state-pill is-${statusTone}`}>{orderDisplayStatus(order)}</span>
+      </div>
+    </header>
+
     <div className="order-detail-grid">
-      <main>
-        <section className="order-panel">
-          <div className="order-panel-heading"><div><span>Trạng thái đơn hàng</span><h2>{orderDisplayStatus(order)}</h2></div><Clock3 /></div>
-          <div className="order-timeline">
-            <div className="done"><i><Check /></i><strong>Đã đặt hàng</strong><small>{formatDate(order.createdAt)}</small></div>
-            {order.paidAt && <div className="done"><i><Check /></i><strong>Đã thanh toán</strong><small>{formatDate(order.paidAt)}</small></div>}
-            {order.orderStatus === "cancelled" ? <div className="current cancelled"><i /><strong>Đã hủy</strong></div> : timelineSteps.map((step) => <div className={currentRank >= statusRanks[step.status] ? "done" : ""} key={step.status}><i>{currentRank >= statusRanks[step.status] && <Check />}</i><strong>{step.label}</strong></div>)}
+      <div className="order-detail-main">
+        <section className="order-panel order-status-panel" aria-label="Trạng thái đơn hàng">
+          <div className="order-panel-heading">
+            <div><span>TIẾN TRÌNH ĐƠN HÀNG</span><h2>{orderDisplayStatus(order)}</h2></div>
+            <span className="order-status-icon"><Clock3 aria-hidden="true" /></span>
+          </div>
+          <ol className={`order-timeline${cancelled ? " is-cancelled" : ""}`} style={{ "--stage-count": steps.length }}>
+            {steps.map((step) => <li className={`${step.done ? "done" : ""} ${step.current ? "current" : ""} ${step.cancelled ? "cancelled" : ""}`} key={step.key}>
+              <span className="order-timeline-marker" aria-hidden="true">{step.done ? <Check /> : step.cancelled ? <X /> : null}</span>
+              <strong>{step.label}</strong>
+              {step.date && <small>{step.date}</small>}
+            </li>)}
+          </ol>
+          {order.paidAt && <p className="order-paid-note"><Check size={15} aria-hidden="true" /> Đã ghi nhận thanh toán: {formatDate(order.paidAt)}</p>}
+        </section>
+
+        <section className="order-panel order-products-panel">
+          <div className="order-section-heading"><h2>Sản phẩm trong đơn</h2><span>{order.items.length} sản phẩm</span></div>
+          {order.items.map((item, index) => <div className="order-detail-item" key={`${item.variant || item.product}-${index}`}>
+            <img src={item.image} alt={item.productName || "Sản phẩm"} loading="lazy" />
+            <div className="order-detail-item-info">
+              <strong>{item.productName}</strong>
+              <span>{item.variantName} · Số lượng: {item.quantity}</span>
+              {item.sku && <small title={item.sku}>{item.sku}</small>}
+            </div>
+            <b className="order-detail-item-price">{formatCurrency(item.subtotal)}</b>
+          </div>)}
+        </section>
+
+        <section className="order-panel shipping-snapshot">
+          <span className="order-shipping-icon"><MapPin aria-hidden="true" /></span>
+          <div className="order-shipping-content">
+            <h2>Địa chỉ nhận hàng</h2>
+            <strong>{address.fullName || "Người nhận"}</strong>
+            {address.phone && <p className="order-recipient-phone">{address.phone}</p>}
+            <p>{addressParts.join(", ") || "Chưa có thông tin địa chỉ"}</p>
           </div>
         </section>
-        <section className="order-panel"><h2>Sản phẩm</h2>{order.items.map((item) => <div className="order-detail-item" key={item.variant}><img src={item.image} alt="" /><span><strong>{item.productName}</strong><small>{item.variantName} · {item.sku} × {item.quantity}</small></span><b>{formatCurrency(item.subtotal)}</b></div>)}</section>
-        <section className="order-panel shipping-snapshot"><MapPin /><div><h2>Địa chỉ nhận hàng</h2><strong>{address.fullName} · {address.phone}</strong><p>{addressParts.join(", ")}</p></div></section>
-      </main>
-      <aside className="order-panel order-detail-summary">
-        <h2>Thanh toán</h2>
-        <p><span>Phương thức</span><strong>{order.paymentMethod}</strong></p><p><span>Trạng thái</span><strong>{paymentStatusLabel[order.paymentStatus]}</strong></p>
-        <p><span>Tạm tính</span><strong>{formatCurrency(order.subtotal)}</strong></p>{order.discount > 0 && <p><span>Giảm giá</span><strong>-{formatCurrency(order.discount)}</strong></p>}<p><span>Phí vận chuyển</span><strong>{formatCurrency(order.shippingFee)}</strong></p>
+      </div>
+
+      <aside className="order-panel order-detail-summary" aria-label="Thông tin thanh toán">
+        <h2>Thông tin thanh toán</h2>
+        <p><span>Phương thức</span><strong>{paymentMethodNames[order.paymentMethod] || order.paymentMethod}</strong></p>
+        <p><span>Trạng thái</span><strong className="order-payment-status">{paymentStatusLabel[order.paymentStatus] || "Đang cập nhật"}</strong></p>
+        <p><span>Tạm tính</span><strong>{formatCurrency(order.subtotal)}</strong></p>
+        {order.discount > 0 && <p><span>Giảm giá</span><strong>-{formatCurrency(order.discount)}</strong></p>}
+        <p><span>Phí vận chuyển</span><strong>{formatCurrency(order.shippingFee)}</strong></p>
         <div className="summary-total"><span>Tổng cộng</span><strong>{formatCurrency(order.total)}</strong></div>
-        {error && <p className="form-error">{error}</p>}{notice && <p className="form-notice">{notice}</p>}
+        {error && <p className="form-error" role="alert">{error}</p>}
+        {notice && <p className="form-notice" role="status">{notice}</p>}
         <div className="order-actions">
           {isAwaitingVnpayPayment(order) && <button className="btn btn-dark full" disabled={acting} onClick={payNow}><WalletCards /> Thanh toán ngay</button>}
           {isAwaitingBankTransfer(order) && <Link className="btn btn-dark full" to={`/payment/bank-transfer/${order._id}`}><Landmark /> Xem thông tin chuyển khoản</Link>}

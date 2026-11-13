@@ -2,7 +2,6 @@ import { ArrowRight, Bot, Check, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/product/ProductCard";
 import SectionTitle from "../components/common/SectionTitle";
-import { brands, productData } from "../data/mockData";
 import { formatCurrency } from "../utils/formatters";
 const concerns = [
   [
@@ -60,34 +59,13 @@ const ingredients = [
     "N°06",
   ],
 ];
-const reviews = [
-  [
-    "“Sau khoảng 3 tuần, da mình ít bóng dầu hơn. Chu trình AI gợi ý dễ hiểu và không có quá nhiều bước.”",
-    "Minh Anh",
-    "Da dầu · Dễ nổi mụn",
-    "MA",
-  ],
-  [
-    "“Mình thích cách SKINORA giải thích từng thành phần. Da nhạy cảm nên cảm giác mua hàng yên tâm hơn hẳn.”",
-    "Thu Hà",
-    "Da khô · Nhạy cảm",
-    "TH",
-  ],
-  [
-    "“Giao diện đẹp, sản phẩm chọn lọc tốt. Serum Niacinamide thấm nhanh và hợp với chu trình buổi sáng của mình.”",
-    "Gia Hân",
-    "Da hỗn hợp",
-    "GH",
-  ],
-];
-export default function HomeContentVi({ products = [], loading, error }) {
-  const suggested = productData[0],
-    featured = products[0];
+export default function HomeContentVi({ products = [], brands = [], loading, error, productSource = "featured", onRetry }) {
+  const featured = products[0];
   return (
     <div className="new-home">
       <section className="manifesto">
         <div className="container manifesto-grid">
-          <span className="eyebrow">TRIẾT LÝ SKINORA</span>
+          <span className="eyebrow">TRIẾT LÝ sandwich</span>
           <p>
             Không phải nhiều hơn.
             <br />
@@ -112,9 +90,11 @@ export default function HomeContentVi({ products = [], loading, error }) {
       </section>
       <section className="editorial-products container">
         <SectionTitle
-          eyebrow="SẢN PHẨM NỔI BẬT"
-          title={<><span className="keep-together">Sản phẩm</span> được yêu thích</>}
-          description="Khám phá những sản phẩm chăm sóc da nổi bật được nhiều khách hàng lựa chọn."
+          eyebrow={productSource === "featured" ? "SẢN PHẨM NỔI BẬT" : "GỢI Ý TỪ GIAN HÀNG"}
+          title={productSource === "featured"
+            ? <><span className="keep-together">Sản phẩm</span> nổi bật</>
+            : <><span className="keep-together">Khám phá</span> sản phẩm</>}
+          description="Khám phá những sản phẩm mỹ phẩm đã được đưa lên gian hàng sandwich."
           action={
             <Link className="editorial-link" to="/products">
               Xem toàn bộ <ArrowRight />
@@ -125,7 +105,14 @@ export default function HomeContentVi({ products = [], loading, error }) {
           {products.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
-          {!loading && !products.length && <div className="empty"><p>{error || "Chưa có sản phẩm nổi bật."}</p></div>}
+          {loading && <div className="home-featured-feedback" role="status">Đang tải sản phẩm từ gian hàng…</div>}
+          {!loading && !products.length && (
+            <div className="home-featured-feedback" role="status">
+              <p>{error || "Chưa có sản phẩm được công khai trên gian hàng."}</p>
+              {error && <button type="button" onClick={onRetry}>Thử tải lại</button>}
+              <Link to="/products">Xem tất cả sản phẩm</Link>
+            </div>
+          )}
         </div>
       </section>
       <section id="skin-concerns" className="concern-editorial">
@@ -144,7 +131,7 @@ export default function HomeContentVi({ products = [], loading, error }) {
           <div className="concern-bento">
             {concerns.map(([name, text, id, size]) => (
               <Link
-                to={`/products?q=${encodeURIComponent(name)}`}
+                to={`/products?skinConcern=${encodeURIComponent(({"DA MỤN":"acne","DA DẦU":"oiliness","DA KHÔ":"dryness","DA NHẠY CẢM":"sensitivity","THÂM SẠM":"pigmentation","LÃO HÓA":"aging"})[name])}`}
                 className={`concern-tile ${size}`}
                 key={name}
               >
@@ -194,7 +181,7 @@ export default function HomeContentVi({ products = [], loading, error }) {
               <span>
                 <Bot /> SKIN ADVISOR AI
               </span>
-              <i>● ĐANG HOẠT ĐỘNG</i>
+              <i>VÍ DỤ MINH HỌA</i>
             </div>
             <div className="mock-body">
               <div className="mock-msg user">
@@ -209,19 +196,7 @@ export default function HomeContentVi({ products = [], loading, error }) {
                   <strong>Niacinamide và BHA</strong> ở nồng độ phù hợp...
                 </p>
               </div>
-              <span className="recommended-label">GỢI Ý DÀNH CHO BẠN</span>
-              <div className="mock-product">
-                <img src={suggested.images[0]} alt={suggested.name} />
-                <div>
-                  <small>{suggested.brand}</small>
-                  <strong>{suggested.name}</strong>
-                  <span>
-                    <b>★★★★★</b> {suggested.rating}
-                  </span>
-                  <em>{formatCurrency(suggested.salePrice)}</em>
-                </div>
-                <button aria-label="Thêm sản phẩm">+</button>
-              </div>
+              <Link className="recommended-label" to="/skin-advisor">Trải nghiệm tư vấn với thông tin của bạn →</Link>
             </div>
             <div className="mock-input">
               Hỏi Skin Advisor...{" "}
@@ -253,7 +228,7 @@ export default function HomeContentVi({ products = [], loading, error }) {
           </div>
           <div className="ingredient-list">
             {ingredients.map(([name, use, skin, num]) => (
-              <Link to={`/products?q=${encodeURIComponent(name)}`} key={name}>
+              <Link to={`/products?ingredient=${encodeURIComponent(name.toLowerCase())}`} key={name}>
                 <small>{num}</small>
                 <div>
                   <h3>{name}</h3>
@@ -268,33 +243,22 @@ export default function HomeContentVi({ products = [], loading, error }) {
       </section>
       {featured && <section className="featured-editorial">
         <div className="featured-image">
-          <img src={featured.images[0]} alt={featured.name} />
-          <span>CHĂM SÓC HÀNG RÀO DA</span>
+          {featured.images?.[0] ? <img src={featured.images[0]} alt={featured.name} /> : <span className="catalog-image-missing">Chưa có ảnh sản phẩm</span>}
+          <span>{featured.brand}</span>
         </div>
         <div className="featured-copy">
-          <span className="eyebrow">BÁN CHẠY · CÔNG THỨC KHOA HỌC</span>
-          <h2>
-            Barrier Repair
-            <br />
-            <em>Ceramide Cream</em>
-          </h2>
-          <div className="featured-rating">
-            <span>★★★★★</span> 4.9 · 186 đánh giá
-          </div>
-          <p>
-            Công thức chứa Ceramide hỗ trợ hàng rào bảo vệ da và duy trì độ ẩm.
-            Kết cấu mềm mượt, phù hợp với nhu cầu chăm sóc da khô và nhạy cảm.
-          </p>
-          <div className="ingredient-chips">
-            <span>Ceramide</span>
-            <span>Panthenol</span>
-            <span>Hyaluronic Acid</span>
-          </div>
+          <span className="eyebrow">GIỚI THIỆU SẢN PHẨM</span>
+          <h2>{featured.name}</h2>
+          {featured.reviewCount > 0 && <div className="featured-rating">{featured.rating}/5 · {featured.reviewCount} đánh giá</div>}
+          {featured.description && <p>{featured.description}</p>}
+          {!!featured.ingredients?.length && <div className="ingredient-chips">
+            {featured.ingredients.slice(0, 3).map(item => <span key={item.normalizedName || item.name}>{item.name}</span>)}
+          </div>}
           <div className="featured-buy">
             <strong>{formatCurrency(featured.salePrice)}</strong>
-            <del>{formatCurrency(featured.price)}</del>
+            {featured.price > featured.salePrice && <del>{formatCurrency(featured.price)}</del>}
           </div>
-          <Link className="btn btn-burgundy" to={`/products/${featured.id}`}>
+          <Link className="btn btn-burgundy" to={`/products/${featured.slug || featured.id}`}>
             Khám phá sản phẩm <ArrowRight />
           </Link>
         </div>
@@ -338,37 +302,10 @@ export default function HomeContentVi({ products = [], loading, error }) {
           ))}
         </div>
       </section>
-      <section className="reviews-section">
-        <div className="container">
-          <SectionTitle
-            eyebrow="ĐÁNH GIÁ TỪ KHÁCH HÀNG"
-            title={<>Khách hàng nói gì <span className="keep-together">về SKINORA?</span></>}
-            description="Tham khảo trải nghiệm từ những khách hàng đã lựa chọn sản phẩm tại SKINORA."
-          />
-          <div className="review-editorial">
-            {reviews.map(([quote, name, type, avatar]) => (
-              <article key={name}>
-                <div className="quote-mark">“</div>
-                <div className="review-stars">★★★★★</div>
-                <blockquote>{quote}</blockquote>
-                <footer>
-                  <span>{avatar}</span>
-                  <div>
-                    <strong>{name}</strong>
-                    <small>{type}</small>
-                  </div>
-                </footer>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="brand-marquee">
-        <span>THƯƠNG HIỆU ĐƯỢC TUYỂN CHỌN</span>
-        {brands.map((b) => (
-          <strong key={b}>{b}</strong>
-        ))}
-      </section>
+      {brands.length > 0 && <section className="brand-marquee">
+        <span>KHÁM PHÁ THƯƠNG HIỆU</span>
+        {brands.map(brand => <Link key={brand._id || brand.slug} to={`/products?brand=${encodeURIComponent(brand.name)}`}>{brand.name}</Link>)}
+      </section>}
     </div>
   );
 }

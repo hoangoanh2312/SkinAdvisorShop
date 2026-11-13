@@ -1,0 +1,22 @@
+// Offline safety checks: no Atlas/Cloudinary/Gemini credentials required.
+const assert = require("node:assert/strict");
+const { businessDatabaseName, businessUriFrom, configureLiveDatabase } = require("../config/businessDatabase");
+const template = "mongodb+srv://user:pass@atlas.example.test/skin_advisor_shop?retryWrites=true&w=majority";
+const expected = "mongodb+srv://user:pass@atlas.example.test/skinora_prod?retryWrites=true&w=majority";
+assert.equal(businessUriFrom(template), expected);
+assert.equal(businessUriFrom(expected), expected, "already-business DB is valid");
+assert.equal(businessDatabaseName({}), "skinora_prod");
+assert.throws(() => businessUriFrom("mongodb://localhost:27017/skinora_test"), /REFUSING_TEST_DATABASE/);
+assert.throws(() => businessUriFrom("mongodb://localhost:27017/skinora" , "shop_test"), /BUSINESS_DB_NAME_INVALID/);
+assert.throws(() => businessUriFrom("not-a-mongodb-uri"), /MONGO_URI_MUST_INCLUDE_DATABASE_NAME/);
+const live = { MONGO_URI: template };
+assert.equal(configureLiveDatabase(live), "skinora_prod");
+assert.equal(live.MONGO_URI, expected);
+const repeat = { MONGO_URI: expected, BUSINESS_DB_NAME: "skinora_prod" };
+assert.equal(configureLiveDatabase(repeat), "skinora_prod");
+assert.equal(repeat.MONGO_URI, expected);
+const testing = { NODE_ENV: "test", MONGO_URI: "mongodb://localhost:27017/skinora_orders_test" };
+assert.equal(configureLiveDatabase(testing), "skinora_orders_test");
+assert.equal(testing.MONGO_URI, "mongodb://localhost:27017/skinora_orders_test");
+assert.throws(() => configureLiveDatabase({ NODE_ENV: "test", MONGO_URI: expected }), /REFUSING_NON_TEST_DATABASE/);
+console.log("Single live backend / skinora_prod / test isolation: PASS");

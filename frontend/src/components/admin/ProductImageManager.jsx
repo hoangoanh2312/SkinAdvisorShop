@@ -5,7 +5,7 @@ import axiosClient from "../../api/axiosClient";
 const MAX_BYTES = 5 * 1024 * 1024;
 const allowed = new Set(["image/jpeg", "image/png", "image/webp"]);
 
-const ProductImageManager = forwardRef(function ProductImageManager({ productId, onBusyChange }, ref) {
+const ProductImageManager = forwardRef(function ProductImageManager({ productId, onBusyChange, onImageCountChange }, ref) {
   const [images, setImages] = useState([]), [version, setVersion] = useState(0), [pending, setPending] = useState([]);
   const [busy, setBusy] = useState(false), [progress, setProgress] = useState(0), [error, setError] = useState(""), [deleting, setDeleting] = useState(null);
   const inputRef = useRef(null), operationRef = useRef(false), pendingRef = useRef([]);
@@ -18,6 +18,7 @@ const ProductImageManager = forwardRef(function ProductImageManager({ productId,
   }, []);
   useEffect(() => () => pendingRef.current.forEach(item => URL.revokeObjectURL(item.preview)), []);
   useEffect(() => { onBusyChange?.(busy); }, [busy, onBusyChange]);
+  useEffect(() => { onImageCountChange?.(images.length); }, [images.length, onImageCountChange]);
 
   const load = useCallback(async () => {
     if (!productId) return undefined;

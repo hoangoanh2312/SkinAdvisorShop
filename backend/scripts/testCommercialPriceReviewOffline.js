@@ -1,0 +1,31 @@
+'use strict';
+const assert = require('node:assert/strict');
+const { makeTemplate, parseCsv, reviewRows } = require('../utils/commercialPriceReview');
+const product = { _id: 'p1', name: 'Cocoon Dầu tẩy trang hoa hồng', slug: 'cocoon-dau-tay-trang-hoa-hong', basePrice: 339000, salePrice: null, isActive: false };
+const variant = { _id: 'v1', product: 'p1', sku: 'COCOON-DAU-TAY-TRANG-HOA-HONG-310ML', size: '310', unit: 'ml', price: 339000, salePrice: null, stock: 0, isActive: false };
+const products = [product], variants = [variant];
+const rows = parseCsv(makeTemplate(variants, new Map([[product._id, product]])));
+assert.equal(rows.length, 1);
+assert.equal(rows[0].gia_dang_luu_vnd, '339000');
+assert.equal(reviewRows(rows, products, variants).approved.length, 0);
+const valid = { ...rows[0], gia_da_xac_minh_vnd: '339000', nguon_xac_minh: 'Phiếu báo giá ngày 04/11/2026', nguoi_xac_minh: 'Admin', xac_nhan: 'XAC_NHAN_GIA' };
+const result = reviewRows([valid], products, variants);
+assert.equal(result.approved.length, 1);
+assert.equal(result.approved[0].changed, false);
+assert.equal(reviewRows([{ ...valid, gia_da_xac_minh_vnd: '340000' }], products, variants).approved[0].changed, true);
+for (const bad of ['0', '-1', '1.1', '1e8', 'abc', '100000001', '']) {
+  assert.equal(reviewRows([{ ...valid, gia_da_xac_minh_vnd: bad }], products, variants).errors.length, 1);
+}
+assert.equal(reviewRows([{ ...valid, gia_dang_luu_vnd: '99999' }], products, variants).errors.length, 1);
+assert.equal(reviewRows([{ ...valid, xac_nhan: 'YES' }], products, variants).errors.length, 1);
+assert.equal(reviewRows([{ ...valid, nguon_xac_minh: '' }], products, variants).errors.length, 1);
+assert.equal(reviewRows([valid], [{...product, isActive: true}], variants).errors.length, 1);
+assert.equal(reviewRows([valid], products, [{...variant, stock: 1}]).errors.length, 1);
+assert.equal(reviewRows([valid], products, [{...variant, salePrice: 100}]).errors.length, 1);
+assert.equal(reviewRows([valid, valid], products, variants).errors.length > 0, true);
+assert.throws(() => parseCsv('sku,name\na,b\n'), /HEADERS_INVALID/);
+assert.throws(() => parseCsv('"unclosed'), /UNTERMINATED_CSV_QUOTE/);
+assert.throws(() => makeTemplate([{...variant, sku:'=BAD'}], new Map([[product._id,product]])), /CSV_FORMULA_RISK/);
+const withComma = [{...product, name: 'Cocoon, hoa "hồng"'}];
+assert.deepEqual(parseCsv(makeTemplate(variants, new Map([[product._id, withComma[0]]])))[0].ten_san_pham, withComma[0].name);
+console.log('SKINORA_REAL_PRICE_REVIEW_OFFLINE_PASS: source attestation, explicit consent, exact SKU/size/price, no stock changes, CSV safety');

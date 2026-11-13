@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const express = require("express");
 const mongoose = require("mongoose");
+const { connectTestDatabase } = require("../utils/testDatabase");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Category = require("../models/Category");
@@ -31,7 +32,7 @@ const run = async () => {
     process.env.VNP_HASH_SECRET = testSecret;
     process.env.VNP_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     process.env.VNP_RETURN_URL = "http://localhost:5173/payment/result";
-    await mongoose.connect(process.env.MONGO_URI);
+    await connectTestDatabase(mongoose);
 
     const category = await Category.create({ name: `Payment Test ${tag}`, slug: `payment-test-${tag}` });
     const product = await Product.create({ name: `Payment Product ${tag}`, slug: `payment-product-${tag}`, brand: "Skinora Test", category: category._id, basePrice: 150000 });

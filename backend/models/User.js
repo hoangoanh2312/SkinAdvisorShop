@@ -65,6 +65,7 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
+    googleSub: { type: String, select: false, unique: true, sparse: true },
     phone: { type: String, trim: true, default: "" },
     avatar: { type: String, default: "" },
     role: {

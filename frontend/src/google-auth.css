@@ -1,0 +1,3 @@
+.google-login-button { margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.google-login-button:focus-visible { outline: 3px solid #4c8068; outline-offset: 2px; }
+.profile-card > div:last-child { flex-wrap: wrap; justify-content: center; }

@@ -1,3 +1,150 @@
-.skin-analysis-page{background:#f3f5f1;padding:65px 0 90px;min-height:800px}.skin-analysis-hero{text-align:center;max-width:720px;margin:0 auto 34px}.skin-analysis-hero .eyebrow svg{width:16px}.skin-analysis-hero h1{font:600 clamp(38px,5vw,58px)/1.08 'Playfair Display';margin:12px 0}.skin-analysis-hero p{color:var(--muted);line-height:1.7}.analysis-workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}.analysis-input-card,.analysis-guide,.analysis-results{background:#fff;border:1px solid var(--line);padding:28px}.analysis-tabs{display:grid;grid-template-columns:1fr 1fr;margin-bottom:22px;border:1px solid var(--line)}.analysis-tabs button{display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:#fff;padding:14px}.analysis-tabs button.active{background:var(--ink);color:#fff}.analysis-tabs svg{width:18px}.analysis-preview{position:relative;min-height:430px;background:#e9eeea;display:grid;place-items:center;overflow:hidden}.analysis-preview>img,.camera-frame,.camera-frame video{width:100%;height:430px;object-fit:cover}.analysis-placeholder{text-align:center;display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--muted);padding:30px}.analysis-placeholder svg{width:65px;height:65px;color:#789084}.analysis-placeholder strong{font:600 22px 'Playfair Display';color:var(--ink)}.analysis-placeholder small{max-width:370px;line-height:1.6}.camera-frame{position:relative}.camera-frame video{transform:scaleX(-1)}.camera-frame>span{position:absolute;inset:8% 20%;border:2px dashed rgba(255,255,255,.8);border-radius:48% 48% 42% 42%;box-shadow:0 0 0 999px rgba(18,39,31,.18);pointer-events:none}.analysis-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(239,243,239,.85);font-weight:600}.analysis-overlay svg{width:22px}.analysis-controls{display:flex;justify-content:center;gap:10px;margin:18px 0}.analysis-error{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#fff1ef;color:#9b4338;font-size:13px;margin:14px 0}.analysis-error svg{width:18px;flex:0 0 auto}.analysis-consent{display:flex;align-items:flex-start;gap:10px;padding:15px;background:#f4f7f4;font-size:12px;line-height:1.5;margin:15px 0;cursor:pointer}.analysis-consent input{margin-top:4px;accent-color:var(--green)}.analysis-consent span{display:flex;gap:7px}.analysis-consent svg{width:17px;flex:0 0 auto}.analysis-privacy{text-align:center;color:var(--muted);font-size:10px;line-height:1.5;margin-bottom:0}.analysis-guide h2{font:600 25px 'Playfair Display';margin-top:0}.analysis-guide ol{padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7}.analysis-guide li{padding:7px 0}.analysis-guide>p{display:flex;gap:8px;border-top:1px solid var(--line);padding-top:18px;color:var(--green);font-size:11px;line-height:1.5}.analysis-guide svg{width:17px;flex:0 0 auto}.analysis-results{margin-top:25px}.result-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:22px}.result-heading h2{font:600 36px 'Playfair Display';margin:7px 0 0}.result-heading>strong{background:#e4efe7;color:#35644d;padding:10px 13px;border-radius:20px;font-size:12px}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}.result-grid article{background:#f5f7f4;padding:20px}.result-grid h3,.analysis-results>h3,.routine-grid h3{font:600 20px 'Playfair Display';margin-top:0}.concern-results,.ingredient-results{display:flex;flex-wrap:wrap;gap:8px}.concern-results span,.ingredient-results span{display:flex;gap:9px;background:#fff;border:1px solid var(--line);padding:8px 10px;font-size:11px}.concern-results b{color:#49715e}.analysis-warning{background:#fff5e7;color:#815a26;padding:12px 15px;font-size:12px}.analysis-products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.analysis-products .recommend-card{min-width:0;margin:0;border:1px solid var(--line)}.routine-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.routine-grid>article{border:1px solid var(--line);padding:22px}.routine-grid article>div{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-top:1px solid #edf0ee;font-size:12px}.routine-grid small{color:var(--muted);text-align:right}.analysis-disclaimer{margin:25px 0 0;border-left:3px solid var(--sage);padding:12px 15px;background:#f3f5f1;color:var(--muted);font-size:12px;line-height:1.6}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skin-analysis-page{background:#f3f5f1;padding:65px 0 90px;min-height:800px}.skin-analysis-hero{text-align:center;max-width:720px;margin:0 auto 34px}.skin-analysis-hero .eyebrow svg{width:16px}.skin-analysis-hero h1{font:600 clamp(38px,5vw,58px)/1.08 'Segoe UI', Arial, 'Noto Sans', sans-serif;margin:12px 0}.skin-analysis-hero p{color:var(--muted);line-height:1.7}.analysis-workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}.analysis-input-card,.analysis-guide,.analysis-results{background:#fff;border:1px solid var(--line);padding:28px}.analysis-tabs{display:grid;grid-template-columns:1fr 1fr;margin-bottom:22px;border:1px solid var(--line)}.analysis-tabs button{display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:#fff;padding:14px}.analysis-tabs button.active{background:var(--ink);color:#fff}.analysis-tabs svg{width:18px}.analysis-preview{position:relative;min-height:430px;background:#e9eeea;display:grid;place-items:center;overflow:hidden}.analysis-preview>img,.camera-frame,.camera-frame video{width:100%;height:430px;object-fit:cover}.analysis-placeholder{text-align:center;display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--muted);padding:30px}.analysis-placeholder svg{width:65px;height:65px;color:#789084}.analysis-placeholder strong{font:600 22px 'Segoe UI', Arial, 'Noto Sans', sans-serif;color:var(--ink)}.analysis-placeholder small{max-width:370px;line-height:1.6}.camera-frame{position:relative}.camera-frame video{transform:scaleX(-1)}.camera-frame>span{position:absolute;inset:8% 20%;border:2px dashed rgba(255,255,255,.8);border-radius:48% 48% 42% 42%;box-shadow:0 0 0 999px rgba(18,39,31,.18);pointer-events:none}.analysis-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(239,243,239,.85);font-weight:600}.analysis-overlay svg{width:22px}.analysis-controls{display:flex;justify-content:center;gap:10px;margin:18px 0}.analysis-error{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#fff1ef;color:#9b4338;font-size:13px;margin:14px 0}.analysis-error svg{width:18px;flex:0 0 auto}.analysis-consent{display:flex;align-items:flex-start;gap:10px;padding:15px;background:#f4f7f4;font-size:12px;line-height:1.5;margin:15px 0;cursor:pointer}.analysis-consent input{margin-top:4px;accent-color:var(--green)}.analysis-consent span{display:flex;gap:7px}.analysis-consent svg{width:17px;flex:0 0 auto}.analysis-privacy{text-align:center;color:var(--muted);font-size:10px;line-height:1.5;margin-bottom:0}.analysis-guide h2{font:600 25px 'Segoe UI', Arial, 'Noto Sans', sans-serif;margin-top:0}.analysis-guide ol{padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7}.analysis-guide li{padding:7px 0}.analysis-guide>p{display:flex;gap:8px;border-top:1px solid var(--line);padding-top:18px;color:var(--green);font-size:11px;line-height:1.5}.analysis-guide svg{width:17px;flex:0 0 auto}.analysis-results{margin-top:25px}.result-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:22px}.result-heading h2{font:600 36px 'Segoe UI', Arial, 'Noto Sans', sans-serif;margin:7px 0 0}.result-heading>strong{background:#e4efe7;color:#35644d;padding:10px 13px;border-radius:20px;font-size:12px}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}.result-grid article{background:#f5f7f4;padding:20px}.result-grid h3,.analysis-results>h3,.routine-grid h3{font:600 20px 'Segoe UI', Arial, 'Noto Sans', sans-serif;margin-top:0}.concern-results,.ingredient-results{display:flex;flex-wrap:wrap;gap:8px}.concern-results span,.ingredient-results span{display:flex;gap:9px;background:#fff;border:1px solid var(--line);padding:8px 10px;font-size:11px}.concern-results b{color:#49715e}.analysis-warning{background:#fff5e7;color:#815a26;padding:12px 15px;font-size:12px}.analysis-products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.analysis-products .recommend-card{min-width:0;margin:0;border:1px solid var(--line)}.routine-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.routine-grid>article{border:1px solid var(--line);padding:22px}.routine-grid article>div{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-top:1px solid #edf0ee;font-size:12px}.routine-grid small{color:var(--muted);text-align:right}.analysis-disclaimer{margin:25px 0 0;border-left:3px solid var(--sage);padding:12px 15px;background:#f3f5f1;color:var(--muted);font-size:12px;line-height:1.6}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:900px){.analysis-workspace{grid-template-columns:1fr}.analysis-guide{order:-1}.analysis-guide ol{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;list-style-position:inside}.analysis-products{grid-template-columns:1fr}}
 @media(max-width:600px){.skin-analysis-page{padding:35px 0 65px}.analysis-input-card,.analysis-guide,.analysis-results{padding:18px}.analysis-tabs button{font-size:11px;padding:12px 8px}.analysis-preview,.analysis-preview>img,.camera-frame,.camera-frame video{min-height:0;height:360px}.analysis-guide ol,.result-grid,.routine-grid{grid-template-columns:1fr}.result-heading{align-items:flex-start;flex-direction:column;gap:15px}.analysis-products .recommend-card{grid-template-columns:78px minmax(0,1fr)}.analysis-products .recommend-card img,.analysis-products .recommend-placeholder{width:78px;height:100px}.analysis-consent span{align-items:flex-start}}
+
+/* Results: readable explanations on desktop and narrow screens. */
+.ingredient-results .ingredient-explanation,.ingredient-results .ingredient-source{flex-basis:100%;margin:4px 0 0;line-height:1.6;color:var(--muted);font-size:12px}
+.ingredient-results .ingredient-explanation strong{color:var(--ink)}
+.ingredient-results .ingredient-source{border-top:1px solid var(--line);padding-top:10px;font-style:italic}
+.routine-grid article>div{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:5px}
+.routine-grid .routine-description{color:var(--muted);font-size:12px;line-height:1.55;margin:0}
+.routine-grid small{text-align:left}
+
+/* Account-owned AI history: no original image thumbnails are retained. */
+.analysis-history{margin:32px 0 65px;background:#fff;border:1px solid #dce8e0;border-radius:12px;padding:24px}
+.analysis-history-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.analysis-history-head h2{font-size:22px;margin:0}
+.analysis-history>p{font-size:13px;color:#50695d;line-height:1.7}
+.analysis-history-list{display:grid;gap:9px;margin-top:15px}
+.analysis-history-list article{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #e5ece7;padding:14px;flex-wrap:wrap}
+.analysis-history-list span{display:grid;gap:4px}
+.analysis-history-list small{color:#667b70;font-size:12px}
+
+/* Các quan sát không chắc chắn luôn tách khỏi dấu hiệu rõ và tư vấn mỹ phẩm. */
+.skin-analysis-page .concern-detail { display: grid; gap: 4px; padding: 9px 0; border-bottom: 1px solid #e9efeb; }
+.skin-analysis-page .concern-detail > span { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px 14px; }
+.skin-analysis-page .concern-detail small { font-size: 12px; line-height: 1.55; color: #687a70; }
+.skin-analysis-page .possible-concerns { margin-top: 18px; padding: 14px 15px; border: 1px solid #e8d7bb; background: #fff9f0; border-radius: 10px; }
+.skin-analysis-page .possible-concerns h4 { display: flex; gap: 8px; align-items: center; font-size: 14px; color: #715227; margin: 0 0 9px; }
+.skin-analysis-page .possible-concerns p { font-size: 13px; line-height: 1.5; margin: 6px 0; color: #514531; overflow-wrap: anywhere; }
+.skin-analysis-page .possible-concerns small { display: block; margin-top: 8px; color: #715d3c; line-height: 1.5; }
+.skin-analysis-page .concern-results .concern-detail { width: 100%; }
+.skin-analysis-page .concern-results .concern-detail > span { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 5px 12px; }
+.skin-analysis-page .concern-results .concern-detail > span b { margin-left: auto; white-space: nowrap; }
+
+/* Skin Advisor journey, inspired by useful steps rather than any third-party visual identity. */
+.skin-analysis-experience { background: #f7f8f5; color: #173c30; }
+.skin-analysis-experience, .skin-analysis-experience button, .skin-analysis-experience input { font-family: 'Segoe UI', Arial, 'Noto Sans', sans-serif; }
+.skin-analysis-experience * { box-sizing: border-box; }
+.skin-analysis-experience .container { max-width: 1180px; }
+.skin-analysis-experience .skin-analysis-hero { max-width: 870px; padding: 20px 8px 8px; margin-bottom: 35px; }
+.skin-ai-kicker { display: inline-flex; align-items: center; gap: 7px; color: #a56855; letter-spacing: .14em; font-size: 11px; font-weight: 800; }
+.skin-analysis-experience .skin-analysis-hero h1 { font-size: clamp(35px, 4.6vw, 57px); letter-spacing: -.035em; line-height: 1.13; max-width: 760px; margin: 15px auto; }
+.skin-analysis-experience .skin-analysis-hero p { max-width: 670px; margin: auto; color: #64766e; }
+.skin-start-button, .skin-analyze-button, .skin-next-button { cursor: pointer; border: 0; background: #153b2e; color: #fff; min-height: 52px; padding: 13px 23px; font-size: 14px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 12px; border-radius: 8px; transition: background .2s ease, transform .2s ease; }
+.skin-start-button { margin-top: 23px; }
+.skin-start-button:hover, .skin-analyze-button:hover:not(:disabled), .skin-next-button:hover { background: #245a44; transform: translateY(-1px); }
+.skin-analyze-button:disabled, .skin-next-button:disabled { opacity: .54; cursor: not-allowed; }
+.skin-ai-stepper { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 35px auto 5px; color: #64796f; font-size: 12px; }
+.skin-ai-stepper > span { display: inline-flex; align-items: center; gap: 7px; }
+.skin-ai-stepper b { font-variant-numeric: tabular-nums; color: #a56855; }
+.skin-analysis-experience .analysis-workspace { grid-template-columns: minmax(0,1fr) 300px; gap: 22px; scroll-margin-top: 95px; }
+.skin-analysis-experience .analysis-input-card, .skin-analysis-experience .analysis-guide, .skin-analysis-experience .analysis-results, .skin-analysis-experience .analysis-history { border: 1px solid #e0e9e3; border-radius: 16px; box-shadow: 0 12px 36px rgba(16, 50, 35, .035); }
+.skin-analysis-experience .analysis-input-card { padding: 26px; }
+.skin-section-title > span { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #a56855; }
+.skin-section-title h2 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.3; margin: 9px 0 22px; letter-spacing: -.02em; }
+.skin-analysis-experience .analysis-tabs { overflow: hidden; border-radius: 9px; background: #f5f8f5; border-color: #e1e9e3; }
+.skin-analysis-experience .analysis-tabs button { font-size: 13px; font-weight: 700; background: transparent; }
+.skin-analysis-experience .analysis-tabs button.active { background: #153b2e; color: #fff; }
+.skin-analysis-experience .analysis-preview { border-radius: 13px; background: radial-gradient(circle at 50% 25%, #f2f6f0, #e3ebe5); }
+.skin-analysis-experience .analysis-preview > img { object-fit: contain; }
+.skin-analysis-experience .analysis-placeholder { gap: 14px; }
+.skin-analysis-experience .analysis-placeholder strong { font-size: 20px; }
+.skin-face-icon { border: 1px solid #c1d0c3; border-radius: 50%; background: #f6f9f5; width: 112px; height: 112px; display: grid; place-items: center; }
+.skin-analysis-experience .analysis-controls { margin: 20px 0; flex-wrap: wrap; }
+.skin-analysis-experience .analysis-controls .btn { border-radius: 8px; min-height: 44px; }
+.skin-analysis-experience .skin-analyze-button { width: 100%; }
+.skin-analysis-experience .analysis-privacy { display: flex; justify-content: center; align-items: flex-start; gap: 8px; text-align: left; font-size: 11px; line-height: 1.6; margin-top: 18px; }
+.skin-analysis-experience .analysis-privacy svg { flex: 0 0 auto; margin-top: 1px; }
+.skin-analysis-experience .analysis-guide { padding: 27px 23px; }
+.skin-analysis-experience .analysis-guide h2 { font-size: 23px; line-height: 1.25; margin: 9px 0 14px; }
+.skin-analysis-experience .analysis-guide ol { font-size: 13px; line-height: 1.65; padding-left: 22px; }
+.skin-guide-icon { display: grid; place-items: center; height: 53px; width: 53px; border-radius: 50%; background: #e7f0e8; margin-bottom: 19px; }
+.skin-analysis-experience .analysis-guide > p { margin-top: 23px; }
+.skin-ai-working { display: flex; flex-direction: column; gap: 13px; background: rgba(18, 47, 35, .92); color: #fff; text-align: center; padding: 25px; }
+.skin-ai-working > strong { font-size: 19px; }
+.skin-ai-working > span { font-size: 12px; line-height: 1.6; max-width: 350px; }
+.skin-indeterminate { height: 5px; border-radius: 10px; background: rgba(255,255,255,.3); width: min(260px, 90%); overflow: hidden; margin-top: 14px; }
+.skin-indeterminate i { display: block; height: 100%; width: 36%; border-radius: 10px; background: #bfe1c8; animation: skin-scanning 1.4s ease-in-out infinite alternate; }
+@keyframes skin-scanning { from { transform: translateX(0) } to { transform: translateX(180%) } }
+.skin-analysis-experience .analysis-results { scroll-margin-top: 95px; padding: 30px; }
+.skin-result-summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; border-radius: 15px; background: #eaf1eb; margin-bottom: 22px; }
+.skin-result-summary small { color: #657e70; }
+.skin-result-summary h3 { font-size: clamp(27px, 3vw, 37px); margin: 5px 0 7px; }
+.skin-result-summary p { color: #667c6e; font-size: 13px; line-height: 1.6; margin: 0; }
+.skin-result-summary > span { display: grid; place-items: center; flex: 0 0 57px; height: 57px; border-radius: 50%; background: #fff; }
+.skin-result-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid #dce7df; gap: 10px; }
+.skin-result-tabs button { background: transparent; color: #577367; border: 0; border-bottom: 3px solid transparent; padding: 16px; font-weight: 800; cursor: pointer; }
+.skin-result-tabs button.active { color: #153b2e; border-color: #153b2e; }
+.skin-tab-panel { padding: 16px 0 6px; }
+.skin-analysis-experience .result-grid { margin: 24px 0; }
+.skin-analysis-experience .result-grid article { border: 1px solid #e4ece5; background: #f9fbf8; border-radius: 12px; }
+.skin-analysis-experience .concern-results .concern-detail { border-bottom-color: #e2ebe4; }
+.skin-analysis-experience .concern-results .concern-detail > span { background: none; border: 0; padding: 0; font-size: 13px; }
+.skin-analysis-experience .concern-results .concern-detail b { white-space: normal; }
+.skin-analysis-experience .possible-concerns { border-radius: 9px; }
+.skin-next-button { display: flex; width: fit-content; margin: 0 0 0 auto; }
+.skin-routine-intro { font-size: 14px; color: #637a6e; line-height: 1.7; }
+.skin-analysis-experience .routine-grid h3 { display: flex; align-items: center; gap: 10px; }
+.skin-products-heading { font-size: 22px; margin: 30px 0 18px; }
+.skin-analysis-experience .analysis-history { padding: 28px; }
+.skin-analysis-experience .analysis-history-list .btn { display: inline-flex; gap: 7px; align-items: center; }
+.skin-privacy-backdrop { position: fixed; inset: 0; z-index: 9000; background: rgba(13, 32, 25, .70); display: grid; place-items: center; padding: 20px; overflow: auto; }
+.skin-privacy-modal { position: relative; background: #fff; color: #153b2e; width: min(100%, 510px); max-height: min(93vh, 800px); overflow-y: auto; padding: 37px; border-radius: 17px; box-shadow: 0 25px 80px rgba(0,0,0,.2); font-family: 'Segoe UI', Arial, 'Noto Sans', sans-serif; }
+.skin-privacy-close { position: absolute; right: 15px; top: 15px; display: grid; place-items: center; height: 35px; width: 35px; border: 0; border-radius: 50%; background: #f1f5f2; cursor: pointer; }
+.skin-privacy-mark { width: 60px; height: 60px; border-radius: 50%; background: #eaf2eb; display: grid; place-items: center; margin-bottom: 20px; }
+.skin-privacy-modal h2 { font-size: 31px; line-height: 1.18; margin: 10px 0 15px; }
+.skin-privacy-modal > p { font-size: 14px; line-height: 1.7; color: #52695d; }
+.skin-privacy-points { display: grid; gap: 12px; font-size: 13px; padding: 15px 0; }
+.skin-privacy-points > span { display: flex; align-items: center; gap: 10px; }
+.skin-privacy-points svg { color: #367758; flex: 0 0 auto; }
+.skin-privacy-accept { display: flex; align-items: flex-start; gap: 11px; padding: 17px; margin: 12px 0 21px; border-radius: 10px; background: #f1f5f2; font-size: 13px; line-height: 1.55; cursor: pointer; }
+.skin-privacy-accept input { accent-color: #153b2e; width: 18px; height: 18px; margin: 1px 0 0; flex: 0 0 auto; }
+.skin-privacy-modal .skin-analyze-button { width: 100%; }
+.skin-privacy-cancel { border: 0; display: block; cursor: pointer; background: none; color: #62776b; margin: 13px auto 0; font-size: 13px; }
+@media (max-width: 900px) { .skin-analysis-experience .analysis-workspace { grid-template-columns: minmax(0,1fr); } .skin-analysis-experience .analysis-guide { order: 0; } .skin-analysis-experience .analysis-guide ol { display: block; } }
+@media (max-width: 600px) { .skin-analysis-experience { padding-top: 32px; } .skin-analysis-experience .skin-analysis-hero h1 { font-size: 36px; } .skin-analysis-experience .skin-ai-stepper { gap: 6px; font-size: 10px; } .skin-analysis-experience .skin-ai-stepper svg { display: none; } .skin-analysis-experience .analysis-input-card, .skin-analysis-experience .analysis-guide, .skin-analysis-experience .analysis-results { padding: 18px; } .skin-analysis-experience .analysis-preview, .skin-analysis-experience .analysis-preview > img, .skin-analysis-experience .camera-frame, .skin-analysis-experience .camera-frame video { height: 340px; } .skin-analysis-experience .analysis-tabs button { font-size: 12px; } .skin-analysis-experience .result-grid, .skin-analysis-experience .routine-grid { grid-template-columns: minmax(0,1fr); } .skin-result-summary { padding: 20px; } .skin-result-summary > span { display: none; } .skin-privacy-modal { padding: 31px 23px 22px; } .skin-privacy-modal h2 { font-size: 26px; } .skin-analysis-experience .analysis-products { grid-template-columns: minmax(0,1fr); } .skin-analysis-experience .analysis-history { padding: 19px; } }
+@media (prefers-reduced-motion: reduce) { .skin-indeterminate i { animation: none; width: 100%; } .skin-start-button, .skin-analyze-button, .skin-next-button { transition: none; } }
+
+/* SANDWICH: thống nhất font Unicode tiếng Việt, không cắt dấu và không ép chữ. */
+.skin-analysis-experience,
+.skin-analysis-experience :is(h1,h2,h3,h4,p,small,strong,b,span,label,button,input,textarea),
+.skin-privacy-modal,
+.skin-privacy-modal :is(h1,h2,h3,h4,p,small,strong,b,span,label,button,input) {
+  font-family: 'Segoe UI', Arial, 'Noto Sans', sans-serif;
+}
+.skin-analysis-experience :is(h1,h2,h3,h4), .skin-privacy-modal :is(h1,h2,h3,h4) {
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.skin-analysis-experience :is(.result-grid,.routine-grid,.analysis-results,.skin-tab-panel,.skin-acne-status),
+.skin-analysis-experience .result-grid > article { min-width: 0; }
+.skin-analysis-experience .concern-detail > span { min-width: 0; align-items: flex-start; }
+.skin-analysis-experience .concern-detail strong { overflow-wrap: break-word; }
+.skin-acne-status { border: 1px solid #d6e5dd; background: #f5faf6; border-radius: 14px; padding: 20px 22px; margin: 18px 0 12px; }
+.skin-acne-status.is-uncertain { background: #fff9ed; border-color: #e9d9b9; }
+.skin-acne-status.is-unconfirmed { background: #f7f8f6; border-color: #e2e5e0; }
+.skin-acne-status-heading { display: flex; gap: 13px; align-items: flex-start; }
+.skin-acne-status-heading > svg { flex: 0 0 auto; margin-top: 4px; color: #2c664c; }
+.skin-acne-status-heading span { font-size: 11px; font-weight: 800; color: #6e8175; letter-spacing: .11em; }
+.skin-acne-status-heading h3 { margin: 5px 0 9px; font-size: clamp(18px, 2.3vw, 23px); color: #193c2d; }
+.skin-acne-status p { color: #304d3f; line-height: 1.65; margin: 5px 0 9px; overflow-wrap: break-word; }
+.skin-acne-status small { display: block; line-height: 1.6; color: #647a6a; }
+.skin-acne-retry { margin-top: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 40px; padding: 9px 13px; background: white; border: 1px solid #a7bfad; border-radius: 7px; color: #20523a; font-size: 13px; font-weight: 700; }
+.skin-acne-retry:hover { background: #e8f2eb; }
+@media (max-width: 600px) {
+  .skin-analysis-experience .skin-acne-status { padding: 16px; }
+  .skin-analysis-experience .skin-result-tabs button { padding: 12px 8px; line-height: 1.35; white-space: normal; }
+  .skin-acne-retry { width: 100%; }
+}

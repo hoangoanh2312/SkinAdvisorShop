@@ -1,0 +1,34 @@
+/* sandwich — inline add-to-cart confirmation for the product detail page. */
+.detail-info .sandwich-cart-notice {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-top: 14px;
+  border: 1px solid #c6dfd0;
+  border-radius: 12px;
+  background: #eef7f0;
+  color: #173f2e;
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.detail-info .sandwich-cart-notice.is-error { border-color: #e4c6bd; background: #fff5f2; color: #7f302c; }
+.detail-info .sandwich-cart-notice-icon { display: grid; place-items: center; flex: 0 0 31px; width: 31px; height: 31px; border-radius: 50%; background: #d5ebda; }
+.detail-info .sandwich-cart-notice.is-error .sandwich-cart-notice-icon { background: #f6dfd7; }
+.detail-info .sandwich-cart-notice-icon svg { width: 18px; height: 18px; }
+.detail-info .sandwich-cart-notice-copy { flex: 1 1 185px; min-width: 0; display: flex; flex-direction: column; gap: 3px; font-size: 14px; }
+.detail-info .sandwich-cart-notice-copy strong { font-weight: 700; }
+.detail-info .sandwich-cart-notice-copy span { color: #526b5d; font-size: 13px; }
+.detail-info .sandwich-cart-notice-link { display: inline-flex; align-items: center; gap: 2px; font-weight: 700; color: #164832; font-size: 14px; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
+.detail-info .sandwich-cart-notice-link svg { width: 17px; height: 17px; }
+.detail-info .sandwich-cart-notice-dismiss { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; padding: 5px; border: 0; border-radius: 50%; cursor: pointer; color: inherit; background: transparent; }
+.detail-info .sandwich-cart-notice-dismiss:hover { background: #dce9df; }
+.detail-info .sandwich-cart-notice-dismiss svg { width: 16px; height: 16px; }
+.detail-info .purchase-row button:disabled { cursor: not-allowed; }
+@media (max-width: 560px) {
+  .detail-info .sandwich-cart-notice { padding: 12px; gap: 9px; }
+  .detail-info .sandwich-cart-notice-copy { flex-basis: calc(100% - 82px); }
+  .detail-info .sandwich-cart-notice-link { margin-left: 40px; }
+}

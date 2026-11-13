@@ -2,13 +2,14 @@ require("dotenv").config({ quiet: true });
 
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const { startTestServer } = require("../utils/testServer");
 const User = require("../models/User");
 const Category = require("../models/Category");
 const Product = require("../models/Product");
 const Variant = require("../models/Variant");
 
 mongoose.set("autoIndex", false);
-const BASE = process.env.API_BASE_URL || "http://127.0.0.1:5000";
+let BASE;
 const tag = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const password = `Commerce-${tag}`;
 const emails = {
@@ -27,8 +28,9 @@ const request = async (path, method = "GET", body, token) => {
 const expect = (result, status, label) => assert(result.status === status, `${label}: expected ${status}, received ${result.status}`);
 
 const run = async () => {
+  let testServer;
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    testServer = await startTestServer(); BASE = testServer.baseUrl; console.log(`Test database: ${testServer.databaseName}`);
     const hash = await bcrypt.hash(password, 12);
     const [admin, customer, other, category] = await Promise.all([
       User.create({ fullName: "Commerce Admin Test", email: emails.admin, password: hash, role: "admin" }),
@@ -38,7 +40,6 @@ const run = async () => {
     ]);
     const product = await Product.create({ name: `Commerce Serum ${tag}`, slug: `commerce-serum-${tag}`, brand: `CommerceBrand-${tag}`, category: category._id, basePrice: 100000, skinTypes: ["oily"], skinConcerns: ["acne"] });
     const variant = await Variant.create({ product: product._id, name: "30 ml", sku: `COM-${tag}`.toUpperCase(), size: "30", unit: "ml", price: 100000, salePrice: 90000, stock: 10 });
-    await mongoose.connection.close();
 
     const login = async (email) => {
       const result = await request("/api/auth/login", "POST", { email, password });
@@ -113,13 +114,13 @@ const run = async () => {
     expect(await request(`/api/admin/orders/${secondId}/status`, "PUT", { orderStatus: "completed" }, adminToken), 200, "Complete order");
     console.log("Authorization and order status transition tests: passed");
 
-    console.log(`Test data retained: admin=${admin._id}, customer=${customer._id}, other=${other._id}, category=${category._id}, product=${product._id}, variant=${variant._id}, voucher=${voucherId}, cancelledOrder=${order._id}, completedOrder=${secondId}`);
+    console.log(`Isolated test data verified: admin=${admin._id}, customer=${customer._id}, other=${other._id}, category=${category._id}, product=${product._id}, variant=${variant._id}, voucher=${voucherId}, cancelledOrder=${order._id}, completedOrder=${secondId}`);
     console.log("All commerce API tests passed");
   } catch (error) {
     console.error(`Commerce API test failed: ${error.message}`);
     process.exitCode = 1;
   } finally {
-    if (mongoose.connection.readyState !== 0) await mongoose.connection.close();
+    if (testServer) await testServer.close();
   }
 };
 

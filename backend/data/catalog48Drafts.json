@@ -1,0 +1,1257 @@
+[
+  {
+    "brand": "COSRX",
+    "name": "COSRX Advanced Snail 96 Mucin Power Essence",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "sensitivity"
+    ],
+    "keyIngredients": [
+      "Snail Secretion Filtrate"
+    ],
+    "sourceUrl": "https://www.cosrx.com/products/advanced-snail-96-mucin-power-essence",
+    "sizeHint": "100ml",
+    "slug": "cosrx-advanced-snail-96-mucin-power-essence",
+    "briefDescription": "Sản phẩm chăm sóc da COSRX. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": true
+  },
+  {
+    "brand": "COSRX",
+    "name": "COSRX Low pH Good Morning Gel Cleanser",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "pores"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.cosrx.com/collections/best/best",
+    "sizeHint": "",
+    "slug": "cosrx-low-ph-good-morning-gel-cleanser",
+    "briefDescription": "Sản phẩm chăm sóc da COSRX. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "COSRX",
+    "name": "COSRX BHA Blackhead Power Liquid",
+    "categorySlug": "tay-te-bao-chet",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pores",
+      "oiliness"
+    ],
+    "keyIngredients": [
+      "Betaine Salicylate"
+    ],
+    "sourceUrl": "https://www.cosrx.com/collections/best/best",
+    "sizeHint": "",
+    "slug": "cosrx-bha-blackhead-power-liquid",
+    "briefDescription": "Sản phẩm chăm sóc da COSRX. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "COSRX",
+    "name": "COSRX Advanced Snail 92 All In One Cream",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Snail Secretion Filtrate"
+    ],
+    "sourceUrl": "https://www.cosrx.com/collections/best/best",
+    "sizeHint": "",
+    "slug": "cosrx-advanced-snail-92-all-in-one-cream",
+    "briefDescription": "Sản phẩm chăm sóc da COSRX. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "COSRX",
+    "name": "COSRX AHA/BHA Clarifying Treatment Toner",
+    "categorySlug": "toner-nuoc-can-bang",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pores",
+      "dullness"
+    ],
+    "keyIngredients": [
+      "AHA",
+      "BHA"
+    ],
+    "sourceUrl": "https://www.cosrx.com/collections/best/best",
+    "sizeHint": "",
+    "slug": "cosrx-aha-bha-clarifying-treatment-toner",
+    "briefDescription": "Sản phẩm chăm sóc da COSRX. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "CeraVe",
+    "name": "CeraVe Hydrating Facial Cleanser",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "dry"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "sensitivity"
+    ],
+    "keyIngredients": [
+      "Ceramides",
+      "Hyaluronic Acid"
+    ],
+    "sourceUrl": "https://www.cerave.com/skincare",
+    "sizeHint": "",
+    "slug": "cerave-hydrating-facial-cleanser",
+    "briefDescription": "Sản phẩm chăm sóc da CeraVe. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "CeraVe",
+    "name": "CeraVe Foaming Facial Cleanser",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "pores"
+    ],
+    "keyIngredients": [
+      "Ceramides"
+    ],
+    "sourceUrl": "https://www.cerave.com/skincare",
+    "sizeHint": "",
+    "slug": "cerave-foaming-facial-cleanser",
+    "briefDescription": "Sản phẩm chăm sóc da CeraVe. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "CeraVe",
+    "name": "CeraVe Moisturizing Cream",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "sensitivity"
+    ],
+    "keyIngredients": [
+      "Ceramides",
+      "Hyaluronic Acid"
+    ],
+    "sourceUrl": "https://www.cerave.com/skincare",
+    "sizeHint": "",
+    "slug": "cerave-moisturizing-cream",
+    "briefDescription": "Sản phẩm chăm sóc da CeraVe. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "CeraVe",
+    "name": "CeraVe PM Facial Moisturizing Lotion",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Niacinamide",
+      "Ceramides"
+    ],
+    "sourceUrl": "https://www.cerave.com/skincare",
+    "sizeHint": "",
+    "slug": "cerave-pm-facial-moisturizing-lotion",
+    "briefDescription": "Sản phẩm chăm sóc da CeraVe. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "CeraVe",
+    "name": "CeraVe Resurfacing Retinol Serum",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation",
+      "pores",
+      "aging"
+    ],
+    "keyIngredients": [
+      "Retinol",
+      "Niacinamide",
+      "Ceramides"
+    ],
+    "sourceUrl": "https://www.cerave.com/skincare/facial-serums/resurfacing-retinol-serum",
+    "sizeHint": "",
+    "slug": "cerave-resurfacing-retinol-serum",
+    "briefDescription": "Sản phẩm chăm sóc da CeraVe. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "La Roche-Posay",
+    "name": "La Roche-Posay Toleriane Hydrating Gentle Facial Cleanser",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "sensitivity"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.laroche-posay.us/our-products/product-line",
+    "sizeHint": "",
+    "slug": "la-roche-posay-toleriane-hydrating-gentle-facial-cleanser",
+    "briefDescription": "Sản phẩm chăm sóc da La Roche-Posay. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "La Roche-Posay",
+    "name": "La Roche-Posay Effaclar Purifying Foaming Gel",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "acne"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.laroche-posay.us/our-products/product-line",
+    "sizeHint": "",
+    "slug": "la-roche-posay-effaclar-purifying-foaming-gel",
+    "briefDescription": "Sản phẩm chăm sóc da La Roche-Posay. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "La Roche-Posay",
+    "name": "La Roche-Posay Cicaplast Balm B5+",
+    "categorySlug": "cham-soc-phuc-hoi",
+    "skinTypes": [
+      "dry",
+      "sensitive",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "sensitivity"
+    ],
+    "keyIngredients": [
+      "Panthenol"
+    ],
+    "sourceUrl": "https://www.laroche-posay.us/our-products/product-line/cicaplast",
+    "sizeHint": "",
+    "slug": "la-roche-posay-cicaplast-balm-b5",
+    "briefDescription": "Sản phẩm chăm sóc da La Roche-Posay. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "La Roche-Posay",
+    "name": "La Roche-Posay Hyalu B5 Pure Hyaluronic Acid Serum",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "aging"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid",
+      "Panthenol"
+    ],
+    "sourceUrl": "https://www.laroche-posay.us/our-products/product-line/hyalu-b5",
+    "sizeHint": "",
+    "slug": "la-roche-posay-hyalu-b5-pure-hyaluronic-acid-serum",
+    "briefDescription": "Sản phẩm chăm sóc da La Roche-Posay. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "La Roche-Posay",
+    "name": "La Roche-Posay Anthelios Ultra-Light Fluid Facial Sunscreen SPF 60",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.laroche-posay.us/our-products/product-line",
+    "sizeHint": "",
+    "slug": "la-roche-posay-anthelios-ultra-light-fluid-facial-sunscreen-spf-60",
+    "briefDescription": "Sản phẩm chăm sóc da La Roche-Posay. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Bioderma",
+    "name": "Bioderma Sensibio H2O",
+    "categorySlug": "tay-trang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "sensitivity"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.bioderma.com.vn/san-pham/sensibio/h2o",
+    "sizeHint": "",
+    "slug": "bioderma-sensibio-h2o",
+    "briefDescription": "Sản phẩm chăm sóc da Bioderma. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Bioderma",
+    "name": "Bioderma Sensibio Gel Moussant",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "sensitivity",
+      "dryness"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.bioderma.us/content/bioderma/us/en/products/product-page.html/sensibio-foaming-gel.html",
+    "sizeHint": "",
+    "slug": "bioderma-sensibio-gel-moussant",
+    "briefDescription": "Sản phẩm chăm sóc da Bioderma. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Bioderma",
+    "name": "Bioderma Sébium Gel Moussant",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "acne"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.bioderma.us/en/",
+    "sizeHint": "",
+    "slug": "bioderma-sebium-gel-moussant",
+    "briefDescription": "Sản phẩm chăm sóc da Bioderma. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Bioderma",
+    "name": "Bioderma Atoderm Intensive Baume",
+    "categorySlug": "cham-soc-phuc-hoi",
+    "skinTypes": [
+      "dry",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "sensitivity"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.bioderma.us/en/",
+    "sizeHint": "",
+    "slug": "bioderma-atoderm-intensive-baume",
+    "briefDescription": "Sản phẩm chăm sóc da Bioderma. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Bioderma",
+    "name": "Bioderma Sébium Mat Control",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "pores"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://www.bioderma.us/en/p/sebium-mat-control.html",
+    "sizeHint": "",
+    "slug": "bioderma-sebium-mat-control",
+    "briefDescription": "Sản phẩm chăm sóc da Bioderma. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Hada Labo",
+    "name": "Hada Labo ADVANCED NOURISH Hyaluronic Acid Serum",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid"
+    ],
+    "sourceUrl": "https://hadalabo.com.vn/danh-muc/dong-san-pham/advanced-nourish/",
+    "sizeHint": "30ml",
+    "slug": "hada-labo-advanced-nourish-hyaluronic-acid-serum",
+    "briefDescription": "Sản phẩm chăm sóc da Hada Labo. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Hada Labo",
+    "name": "Hada Labo ADVANCED NOURISH Hyaluronic Acid Cream",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid"
+    ],
+    "sourceUrl": "https://hadalabo.com.vn/danh-muc/dong-san-pham/advanced-nourish/",
+    "sizeHint": "50g",
+    "slug": "hada-labo-advanced-nourish-hyaluronic-acid-cream",
+    "briefDescription": "Sản phẩm chăm sóc da Hada Labo. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Hada Labo",
+    "name": "Hada Labo PERFECT WHITE Tranexamic Acid Serum",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation",
+      "dullness"
+    ],
+    "keyIngredients": [
+      "Tranexamic Acid",
+      "Niacinamide"
+    ],
+    "sourceUrl": "https://hadalabo.com.vn/san-pham/serum-duong-trang-hada-labo-perfect-white/",
+    "sizeHint": "30ml",
+    "slug": "hada-labo-perfect-white-tranexamic-acid-serum",
+    "briefDescription": "Sản phẩm chăm sóc da Hada Labo. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Hada Labo",
+    "name": "Hada Labo ACNE CARE Calming Gel Cream",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "oily",
+      "combination",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "acne",
+      "sensitivity"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://hadalabo.com.vn/san-pham/",
+    "sizeHint": "50g",
+    "slug": "hada-labo-acne-care-calming-gel-cream",
+    "briefDescription": "Sản phẩm chăm sóc da Hada Labo. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Hada Labo",
+    "name": "Hada Labo ADVANCED NOURISH Hyaluronic Acid Lotion (Oily Skin)",
+    "categorySlug": "toner-nuoc-can-bang",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "oiliness"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid"
+    ],
+    "sourceUrl": "https://hadalabo.com.vn/danh-muc/dong-san-pham/advanced-nourish/",
+    "sizeHint": "170ml",
+    "slug": "hada-labo-advanced-nourish-hyaluronic-acid-lotion-oily-skin",
+    "briefDescription": "Sản phẩm chăm sóc da Hada Labo. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Anessa",
+    "name": "Anessa Perfect UV Sunscreen Skincare Milk NA SPF50+ PA++++",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "oily",
+      "combination",
+      "normal"
+    ],
+    "skinConcerns": [
+      "pigmentation"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://anessa.vn/san-pham",
+    "sizeHint": "60ml",
+    "slug": "anessa-perfect-uv-sunscreen-skincare-milk-na-spf50-pa",
+    "briefDescription": "Sản phẩm chăm sóc da Anessa. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Anessa",
+    "name": "Anessa Perfect UV Sunscreen Mild Milk NA SPF50+ PA++++",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "dry",
+      "normal",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "pigmentation"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://anessa.vn/san-pham",
+    "sizeHint": "60ml",
+    "slug": "anessa-perfect-uv-sunscreen-mild-milk-na-spf50-pa",
+    "briefDescription": "Sản phẩm chăm sóc da Anessa. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Anessa",
+    "name": "Anessa Perfect UV Sunscreen Skincare Gel NB SPF50+ PA++++",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://anessa.vn/san-pham",
+    "sizeHint": "90g",
+    "slug": "anessa-perfect-uv-sunscreen-skincare-gel-nb-spf50-pa",
+    "briefDescription": "Sản phẩm chăm sóc da Anessa. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Anessa",
+    "name": "Anessa Brightening UV Sunscreen Gel NA SPF50+ PA++++",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation",
+      "dullness"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://anessa.vn/san-pham",
+    "sizeHint": "90g",
+    "slug": "anessa-brightening-uv-sunscreen-gel-na-spf50-pa",
+    "briefDescription": "Sản phẩm chăm sóc da Anessa. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "SKIN1004",
+    "name": "SKIN1004 Madagascar Centella Ampoule",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "sensitivity",
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Centella Asiatica"
+    ],
+    "sourceUrl": "https://www.skin1004.com/collections/main-page-recommendation/hydrating",
+    "sizeHint": "100ml",
+    "slug": "skin1004-madagascar-centella-ampoule",
+    "briefDescription": "Sản phẩm chăm sóc da SKIN1004. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "SKIN1004",
+    "name": "SKIN1004 Madagascar Centella Light Cleansing Oil",
+    "categorySlug": "tay-trang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness"
+    ],
+    "keyIngredients": [
+      "Centella Asiatica"
+    ],
+    "sourceUrl": "https://www.skin1004.com/pages/collection-series",
+    "sizeHint": "200ml",
+    "slug": "skin1004-madagascar-centella-light-cleansing-oil",
+    "briefDescription": "Sản phẩm chăm sóc da SKIN1004. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "SKIN1004",
+    "name": "SKIN1004 Madagascar Centella Ampoule Foam",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "sensitivity"
+    ],
+    "keyIngredients": [
+      "Centella Asiatica"
+    ],
+    "sourceUrl": "https://www.skin1004.com/collections/main-page-recommendation/hydrating",
+    "sizeHint": "125ml",
+    "slug": "skin1004-madagascar-centella-ampoule-foam",
+    "briefDescription": "Sản phẩm chăm sóc da SKIN1004. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "SKIN1004",
+    "name": "SKIN1004 Madagascar Centella Soothing Cream",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "sensitivity",
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Centella Asiatica",
+      "Ceramides"
+    ],
+    "sourceUrl": "https://www.skin1004.com/pages/collection-series",
+    "sizeHint": "",
+    "slug": "skin1004-madagascar-centella-soothing-cream",
+    "briefDescription": "Sản phẩm chăm sóc da SKIN1004. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "SKIN1004",
+    "name": "SKIN1004 Madagascar Centella Hyalu-Cica Water-Fit Sun Serum",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "pigmentation"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid",
+      "Centella Asiatica"
+    ],
+    "sourceUrl": "https://www.skin1004.com/collections/main-page-recommendation/hydrating",
+    "sizeHint": "50ml",
+    "slug": "skin1004-madagascar-centella-hyalu-cica-water-fit-sun-serum",
+    "briefDescription": "Sản phẩm chăm sóc da SKIN1004. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Paula's Choice",
+    "name": "Paula's Choice Skin Perfecting 2% BHA Liquid Exfoliant",
+    "categorySlug": "tay-te-bao-chet",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pores",
+      "oiliness",
+      "acne"
+    ],
+    "keyIngredients": [
+      "Salicylic Acid"
+    ],
+    "sourceUrl": "https://paulaschoice.vn/products/skin-perfecting-2-bha-liquid-exfoliant",
+    "sizeHint": "",
+    "slug": "paulas-choice-skin-perfecting-2-bha-liquid-exfoliant",
+    "briefDescription": "Sản phẩm chăm sóc da Paula's Choice. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Paula's Choice",
+    "name": "Paula's Choice 10% Niacinamide Booster",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pores",
+      "oiliness",
+      "pigmentation"
+    ],
+    "keyIngredients": [
+      "Niacinamide"
+    ],
+    "sourceUrl": "https://helpcenter.paulaschoice.com/en_us/silicone-free-products-Hkx3XVIjlg",
+    "sizeHint": "",
+    "slug": "paulas-choice-10-niacinamide-booster",
+    "briefDescription": "Sản phẩm chăm sóc da Paula's Choice. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Paula's Choice",
+    "name": "Paula's Choice CALM Ultra-Gentle Cleanser",
+    "categorySlug": "sua-rua-mat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "sensitivity",
+      "dryness"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://helpcenter.paulaschoice.com/en_us/silicone-free-products-Hkx3XVIjlg",
+    "sizeHint": "",
+    "slug": "paulas-choice-calm-ultra-gentle-cleanser",
+    "briefDescription": "Sản phẩm chăm sóc da Paula's Choice. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Paula's Choice",
+    "name": "Paula's Choice RESIST Barrier Repair Advanced Moisturizer",
+    "categorySlug": "cham-soc-phuc-hoi",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "sensitive"
+    ],
+    "skinConcerns": [
+      "dryness",
+      "aging"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://helpcenter.paulaschoice.com/en_us/silicone-free-products-Hkx3XVIjlg",
+    "sizeHint": "",
+    "slug": "paulas-choice-resist-barrier-repair-advanced-moisturizer",
+    "briefDescription": "Sản phẩm chăm sóc da Paula's Choice. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "The Ordinary",
+    "name": "The Ordinary Niacinamide 10% + Zinc 1%",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "pores",
+      "pigmentation"
+    ],
+    "keyIngredients": [
+      "Niacinamide",
+      "Zinc PCA"
+    ],
+    "sourceUrl": "https://theordinary.com/en-us/category/best-sellers",
+    "sizeHint": "",
+    "slug": "the-ordinary-niacinamide-10-zinc-1",
+    "briefDescription": "Sản phẩm chăm sóc da The Ordinary. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "The Ordinary",
+    "name": "The Ordinary Hyaluronic Acid 2% + B5 (with Ceramides)",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid",
+      "Panthenol",
+      "Ceramides"
+    ],
+    "sourceUrl": "https://theordinary.com/en-us/category/best-sellers",
+    "sizeHint": "",
+    "slug": "the-ordinary-hyaluronic-acid-2-b5-with-ceramides",
+    "briefDescription": "Sản phẩm chăm sóc da The Ordinary. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "The Ordinary",
+    "name": "The Ordinary Glycolic Acid 7% Exfoliating Toner",
+    "categorySlug": "tay-te-bao-chet",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dullness",
+      "pigmentation"
+    ],
+    "keyIngredients": [
+      "Glycolic Acid"
+    ],
+    "sourceUrl": "https://theordinary.com/en-us/category/best-sellers",
+    "sizeHint": "",
+    "slug": "the-ordinary-glycolic-acid-7-exfoliating-toner",
+    "briefDescription": "Sản phẩm chăm sóc da The Ordinary. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "The Ordinary",
+    "name": "The Ordinary Azelaic Acid Suspension 10%",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation",
+      "dullness"
+    ],
+    "keyIngredients": [
+      "Azelaic Acid"
+    ],
+    "sourceUrl": "https://theordinary.com/en-us/category/best-sellers",
+    "sizeHint": "",
+    "slug": "the-ordinary-azelaic-acid-suspension-10",
+    "briefDescription": "Sản phẩm chăm sóc da The Ordinary. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "The Ordinary",
+    "name": "The Ordinary Natural Moisturizing Factors + HA",
+    "categorySlug": "kem-duong",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [
+      "Hyaluronic Acid"
+    ],
+    "sourceUrl": "https://theordinary.com/en-us/category/best-sellers",
+    "sizeHint": "",
+    "slug": "the-ordinary-natural-moisturizing-factors-ha",
+    "briefDescription": "Sản phẩm chăm sóc da The Ordinary. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Cocoon",
+    "name": "Cocoon Tinh chất bí đao N7",
+    "categorySlug": "serum-tinh-chat",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "acne",
+      "pigmentation"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://cocoonvietnam.com/danh-muc/tim-hieu-nguyen-lieu",
+    "sizeHint": "30ml",
+    "slug": "cocoon-tinh-chat-bi-ao-n7",
+    "briefDescription": "Sản phẩm chăm sóc da Cocoon. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Cocoon",
+    "name": "Cocoon Nước tẩy trang bí đao",
+    "categorySlug": "tay-trang",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "oiliness",
+      "acne"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://cocoonvietnam.com/danh-muc/tim-hieu-nguyen-lieu",
+    "sizeHint": "1000ml",
+    "slug": "cocoon-nuoc-tay-trang-bi-ao",
+    "briefDescription": "Sản phẩm chăm sóc da Cocoon. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Cocoon",
+    "name": "Cocoon Sữa chống nắng bí đao",
+    "categorySlug": "kem-chong-nang",
+    "skinTypes": [
+      "oily",
+      "combination"
+    ],
+    "skinConcerns": [
+      "pigmentation"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://cocoonvietnam.com/danh-muc/tim-hieu-nguyen-lieu",
+    "sizeHint": "50ml",
+    "slug": "cocoon-sua-chong-nang-bi-ao",
+    "briefDescription": "Sản phẩm chăm sóc da Cocoon. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Cocoon",
+    "name": "Cocoon Nước tẩy trang hoa hồng",
+    "categorySlug": "tay-trang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://cocoonvietnam.com/danh-muc/tim-hieu-nguyen-lieu",
+    "sizeHint": "500ml",
+    "slug": "cocoon-nuoc-tay-trang-hoa-hong",
+    "briefDescription": "Sản phẩm chăm sóc da Cocoon. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  },
+  {
+    "brand": "Cocoon",
+    "name": "Cocoon Dầu tẩy trang hoa hồng",
+    "categorySlug": "tay-trang",
+    "skinTypes": [
+      "normal",
+      "dry",
+      "combination"
+    ],
+    "skinConcerns": [
+      "dryness"
+    ],
+    "keyIngredients": [],
+    "sourceUrl": "https://cocoonvietnam.com/danh-muc/tim-hieu-nguyen-lieu",
+    "sizeHint": "310ml",
+    "slug": "cocoon-dau-tay-trang-hoa-hong",
+    "briefDescription": "Sản phẩm chăm sóc da Cocoon. Thông tin thương mại, thành phần đầy đủ và ảnh cần được người quản trị kiểm tra theo bao bì hoặc website chính hãng trước khi mở bán.",
+    "reviewStatus": "CHO_XAC_MINH_THONG_TIN",
+    "suggestedStock": 0,
+    "suggestedPrice": null,
+    "imageUrl": "",
+    "imageUsagePermission": "CHUA_XAC_NHAN",
+    "isExistingProduct": false
+  }
+]

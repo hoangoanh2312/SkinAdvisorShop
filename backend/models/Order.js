@@ -38,6 +38,9 @@ const shippingAddressSchema = new mongoose.Schema(
 const orderSchema = new mongoose.Schema(
   {
     orderCode: { type: String, immutable: true },
+    // Optional client attempt key: legacy orders remain readable.
+    idempotencyKey: { type: String, immutable: true, select: false, default: undefined },
+    requestFingerprint: { type: String, immutable: true, select: false, default: undefined },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
     items: { type: [orderItemSchema], required: true, validate: [(items) => items.length > 0, "Order requires items"] },
     shippingAddress: { type: shippingAddressSchema, required: true },
@@ -67,5 +70,10 @@ orderSchema.index({ user: 1, createdAt: -1 });
 orderSchema.index({ orderStatus: 1, createdAt: -1 });
 orderSchema.index({ orderCode: 1 }, { unique: true, sparse: true });
 orderSchema.index({ vnpayTxnRef: 1 }, { unique: true, sparse: true });
+// A retry of the same authenticated checkout must not create a second order.
+orderSchema.index(
+  { user: 1, idempotencyKey: 1 },
+  { unique: true, partialFilterExpression: { idempotencyKey: { $type: "string" } } }
+);
 
 module.exports = mongoose.model("Order", orderSchema);

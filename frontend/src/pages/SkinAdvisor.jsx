@@ -72,7 +72,7 @@ export default function SkinAdvisor() {
     <div className="advisor-page">
       <div className="advisor-head">
         <span className="ai-mark"><Sparkles /></span>
-        <div><span className="eyebrow">SKIN ADVISOR AI</span><h1>Tìm sản phẩm phù hợp với làn da của bạn</h1><p>Chia sẻ nhu cầu chăm sóc để nhận gợi ý sản phẩm thực tế từ SKINORA.</p></div>
+        <div><span className="eyebrow">SKIN ADVISOR AI</span><h1>Tìm sản phẩm phù hợp với làn da của bạn</h1><p>Chia sẻ nhu cầu chăm sóc để nhận gợi ý sản phẩm thực tế từ sandwich.</p></div>
       </div>
       <div className="chat-shell">
         <aside className="chat-aside">

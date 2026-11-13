@@ -11,6 +11,7 @@ const voucherSchema = new mongoose.Schema(
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     usageLimit: { type: Number, default: null, min: 0 },
+    perUserLimit: { type: Number, default: null, min: 1 },
     usedCount: { type: Number, default: 0, min: 0 },
     isActive: { type: Boolean, default: true },
   },

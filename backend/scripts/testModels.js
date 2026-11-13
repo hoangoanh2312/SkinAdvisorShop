@@ -1,7 +1,7 @@
 require("dotenv").config({ quiet: true });
 
 const mongoose = require("mongoose");
-const connectDB = require("../config/db");
+const { connectTestDatabase } = require("../utils/testDatabase");
 
 // This verification script must not create indexes or otherwise mutate Atlas.
 mongoose.set("autoIndex", false);
@@ -20,7 +20,7 @@ const models = [
 
 const testModels = async () => {
   try {
-    await connectDB();
+    await connectTestDatabase(mongoose);
 
     for (const [name, model] of models) {
       if (model.modelName !== name) {

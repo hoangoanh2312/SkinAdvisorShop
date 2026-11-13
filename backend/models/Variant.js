@@ -20,7 +20,10 @@ const variantSchema = new mongoose.Schema(
     unit: { type: String, default: "" },
     price: { type: Number, required: true, min: 0 },
     salePrice: { type: Number, default: null, min: 0 },
-    stock: { type: Number, default: 0, min: 0 },
+    stock: { type: Number, default: 0, min: 0, validate: {
+      validator: Number.isSafeInteger,
+      message: "Tồn kho phải là số nguyên không âm",
+    } },
     image: { type: String, default: "" },
     isActive: { type: Boolean, default: true },
   },

@@ -1,0 +1,512 @@
+/* sandwich – richer editorial beauty palette, Nov 2026.
+   Visual-only overrides. No API, routing, business data, or markup changes. */
+:root {
+  --ivory: #f9f2ec;
+  --blush: #f4dfdf;
+  --nude: #c98a86;
+  --burgundy: #7b2945;
+  --plum: #2c1b28;
+  --charcoal: #282326;
+  --beige: #f0e3d9;
+  --ink: #20352e;
+  --green: #214b3c;
+  --muted: #665b60;
+  --line: #e4d0cd;
+  --rose: #f6e3e2;
+  --shadow: 0 14px 40px rgba(64, 31, 41, .12);
+  --sandwich-accent: #7b2945;
+  --sandwich-accent-hover: #602039;
+  --sandwich-ink: #282326;
+  --sandwich-surface: #fffaf7;
+}
+
+/* Stronger navigational hierarchy, without moving elements. */
+#root .header {
+  background: rgba(255, 250, 247, .97);
+  border-bottom-color: #e5cbc8;
+  box-shadow: 0 5px 20px rgba(58, 27, 39, .05);
+}
+#root .header .logo { color: #174032; }
+#root .header .logo span { color: var(--sandwich-accent); }
+#root .nav a { color: #3b3134; font-size: max(12px, .82rem); font-weight: 650; }
+#root .nav a.active,
+#root .nav a:hover,
+#root .nav .ai-nav { color: var(--sandwich-accent); }
+#root .header-search { background: #f4eae7; }
+#root .cart-icon span { background: var(--sandwich-accent); }
+#root .topbar { background: #244738; color: #fff; }
+
+/* Editorial hero: warm rose contrast + vivid original imagery. */
+#root .responsive-hero {
+  background: linear-gradient(114deg, #fff5ed 0%, #f3e4e1 45%, #e1bcc1 100%);
+}
+#root .hero-ghost { color: rgba(120, 43, 72, .085); }
+#root .hero-message h1 { color: #23282a; }
+#root .hero-message h1 em { color: #7b2945; }
+#root .hero-message > p { color: #584a4e; font-size: clamp(14px, 1.05vw, 17px); line-height: 1.7; }
+#root .hero-message .ai-pill {
+  background: rgba(255, 252, 249, .84);
+  color: #702d45;
+  border-color: #d9a3aa;
+}
+#root .hero-art-frame img { filter: saturate(.92) contrast(1.035); }
+#root .hero-art-frame::after { background: linear-gradient(90deg,rgba(255,239,232,.10),transparent 50%); }
+#root .hero-ai-card {
+  background: rgba(255, 251, 248, .97);
+  border: 1px solid #e4bdc4;
+  box-shadow: 0 20px 50px rgba(63, 30, 40, .19);
+}
+#root .hero-ai-card > strong { color: #24382e; }
+#root .hero-ai-card > span { color: #67585d; font-size: 12px; }
+#root .hero-ai-card p { color: #514548; }
+#root .hero-ai-card a { color: #782843; font-size: 12px; font-weight: 700; }
+#root .hero-trust strong { color: #6d2942; }
+#root .hero-trust span { color: #625056; font-size: 10px; }
+#root .hero-transition { background: #fff7f3; border-color: #e6c6ca; }
+#root .hero-transition span { font-size: 11px; color: #4a3940; }
+
+/* Buttons and interactive text are obvious, accessible and consistent. */
+#root .btn-burgundy,
+#root .new-home .btn-burgundy {
+  color: #fff;
+  background: var(--sandwich-accent);
+  border-color: var(--sandwich-accent);
+  box-shadow: 0 9px 24px rgba(123, 41, 69, .18);
+  font-size: 13px;
+  font-weight: 750;
+}
+#root .btn-burgundy:hover,
+#root .new-home .btn-burgundy:hover {
+  background: var(--sandwich-accent-hover);
+  border-color: var(--sandwich-accent-hover);
+  box-shadow: 0 12px 29px rgba(123, 41, 69, .25);
+}
+#root .editorial-link { color: #67283f; font-size: 13px; font-weight: 700; }
+#root .editorial-link:hover { color: #9e3a57; }
+#root :where(a, button, input, select):focus-visible {
+  outline: 3px solid #b84d76;
+  outline-offset: 3px;
+}
+
+/* Richer alternating surfaces across existing homepage sections. */
+#root .new-home { color: #2c262a; background: #fff9f6; }
+#root .manifesto { background: #fffaf7; }
+#root .manifesto-grid > p { color: #252328; }
+#root .manifesto-grid > p em { color: #8a3450; }
+#root .manifesto-grid > div > p { color: #51464b; font-size: 15px; }
+#root .manifesto-grid > div > div span { color: #483840; font-size: 12px; }
+#root .eyebrow,
+#root .new-home .eyebrow { color: #812e4a; font-size: 12px; font-weight: 800; }
+#root .editorial-products {
+  background: #fff9f6;
+  position: relative;
+}
+#root .new-home .section-heading h2 { color: #262327; }
+#root .new-home .section-heading p { color: #5e5154; font-size: 15px; }
+
+/* Catalog cards: a little depth and brighter product images. */
+#root .product-card {
+  background: #fff;
+  border: 1px solid #ecd8d4;
+  box-shadow: 0 5px 22px rgba(76, 40, 49, .055);
+  overflow: hidden;
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+#root .product-card:hover,
+#root .new-home .product-card:hover {
+  border-color: #c98695;
+  box-shadow: 0 16px 35px rgba(91, 42, 57, .15);
+  transform: translateY(-3px);
+}
+#root .product-image { background: #f4ebe5; }
+#root .product-image img { filter: saturate(1.07) contrast(1.01); }
+#root .product-info,
+#root .luxury-grid .product-info { padding: 17px 16px 19px; }
+#root .brand { color: #87415c; font-size: 11px; }
+#root .product-name { color: #29252a; font-weight: 700; line-height: 1.45; }
+#root .product-info .rating { font-size: 12px; }
+#root .price-row strong { color: #8b304b; font-weight: 800; font-size: 18px; }
+#root .badge-stack > span,
+#root .product-card .discount { background: #822a49; color: #fff; }
+#root .product-card .quick-add { background: #762a44; font-size: 12px; }
+#root .product-card .quick-add:hover { background: #5d2037; }
+#root .home-featured-feedback { background: #fff1eb; border-color: #e6bec2; color: #5d3546; }
+#root .home-featured-feedback button { background: #7b2945; color: #fff; }
+
+/* Concern gallery: saturated imagery and readable overlaid labels. */
+#root .concern-editorial { background: #302128; }
+#root .concern-editorial .eyebrow { color: #ffd6dd; }
+#root .split-heading p { color: #f1dbdc; font-size: 15px; }
+#root .concern-tile img { filter: saturate(.86) contrast(1.04); }
+#root .concern-tile::after { background: linear-gradient(0deg, rgba(37, 13, 27, .86), rgba(37,13,27,.08) 78%); }
+#root .concern-tile span { color: #fff3f2; font-size: 12px; }
+#root .concern-tile h3 { color: #fff; }
+#root .concern-tile b { color: #fff; font-size: 12px; }
+#root .concern-tile:hover img { filter: saturate(1.07); }
+
+/* AI section looks clearly distinct while preserving the existing CTA. */
+#root .ai-signature { background: linear-gradient(135deg, #5a1f39, #7d3050 63%, #a45168); }
+#root .ai-editorial-copy > p { color: #ffeaed; font-size: 15px; }
+#root .ai-signature .eyebrow.light { color: #ffdade; }
+#root .mock-product { box-shadow: 0 9px 25px rgba(34,12,21,.16); }
+
+/* Ingredients: cards-on-paper appearance without changing the list layout. */
+#root .ingredient-section { background: linear-gradient(130deg, #f8e8e4, #f5eee8); }
+#root .ingredient-intro h2 { color: #2b2228; }
+#root .ingredient-intro > p { color: #5e4b51; font-size: 15px; }
+#root .ingredient-list > a {
+  border-color: #d9bec0;
+  padding-left: 15px;
+  padding-right: 14px;
+  transition: background-color .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+#root .ingredient-list > a:hover,
+#root .ingredient-list > a:focus-visible {
+  background: rgba(255, 255, 255, .70);
+  border-color: #bb7b90;
+  box-shadow: inset 4px 0 #8a314f;
+}
+#root .ingredient-list h3 { color: #29252a; font-size: clamp(21px, 1.65vw, 26px); }
+#root .ingredient-list p { color: #53454a; font-size: 13px; letter-spacing: 0; line-height: 1.5; }
+#root .ingredient-list div > span { color: #66505a; font-size: 11px; line-height: 1.5; }
+#root .ingredient-list > a > small { color: #8a3d55; font-size: 12px; }
+#root .ingredient-list > a > svg { color: #84334f; }
+
+/* The remaining sections benefit from stronger text and separators. */
+#root .routine-section { background: #fffbf8; }
+#root .routine-steps article { border-color: #dfc6c3; }
+#root .routine-steps h3 { color: #30272c; }
+#root .routine-steps p { color: #5a4d51; font-size: 14px; }
+#root .ingredient-chips span { background: #f5dedc; color: #642b42; font-size: 12px; }
+#root .newsletter { border-color: rgba(255,255,255,.25); }
+#root .footer { background: #271d24; }
+#root .footer-grid > div > a:not(.logo) { color: #ead5d9; }
+#root .footer p { color: #e2cfd6; }
+
+/* Existing mobile breakpoints retained; only correct legibility and wrapping. */
+@media (max-width: 800px) {
+  #root .nav a { font-size: 14px; }
+  #root .ingredient-list > a { padding-left: 8px; padding-right: 8px; }
+  #root .hero-message > p { font-size: 14px; }
+  #root .hero-ai-card p { font-size: 12px; }
+}
+@media (max-width: 560px) {
+  #root .hero-message h1 { line-height: 1.15; }
+  #root .hero-trust span { font-size: 10px; }
+  #root .new-home .section-heading h2 { font-size: clamp(31px, 8vw, 39px); }
+  #root .luxury-grid .product-info { padding: 12px 10px 15px; }
+  #root .luxury-grid .product-name { font-size: 15px; }
+  #root .ingredient-list p { font-size: 12px; }
+  #root .ingredient-list div > span { font-size: 11px; }
+  #root .manifesto-grid > div > p { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #root .product-card,
+  #root .ingredient-list > a,
+  #root .product-image img { transition: none; }
+}
+
+
+/* v2 — broad page coverage, even visual rhythm rather than a single dark AI block. */
+/* 0. Consistent, legible controls. Keep existing DOM, routes and business logic. */
+#root {
+  --sandwich-maroon: #78314c;
+  --sandwich-berry: #a34b65;
+  --sandwich-pink: #efd0d4;
+  --sandwich-butter: #f8e5d3;
+  --sandwich-cream: #fff8f3;
+  --sandwich-deep: #26352f;
+  --sandwich-copy: #55464a;
+  color: #2a2828;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+#root .new-home,
+#root .catalog-page,
+#root .detail-page,
+#root .cart-page,
+#root .checkout-page,
+#root .orders-page,
+#root .advisor-page,
+#root .skin-analysis-page { font-family: "Segoe UI", Arial, sans-serif; }
+#root .new-home :is(h1,h2,h3,p,span),
+#root .product-card :is(p,strong,span),
+#root .ingredient-list :is(h3,p,span) { overflow-wrap: break-word; }
+#root .eyebrow,
+#root .new-home .eyebrow { color: #853148; font-size: 12px; font-weight: 800; letter-spacing: .14em; }
+#root :is(.btn, .checkout-form button, .order-summary button):where(:not(:disabled)) { transition: background-color .2s ease, box-shadow .2s ease, border-color .2s ease; }
+#root .btn-dark,
+#root .btn-primary { background: #78314c; color: #fff; border-color: #78314c; box-shadow: 0 8px 20px rgba(120,49,76,.15); }
+#root .btn-dark:hover,
+#root .btn-primary:hover { background: #60253c; border-color: #60253c; }
+#root .btn-light { background: #fff9f6; border-color: #d9b9bf; color: #663046; }
+#root .btn-light:hover { border-color: #a8566e; background: #ffeef0; }
+#root .header { background: rgba(255,250,247,.97); border-bottom: 1px solid #e9cdd2; }
+#root .header .nav a { font-weight: 650; font-size: clamp(12px, .98vw, 14px); }
+#root .header .nav a.active { border-bottom-color: #9a425e; }
+#root .header-search { border: 1px solid #efdee0; background: #fff4f4; }
+#root .header-search:focus-within { border-color: #a9546c; box-shadow: 0 0 0 3px #f5dce2; }
+#root .header-icons a:hover { color: #9a3d5a; }
+
+/* 1. HERO. Warm blush and vibrant artwork without a new layout or fake content. */
+#root .responsive-hero {
+  background: radial-gradient(circle at 82% 23%, rgba(255,255,255,.68),transparent 35%),
+              linear-gradient(115deg,#fff4eb 0%,#f8e3e0 48%,#e8b9c6 100%);
+  border-bottom: 1px solid #edcad0;
+}
+#root .hero-message h1 { color: #24362f; letter-spacing: -.024em; }
+#root .hero-message h1 em { color: #8c3650; }
+#root .hero-message > p { color: #504248; }
+#root .hero-ai-card { border-radius: 9px; box-shadow: 0 24px 44px rgba(90,35,54,.19); }
+#root .hero-transition { background: #fff8f4; }
+
+/* 2. BRAND MANIFESTO. Make the next section visibly different from the hero. */
+#root .manifesto {
+  background: linear-gradient(105deg,#fffefe 0%,#fff8f1 54%,#f6e5df 100%);
+  border-block: 1px solid #eddbd7;
+  padding-block: clamp(70px, 8vw, 110px);
+}
+#root .manifesto-grid > p { color: #25352e; font-weight: 800; font-family: "Segoe UI", Arial, sans-serif; letter-spacing: -.035em; }
+#root .manifesto-grid > p em { color: #8c3756; }
+#root .manifesto-grid > div > p { color: #53484a; font-size: 15px; line-height: 1.8; }
+#root .manifesto-grid > div > div span { color: #6b3851; font-size: 12px; }
+#root .manifesto-grid > div > div svg { color: #a54364; }
+
+/* 3. FEATURED PRODUCTS. A genuine shopping gallery, not an empty white expanse. */
+#root .new-home .editorial-products {
+  background: #fff8f2;
+  border-block: 1px solid #f1e2db;
+  padding-block: clamp(78px, 8vw, 118px);
+}
+#root .new-home .section-heading h2 { color: #26352f; font-family: "Segoe UI", Arial, sans-serif; font-weight: 800; letter-spacing: -.032em; }
+#root .new-home .section-heading p { color: #554849; font-size: 15px; line-height: 1.7; }
+#root .new-home .luxury-grid { gap: clamp(15px, 2.5vw, 30px); }
+#root .new-home .luxury-grid .product-card {
+  background: #fff;
+  border: 1px solid #efd8d5;
+  border-radius: 12px;
+  box-shadow: 0 8px 23px rgba(100,51,55,.08);
+}
+#root .new-home .luxury-grid .product-image { background: linear-gradient(140deg,#fff5ec,#f5e1db); }
+#root .new-home .luxury-grid .product-image img { filter: saturate(1.11) contrast(1.035); }
+#root .new-home .luxury-grid .product-info { padding: 16px 18px 20px; }
+#root .new-home .luxury-grid .product-name { font-weight: 750; color: #302a2d; }
+#root .price-row strong { color: #913955; }
+#root .editorial-link { color: #812c4a; border-bottom: 1px solid #812c4a; padding-bottom: 7px; }
+#root .new-home .empty { background: #fff; border: 1px dashed #c8949e; color: #713e50; border-radius: 9px; }
+
+/* 4. SKIN CONCERNS. Rich image cards on a chocolate/plum base. */
+#root .concern-editorial {
+  background: linear-gradient(145deg,#36262f 0%,#573043 60%,#663b49 100%);
+  padding-block: clamp(85px, 9vw, 128px);
+}
+#root .concern-editorial .split-heading h2 { color: #fff; }
+#root .concern-editorial .split-heading h2 em { color: #f3b7c6; }
+#root .concern-editorial .split-heading p { color: #ffeaeb; font-size: 15px; }
+#root .concern-bento { gap: 15px; }
+#root .concern-tile { border-radius: 12px; border: 1px solid rgba(255,221,229,.16); box-shadow: 0 9px 25px rgba(26,8,15,.19); }
+#root .concern-tile img { filter: saturate(1.1) contrast(1.045); }
+#root .concern-tile::after { background: linear-gradient(0deg,rgba(35,13,24,.89) 0%,rgba(35,13,24,.05) 77%); }
+#root .concern-tile span { color: #ffe8ea; font-size: 12px; }
+#root .concern-tile h3 { letter-spacing: -.015em; }
+
+/* 5. AI. The old patch made this section an overwhelming solid maroon rectangle.
+   Keep the dramatic call to action, lighten half of it and add soft visual rhythm. */
+#root .ai-signature {
+  background: radial-gradient(ellipse at 84% 17%,rgba(240,173,192,.33) 0%,transparent 44%),
+              linear-gradient(114deg,#5d263f 0%,#873e5c 60%,#ad5f78 100%);
+  padding-block: clamp(85px, 9vw, 116px);
+}
+#root .ai-signature::before {
+  content: "";
+  position: absolute;
+  width: 37vw;
+  height: 37vw;
+  max-width: 500px;
+  max-height: 500px;
+  border: 1px solid rgba(255,229,234,.17);
+  border-radius: 50%;
+  top: -28%; right: -10%;
+  pointer-events: none;
+}
+#root .ai-editorial-copy h2 { color: #fff; letter-spacing: -.025em; }
+#root .ai-editorial-copy h2 em { color: #ffd3d4; }
+#root .ai-editorial-copy > p { color: #ffebed; line-height: 1.75; }
+#root .ai-chip-row span { background: rgba(255,255,255,.13); border-color: rgba(255,255,255,.47); color: #fff; font-size: 12px; }
+#root .ai-chat-mock { transform: rotate(.3deg); border: 1px solid #f4d7d5; border-radius: 9px; overflow: hidden; box-shadow: 25px 28px 0 rgba(53,16,35,.47),0 14px 40px rgba(32,14,23,.19); }
+#root .ai-signature .btn-ivory { background: #fff5ed; color: #64213c; border-color: #fff5ed; font-weight: 800; }
+#root .ai-signature .btn-ivory:hover { background: #fff; }
+#root .mock-msg.ai { background: #fff; }
+#root .mock-input span { background: #853451; }
+
+/* 6. INGREDIENTS. Give the pale listing real surfaces and a stronger hierarchy. */
+#root .ingredient-section {
+  background: linear-gradient(125deg,#fff2ea 0%,#f6dfde 45%,#fff8f4 100%);
+  padding-block: clamp(85px, 9vw, 120px);
+  border-bottom: 1px solid #e7cbd0;
+}
+#root .ingredient-intro h2 { color: #26342e; font-family: "Segoe UI", Arial, sans-serif; font-weight: 800; letter-spacing: -.028em; }
+#root .ingredient-intro h2 em { color: #863b58; }
+#root .ingredient-intro > p { color: #5b4a51; line-height: 1.7; }
+#root .ingredient-orb { background: rgba(255,255,255,.55); border-color: #dcb6bd; color: #78344d; }
+#root .ingredient-list { border-top: 1px solid #dbb7bb; }
+#root .ingredient-list > a {
+  background: rgba(255,255,255,.58);
+  border-bottom: 1px solid #d8b9ba;
+  border-radius: 3px;
+  padding: 18px 18px;
+  margin-bottom: 8px;
+  min-width: 0;
+}
+#root .ingredient-list > a:nth-child(even) { background: rgba(255,246,245,.85); }
+#root .ingredient-list > a:hover { background: #fff; border-color: #bb7187; box-shadow: 0 7px 25px rgba(112,49,73,.12),inset 4px 0 #a14b67; }
+#root .ingredient-list h3 { color: #342c2c; font-weight: 750; letter-spacing: -.02em; }
+#root .ingredient-list p { color: #594951; font-size: 14px; }
+#root .ingredient-list div > span { color: #74545e; font-size: 12px; }
+
+/* 7. EDITOR'S PICK. Real data only; strong price + clear button. */
+#root .featured-editorial { background: #fff6f1; }
+#root .featured-image { background: #ecd9d1; }
+#root .featured-image img { filter: saturate(1.12) contrast(1.02); }
+#root .featured-image > span { color: #793650; background: #fff9f5; font-weight: 750; }
+#root .featured-copy { background: linear-gradient(125deg,#fff9f5 5%,#f6e4e3 100%); }
+#root .featured-copy h2 { color: #28352f; font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; letter-spacing: -.035em; }
+#root .featured-copy > p { color: #574a4d; font-size: 15px; line-height: 1.75; }
+#root .featured-buy strong { color: #8d304d; font-weight: 800; }
+#root .ingredient-chips span { background: #f6d9dd; color: #71304a; border: 1px solid #e7bbc4; }
+
+/* 8. ROUTINE. Clearly styled step cards, keeping exactly the 3 original steps. */
+#root .routine-section { background: #fff9f5; padding-block: clamp(80px, 9vw, 118px); }
+#root .routine-section .split-heading h2 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; color: #293830; }
+#root .routine-section .split-heading h2 em { color: #963c5c; }
+#root .routine-section .split-heading > p { color: #625257; font-size: 15px; }
+#root .routine-steps { border-top: 2px solid #aa5b73; gap: 12px; }
+#root .routine-steps article,
+#root .routine-steps article + article {
+  background: #fff;
+  border: 1px solid #ead4d2;
+  border-radius: 9px;
+  padding: 25px 25px 24px;
+  box-shadow: 0 6px 24px rgba(106,50,66,.065);
+}
+#root .routine-steps article > span { font-size: 16px; font-weight: 800; color: #a13d5c; }
+#root .routine-steps article > i { color: #a13d5c; right: 24px; top: 26px; }
+#root .routine-steps h3 { font-family: "Segoe UI",Arial,sans-serif; font-size: clamp(19px,2vw,24px); margin-top: 31px; color: #28362d; }
+#root .routine-steps p { color: #66545a; font-size: 14px; line-height: 1.65; }
+#root .brand-marquee { background: #6e2d47; color: #fff4f1; border-block: 1px solid #a95d76; }
+#root .brand-marquee > span { color: #ffdee2; }
+
+/* 9. CATALOG. The shopping pages should match the more lively homepage. */
+#root .catalog-page .page-intro { background: linear-gradient(135deg,#fff8f4,#f5e2e0); margin: 0 0 30px; padding: 65px 24px 50px; border-bottom: 1px solid #ead2d3; }
+#root .catalog-page .page-intro h1 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; color: #2b352e; }
+#root .catalog-page .page-intro p { color: #655058; }
+#root .catalog-layout { padding-top: 30px; }
+#root .filter-panel { border-top: 3px solid #9d4563; padding-top: 12px; }
+#root .filter-title h3 { color: #79334d; }
+#root .filter-group { border-top-color: #ead4d3; }
+#root .filter-group label { color: #55494a; }
+#root .filter-group :is(input[type="checkbox"],input[type="range"]) { accent-color: #963e5a; }
+#root .catalog-search { background: #fff9f6; border-color: #e2c8ca; border-radius: 6px; }
+#root .catalog-toolbar select { border-color: #e2c8ca; border-radius: 6px; background: #fff9f6; }
+#root .catalog-results .product-card { background: #fff; border: 1px solid #ead2cf; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(89,44,60,.08); }
+#root .catalog-results .product-info { padding: 15px; }
+#root .catalog-results .product-image { background: #f7eae4; }
+
+/* 10. DETAIL / CART / CHECKOUT / CUSTOMER ORDERS. Change visuals, not controls. */
+#root .detail-page .breadcrumbs { color: #77545d; }
+#root .detail-page .main-image { background: #f4e6e2; border-radius: 8px; overflow: hidden; }
+#root .detail-page .thumbs button.active { border-color: #963e5a; }
+#root .detail-page .detail-info h1 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; letter-spacing: -.03em; }
+#root .detail-page .detail-price strong { color: #9d3f59; }
+#root .detail-page .variant-row button.active { border-color: #963e5a; background: #fff0f1; }
+#root .detail-page .tag-row span { background: #f6e0e2; color: #673449; }
+#root .detail-page .detail-sections { border-color: #e4c8c8; }
+#root .detail-page .detail-sections article { background: #fffaf8; border-color: #e4c8c8; }
+#root .detail-page .reviews { background: #fff1ec; }
+#root .cart-page .page-intro,
+#root .checkout-page .page-intro,
+#root .orders-page .page-intro { background: #fff8f5; }
+#root .cart-page .cart-item { border-bottom-color: #eed5d6; }
+#root .order-summary { background: #fff3f1; border: 1px solid #edd1d1; border-radius: 10px; box-shadow: 0 10px 26px rgba(89,44,60,.07); }
+#root .order-summary h2 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; }
+#root .checkout-form { border-color: #e6c8ce; border-radius: 10px; background: #fffdfb; }
+#root .checkout-form :is(input,select,textarea):focus { outline: 2px solid #b65d79; outline-offset: 1px; }
+#root .payment-option.active { background: #fff0f1; border-color: #b75d79; }
+#root .orders-page .order-cards article { background: #fff; border-color: #edcece; border-radius: 10px; box-shadow: 0 6px 22px rgba(89,44,60,.07); }
+#root .orders-page .order-cards article:hover { border-color: #bc7187; box-shadow: 0 10px 28px rgba(89,44,60,.12); }
+
+/* 11. ADVISOR / ANALYSIS. AI remains functionally untouched. */
+#root .advisor-page { background: linear-gradient(130deg,#fff2ee,#f5e2e3); }
+#root .advisor-head h1,
+#root .skin-analysis-hero h1 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; color: #29352e; }
+#root .chat-aside { background: linear-gradient(145deg,#4b2b3a,#873e58); }
+#root .chat-shell { border: 1px solid #ebcfd4; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 38px rgba(102,49,68,.12); }
+#root .message.user .bubble { background: #77364f; }
+#root .quick-list button { border-color: #ddb3c0; color: #73314a; background: #fff9f7; }
+#root .chat-input button { background: #823953; }
+#root .skin-analysis-page { background: linear-gradient(140deg,#fff9f5,#f5e8e4); }
+#root .analysis-input-card,
+#root .analysis-guide,
+#root .analysis-results { border: 1px solid #e8ced0; border-radius: 12px; box-shadow: 0 7px 23px rgba(90,43,58,.06); }
+#root .analysis-tabs button.active { background: #78314c; }
+#root .analysis-consent { background: #fdf0ed; }
+#root .result-grid article { background: #fff2f0; border: 1px solid #ead1d2; border-radius: 7px; }
+#root .analysis-disclaimer { background: #fff5ef; border-left-color: #b8637a; }
+#root .routine-grid > article { background: #fffafa; border-color: #e8ced0; border-radius: 8px; }
+
+/* 12. Footer keeps a clearly defined endpoint, with no duplicated content. */
+#root .footer { background: linear-gradient(160deg,#2c232a,#3e2635); color: #fff8f4; }
+#root .footer .newsletter { border-bottom-color: rgba(255,238,240,.3); }
+#root .footer a:hover { color: #ffb8c8; }
+
+/* 13. Prevent layout breakage: typography and card wrapping on small screens. */
+@media (max-width: 900px) {
+  #root .ai-signature { padding-block: 80px; }
+  #root .ai-chat-mock { box-shadow: 12px 16px 0 rgba(53,16,35,.35); }
+  #root .ingredient-list > a { padding: 12px; }
+  #root .routine-steps { gap: 0; }
+  #root .routine-steps article,
+  #root .routine-steps article + article { padding: 20px; }
+  #root .catalog-page .page-intro { margin-inline: 0; }
+}
+@media (max-width: 600px) {
+  #root .manifesto-grid > p { font-size: 31px; }
+  #root .ingredient-intro h2 { font-size: clamp(36px, 9vw, 48px); }
+  #root .ai-editorial-copy h2 { font-size: clamp(38px, 10vw, 51px); }
+  #root .ai-signature::before { display: none; }
+  #root .ai-chat-mock { transform: none; box-shadow: 0 12px 30px rgba(30,11,20,.2); }
+  #root .new-home .luxury-grid .product-info { padding: 12px; }
+  #root .new-home .luxury-grid .product-name { font-size: 15px; }
+  #root .ingredient-list p { font-size: 13px; }
+  #root .ingredient-list div > span { font-size: 11px; }
+  #root .routine-steps { border-top-width: 1px; }
+  #root .routine-steps article,
+  #root .routine-steps article + article { margin-bottom: 8px; padding: 20px; }
+  #root .featured-copy { padding: 42px 25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #root * { scroll-behavior: auto; }
+}
+
+/* 14. ADMIN. Same identity as the storefront, without changing table or action logic. */
+#root .admin-shell { background: #faf4f2; }
+#root .admin-sidebar { background: linear-gradient(160deg,#213c32 0%,#284b3e 68%,#3d3440 100%); }
+#root .admin-sidebar a.active,
+#root .admin-sidebar a:hover { background: #83506a; color: #fff; }
+#root .admin-sidebar .logo span { color: #ffc6cc; }
+#root .admin-content > header h2 { color: #26362f; font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; }
+#root .admin-avatar { background: #76344c; }
+#root .admin-table-card,
+#root .admin-detail-card,
+#root .admin-content .form-card,
+#root .admin-content .stat-grid article,
+#root .admin-content .chart-card {
+  background: #fffdfb;
+  border-color: #e9d2d0;
+  border-radius: 9px;
+  box-shadow: 0 5px 20px rgba(102,51,68,.055);
+}
+#root .admin-content .table-title h3,
+#root .admin-detail-card h2 { color: #293a31; font-family: "Segoe UI",Arial,sans-serif; font-weight: 800; }
+#root .admin-content .admin-order-link { color: #873951; text-decoration: underline; text-underline-offset: 3px; }
+#root .admin-content .admin-order-link:hover { color: #bb5876; }
+#root .admin-content :is(input,select,textarea):focus-visible { outline: 2px solid #ae6078; outline-offset: 1px; }

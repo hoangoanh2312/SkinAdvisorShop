@@ -3,6 +3,7 @@ require("dotenv").config({ quiet: true });
 const assert = require("assert");
 const express = require("express");
 const mongoose = require("mongoose");
+const { connectTestDatabase } = require("../utils/testDatabase");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Category = require("../models/Category");
@@ -24,7 +25,7 @@ const testCloudinaryTimeoutWrapper = async () => {
 };
 
 const runHttpIntegration = async () => {
-  await mongoose.connect(process.env.MONGO_URI);
+    await connectTestDatabase(mongoose);
   const tag = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
   const password = await bcrypt.hash(`Cloud-${tag}`, 12);
   const [admin, customer] = await User.create([{ fullName: "Cloud Admin", email: `cloud.admin.${tag}@example.com`, password, role: "admin" }, { fullName: "Cloud Customer", email: `cloud.customer.${tag}@example.com`, password }]);

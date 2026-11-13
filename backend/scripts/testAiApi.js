@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const express = require("express");
 const mongoose = require("mongoose");
+const { connectTestDatabase } = require("../utils/testDatabase");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Category = require("../models/Category");
@@ -19,7 +20,7 @@ let server;
 
 const run = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await connectTestDatabase(mongoose);
     const category = await Category.create({ name: `AI Test ${tag}`, slug: `ai-test-${tag}` });
     const user = await User.create({
       fullName: "Skinora AI Test",

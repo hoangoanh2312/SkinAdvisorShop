@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const { startTestServer } = require("../utils/testServer");
 const User = require("../models/User");
 const Category = require("../models/Category");
 const Product = require("../models/Product");
@@ -9,7 +10,7 @@ const Variant = require("../models/Variant");
 
 mongoose.set("autoIndex", false);
 
-const BASE = process.env.API_BASE_URL || "http://127.0.0.1:5000";
+let BASE;
 const tag = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const password = `Address-${tag}`;
 const emails = {
@@ -46,8 +47,9 @@ const validAddress = (suffix, overrides = {}) => ({
 });
 
 const run = async () => {
+  let testServer;
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    testServer = await startTestServer(); BASE = testServer.baseUrl; console.log(`Test database: ${testServer.databaseName}`);
     const hash = await bcrypt.hash(password, 12);
     const [owner, other, category] = await Promise.all([
       User.create({ fullName: "Address Owner Test", email: emails.owner, password: hash }),
@@ -56,7 +58,6 @@ const run = async () => {
     ]);
     const product = await Product.create({ name: `Address Serum ${tag}`, slug: `address-serum-${tag}`, brand: `AddressBrand-${tag}`, category: category._id, basePrice: 100000, skinTypes: ["normal"], skinConcerns: ["dryness"] });
     const variant = await Variant.create({ product: product._id, name: "30 ml", sku: `ADDR-${tag}`.toUpperCase(), size: "30", unit: "ml", price: 100000, stock: 10 });
-    await mongoose.connection.close();
 
     const [ownerToken, otherToken] = await Promise.all([login(emails.owner), login(emails.other)]);
     expectStatus(await request("/api/users/me/addresses"), 401, "GET addresses without token");
@@ -123,12 +124,12 @@ const run = async () => {
     assert(emptyList.body.data.addresses.length === 0, "Deleting final address did not leave an empty list");
 
     console.log("All address book and order snapshot tests passed");
-    console.log(`Test data retained: owner=${owner._id}, other=${other._id}, order=${orderId}`);
+    console.log(`Isolated test data verified: owner=${owner._id}, other=${other._id}, order=${orderId}`);
   } catch (error) {
     console.error(`Address API test failed: ${error.message}`);
     process.exitCode = 1;
   } finally {
-    if (mongoose.connection.readyState !== 0) await mongoose.connection.close();
+    if (testServer) await testServer.close();
   }
 };
 

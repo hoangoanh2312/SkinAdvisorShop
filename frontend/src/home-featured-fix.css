@@ -1,0 +1,29 @@
+/* Keep the whole section readable when its API is temporarily unavailable. */
+.new-home .luxury-grid > .home-featured-feedback {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid #dae4dc;
+  border-radius: 14px;
+  background: #f7f9f6;
+  color: #29453c;
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+.home-featured-feedback p { margin: 0 0 18px; overflow-wrap: anywhere; }
+.home-featured-feedback button,
+.home-featured-feedback a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 17px;
+  border-radius: 7px;
+  margin: 5px;
+  font: 600 14px/1.35 "Segoe UI", Arial, sans-serif;
+  text-decoration: none;
+}
+.home-featured-feedback button { background: #183e31; border: 1px solid #183e31; color: white; cursor: pointer; }
+.home-featured-feedback a { background: white; border: 1px solid #a8bbb1; color: #183e31; }

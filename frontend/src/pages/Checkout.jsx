@@ -1,10 +1,11 @@
 import { Banknote, CreditCard, Landmark, LockKeyhole, MapPin, Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../api/axiosClient";
 import AddressBookModal from "../components/checkout/AddressBookModal";
 import { useCart } from "../contexts/CartContext";
 import { formatCurrency } from "../utils/formatters";
+import { getCheckoutAttemptKey, clearCheckoutAttempt } from "../utils/checkoutAttempt";
 
 const SHIPPING_FIELDS = ["fullName", "phone", "province", "ward", "address"];
 const EMPTY_ADDRESS = { fullName: "", phone: "", province: "", ward: "", address: "", label: "Nhà", isDefault: false };
@@ -25,12 +26,28 @@ export default function Checkout() {
   const [voucherCode, setVoucherCode] = useState("");
   const [voucher, setVoucher] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentOptions, setPaymentOptions] = useState({
+    COD: { available: true, mode: "manual" },
+    VNPAY: { available: false, mode: "unavailable" },
+    BANK_TRANSFER: { available: false, mode: "manual_verification" },
+  });
+  const [paymentOptionsError, setPaymentOptionsError] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [orderId, setOrderId] = useState("");
   const [pendingVnpayOrderId, setPendingVnpayOrderId] = useState("");
+  const submittingRef = useRef(false);
 
   const selectedAddress = addresses.find((value) => value._id === selectedId);
+  useEffect(() => {
+    let mounted = true;
+    axiosClient.get("/payments/methods").then(({ data }) => {
+      if (!mounted) return;
+      setPaymentOptions(data.data);
+      setPaymentMethod(current => data.data[current]?.available ? current : "COD");
+    }).catch(() => { if (mounted) setPaymentOptionsError("Không tải được trạng thái thanh toán: tạm thời chỉ cho phép COD."); });
+    return () => { mounted = false; };
+  }, []);
 
   useEffect(() => {
     const loadAddresses = async () => {
@@ -62,7 +79,14 @@ export default function Checkout() {
     setDraft({ fullName: value.fullName || "", phone: value.phone || "", province: value.province || "", ward: value.ward || "", address: value.address || value.addressLine || "", label: value.label || "Khác", isDefault: Boolean(value.isDefault) });
     setModalMode("edit");
   };
-  const changeDraft = (event) => setDraft((value) => ({ ...value, [event.target.name]: event.target.type === "checkbox" ? event.target.checked : event.target.value }));
+  const changeDraft = (event) => {
+    const { name, type, checked, value: nextValue } = event.target;
+    setDraft((previous) => ({
+      ...previous,
+      [name]: type === "checkbox" ? checked : nextValue,
+      ...(name === "province" && previous.province !== nextValue ? { ward: "" } : {}),
+    }));
+  };
   const saveAddress = async (event) => {
     event.preventDefault();
     setAddressSaving(true);
@@ -121,7 +145,8 @@ export default function Checkout() {
 
   const submit = async (event) => {
     event.preventDefault();
-    if (!items.length || loading) return;
+    if (!items.length || loading || submittingRef.current) return;
+    if (!paymentOptions[paymentMethod]?.available) { setError("Phương thức thanh toán chưa sẵn sàng. Vui lòng chọn COD."); return; }
     if (!selectedAddress) {
       setError("Vui lòng thêm và chọn địa chỉ nhận hàng.");
       openAddAddress();
@@ -138,6 +163,7 @@ export default function Checkout() {
       setError("Địa chỉ nhận hàng chưa đầy đủ. Vui lòng cập nhật địa chỉ.");
       return;
     }
+    submittingRef.current = true;
     setLoading(true);
     setError("");
     try {
@@ -145,26 +171,36 @@ export default function Checkout() {
         await openVnpay(pendingVnpayOrderId);
         return;
       }
-      const { data } = await axiosClient.post("/orders", {
+      const orderPayload = {
         items: items.map((item) => ({ variantId: item.variantId, quantity: item.quantity })),
         shippingAddress,
         voucherCode: voucher?.code || "",
         paymentMethod,
-      }, { sessionProtected: true });
+      };
+      const attemptKey = getCheckoutAttemptKey(orderPayload);
+      const { data } = await axiosClient.post("/orders", orderPayload, {
+        sessionProtected: true,
+        headers: { "Idempotency-Key": attemptKey },
+      });
       const createdOrderId = data.data.order._id;
       if (paymentMethod === "VNPAY") {
         setPendingVnpayOrderId(createdOrderId);
         await openVnpay(createdOrderId);
       } else if (paymentMethod === "BANK_TRANSFER") {
+        clearCheckoutAttempt();
         clearCart();
         navigate(`/payment/bank-transfer/${createdOrderId}`);
       } else {
         setOrderId(createdOrderId);
+        clearCheckoutAttempt();
         clearCart();
       }
     } catch (requestError) {
-      setError(requestError.response?.data?.message || (paymentMethod === "VNPAY" ? "Không thể chuyển tới VNPay. Bạn có thể thử lại." : "Không thể tạo đơn hàng."));
+      setError(requestError.response?.data?.message || (pendingVnpayOrderId
+        ? "Không thể chuyển tới VNPay. Bạn có thể thử lại thanh toán cho đơn đã tạo."
+        : "Không xác định được đơn hàng đã tạo hay chưa do mất kết nối. Hãy kiểm tra mục Đơn hàng trước khi thử lại để tránh đặt trùng."));
     } finally {
+      submittingRef.current = false;
       setLoading(false);
     }
   };
@@ -193,8 +229,9 @@ export default function Checkout() {
           <section className="checkout-section">
             <div className="checkout-section-title"><span>04</span><h2>Phương thức thanh toán</h2></div>
             <label className={`payment-option ${paymentMethod === "COD" ? "active" : ""}`}><input type="radio" name="paymentMethod" value="COD" checked={paymentMethod === "COD"} disabled={Boolean(pendingVnpayOrderId)} onChange={(event) => setPaymentMethod(event.target.value)} /><Banknote /><span><strong>Thanh toán khi nhận hàng (COD)</strong><small>Thanh toán trực tiếp khi đơn hàng được giao tới bạn.</small></span></label>
-            <label className={`payment-option ${paymentMethod === "VNPAY" ? "active" : ""}`}><input type="radio" name="paymentMethod" value="VNPAY" checked={paymentMethod === "VNPAY"} disabled={Boolean(pendingVnpayOrderId)} onChange={(event) => setPaymentMethod(event.target.value)} /><CreditCard /><span><strong>Thanh toán qua VNPay</strong><small>Chuyển tới cổng VNPay Sandbox để thanh toán an toàn.</small></span></label>
-            <label className={`payment-option ${paymentMethod === "BANK_TRANSFER" ? "active" : ""}`}><input type="radio" name="paymentMethod" value="BANK_TRANSFER" checked={paymentMethod === "BANK_TRANSFER"} disabled={Boolean(pendingVnpayOrderId)} onChange={(event) => setPaymentMethod(event.target.value)} /><Landmark /><span><strong>Chuyển khoản ngân hàng</strong><small>Quét VietQR với đúng số tiền và nội dung của đơn hàng.</small></span></label>
+            {paymentOptions.VNPAY?.available && <label className={`payment-option ${paymentMethod === "VNPAY" ? "active" : ""}`}><input type="radio" name="paymentMethod" value="VNPAY" checked={paymentMethod === "VNPAY"} disabled={Boolean(pendingVnpayOrderId)} onChange={(event) => setPaymentMethod(event.target.value)} /><CreditCard /><span><strong>Thanh toán qua VNPay</strong><small>{paymentOptions.VNPAY.mode === "sandbox" ? "Chế độ Sandbox để kiểm thử, không phải thanh toán thật." : "Chuyển tới cổng VNPay để thanh toán."}</small></span></label>}
+            {paymentOptions.BANK_TRANSFER?.available && <label className={`payment-option ${paymentMethod === "BANK_TRANSFER" ? "active" : ""}`}><input type="radio" name="paymentMethod" value="BANK_TRANSFER" checked={paymentMethod === "BANK_TRANSFER"} disabled={Boolean(pendingVnpayOrderId)} onChange={(event) => setPaymentMethod(event.target.value)} /><Landmark /><span><strong>Chuyển khoản ngân hàng</strong><small>Quét VietQR với đúng số tiền và nội dung của đơn hàng; Admin sẽ đối soát.</small></span></label>}
+            {paymentOptionsError && <p className="form-error" role="alert">{paymentOptionsError}</p>}
           </section>
         </div>
         <aside className="order-summary"><span className="summary-step">05</span><h2>Tổng thanh toán</h2><div><span>Tạm tính</span><strong>{formatCurrency(total)}</strong></div>{voucher && <div><span>Giảm giá</span><strong>-{formatCurrency(voucher.discount)}</strong></div>}<div className="summary-total"><span>Tổng cộng</span><strong>{formatCurrency(voucher?.finalValue ?? total)}</strong></div>{error && <p className="form-error">{error}</p>}<button className="btn btn-dark full" disabled={loading || addressLoading}>{loading ? "Đang xử lý..." : pendingVnpayOrderId ? "Thử lại thanh toán VNPay" : paymentMethod === "VNPAY" ? "Thanh toán VNPay" : paymentMethod === "BANK_TRANSFER" ? "Tạo mã VietQR" : "Đặt hàng"}</button><small><LockKeyhole /> Giá, voucher và tồn kho được backend xác nhận lại.</small></aside>

@@ -66,6 +66,6 @@ describe("role-based header", () => {
 it("uses the authenticated admin identity and keeps the current sidebar item active", () => {
   authState = { user: admin, loading: false, isAuthenticated: true, logout: vi.fn() };
   renderAt(<AdminLayout />, "/admin/orders");
-  expect(screen.getByText("Xin chào, SKINORA Admin")).toBeInTheDocument();
+  expect(screen.getByText("Xin chào, sandwich Admin")).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Đơn hàng" })).toHaveClass("active");
 });

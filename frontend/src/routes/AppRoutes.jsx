@@ -14,6 +14,12 @@ import Profile from "../pages/Profile";
 import Orders from "../pages/Orders";
 import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/admin/Dashboard";
+import InventoryAdmin from "../pages/admin/InventoryAdmin";
+import ReturnsAdmin from "../pages/admin/ReturnsAdmin";
+import ReportsAdmin from "../pages/admin/ReportsAdmin";
+import AuditAdmin from "../pages/admin/AuditAdmin";
+import ReadinessAdmin from "../pages/admin/ReadinessAdmin";
+import LaunchReadinessAdmin from "../pages/admin/LaunchReadinessAdmin";
 import ProductsAdmin from "../pages/admin/ProductsAdmin";
 import ProductForm from "../pages/admin/ProductForm";
 import CategoriesAdmin from "../pages/admin/CategoriesAdmin";
@@ -21,6 +27,7 @@ import OrdersAdmin from "../pages/admin/OrdersAdmin";
 import OrderAdminDetail from "../pages/admin/OrderAdminDetail";
 import UsersAdmin from "../pages/admin/UsersAdmin";
 import VouchersAdmin from "../pages/admin/VouchersAdmin";
+import BrandsAdmin from "../pages/admin/BrandsAdmin";
 import OrderDetail from "../pages/OrderDetail";
 import PaymentResult from "../pages/PaymentResult";
 import BankTransfer from "../pages/BankTransfer";
@@ -55,10 +62,17 @@ export default function AppRoutes() {
         <Route path="products/new" element={<ProductForm />} />
         <Route path="products/:id/edit" element={<ProductForm />} />
         <Route path="categories" element={<CategoriesAdmin />} />
+        <Route path="brands" element={<BrandsAdmin />} />
         <Route path="orders" element={<OrdersAdmin />} />
         <Route path="orders/:id" element={<OrderAdminDetail />} />
         <Route path="users" element={<UsersAdmin />} />
         <Route path="vouchers" element={<VouchersAdmin />} />
+        <Route path="inventory" element={<InventoryAdmin />} />
+        <Route path="returns" element={<ReturnsAdmin />} />
+        <Route path="reports" element={<ReportsAdmin />} />
+        <Route path="audit" element={<AuditAdmin />} />
+        <Route path="readiness" element={<ReadinessAdmin />} />
+        <Route path="launch-readiness" element={<LaunchReadinessAdmin />} />
       </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

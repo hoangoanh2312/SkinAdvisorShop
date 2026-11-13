@@ -1,0 +1,17 @@
+const router = require("express").Router();
+const { protect, authorize } = require("../middleware/authMiddleware");
+const { adminProductDetail, customerDetail, dashboardSummary, listAdminProducts, listCustomers, setCustomerStatus } = require("../controllers/adminController");
+const { getAdminCategories } = require("../controllers/categoryController");
+const { previewCatalogVisibility, bulkShowEligibleCatalog, setCatalogVisibility } = require("../controllers/catalogVisibilityController");
+router.use(protect, authorize("admin"));
+router.get("/dashboard/summary", dashboardSummary);
+router.get("/categories", getAdminCategories);
+router.get("/products", listAdminProducts);
+router.get("/products/catalog-visibility/preview", previewCatalogVisibility);
+router.patch("/products/catalog-visibility/bulk", bulkShowEligibleCatalog);
+router.patch("/products/:id/catalog-visibility", setCatalogVisibility);
+router.get("/products/:id", adminProductDetail);
+router.get("/customers", listCustomers);
+router.get("/customers/:id", customerDetail);
+router.patch("/customers/:id/status", setCustomerStatus);
+module.exports = router;

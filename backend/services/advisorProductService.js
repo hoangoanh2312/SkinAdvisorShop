@@ -5,7 +5,7 @@ const normalize = (value = "") => value.toString().normalize("NFD").replace(/[\u
 const uniqueStrings = (values = []) => [...new Set(values.filter((value) => typeof value === "string" && value.trim()).map((value) => value.trim()))];
 
 const mergeSkinProfile = (stored = {}, provided = {}) => ({
-  skinType: stored.skinType || provided.skinType || undefined,
+  skinType: provided.skinType || stored.skinType || undefined,
   skinConcerns: uniqueStrings([...(stored.skinConcerns || []), ...(provided.skinConcerns || [])]),
   allergies: uniqueStrings([...(stored.allergies || []), ...(provided.allergies || [])]),
   avoidIngredients: uniqueStrings([...(stored.avoidIngredients || []), ...(provided.avoidIngredients || [])]),
@@ -14,9 +14,15 @@ const mergeSkinProfile = (stored = {}, provided = {}) => ({
 const getCandidateProducts = async (skinProfile) => {
   const preferences = [skinProfile.skinType, ...(skinProfile.skinConcerns || [])].filter(Boolean);
   const ingredientPreferences = [...(skinProfile.allergies || []), ...(skinProfile.avoidIngredients || [])];
-  let products = await Product.find({ isActive: true })
+  // Query sellable SKU IDs before product ranking. Draft/unpriced variants must
+  // not be AI recommendations, and a limit/slice of draft products must not
+  // hide the few genuinely available products.
+  const sellableVariants = await Variant.find({ isActive: true, stock: { $gt: 0 }, price: { $gt: 0 } })
+    .sort({ price: 1 }).lean();
+  if (sellableVariants.length === 0) return [];
+  const sellableProductIds = [...new Set(sellableVariants.map((variant) => String(variant.product)))];
+  let products = await Product.find({ _id: { $in: sellableProductIds }, isActive: true })
     .sort({ averageRating: -1, soldCount: -1, createdAt: -1 })
-    .limit(30)
     .lean();
   const avoid = new Set(ingredientPreferences.map(normalize));
   const profileTags = new Set(preferences.map(normalize));
@@ -33,8 +39,9 @@ const getCandidateProducts = async (skinProfile) => {
       (product.skinConcerns || []).filter((concern) => skinProfile.skinConcerns?.includes(concern)).length * 2,
   })).sort((left, right) => right.score - left.score).slice(0, 10).map(({ product }) => product);
 
-  const variants = await Variant.find({ product: { $in: products.map((product) => product._id) }, isActive: true }).sort({ price: 1 }).lean();
-  return products.map((product) => ({
+  const variants = sellableVariants.filter((variant) => products.some((product) => String(product._id) === String(variant.product)));
+  const inStockProductIds = new Set(variants.map((variant) => String(variant.product)));
+  return products.filter((product) => inStockProductIds.has(String(product._id))).map((product) => ({
     _id: product._id,
     name: product.name,
     slug: product.slug,
@@ -61,8 +68,9 @@ const mapRecommendations = (ids, candidates) => {
   return [...new Set(ids)].filter((id) => allowed.has(String(id))).map((id) => {
     const product = allowed.get(String(id));
     const availableVariants = product.variants.filter((variant) => variant.stock > 0);
-    const lowest = availableVariants[0] || product.variants[0];
+    const lowest = availableVariants[0];
     const image = lowest?.image || product.images?.[0] || "";
+    if (!lowest) return null;
     return {
       id: String(product._id),
       slug: product.slug,
@@ -76,7 +84,7 @@ const mapRecommendations = (ids, candidates) => {
       salePrice: lowest?.salePrice ?? product.salePrice ?? lowest?.price ?? product.basePrice ?? null,
       variants: product.variants,
     };
-  });
+  }).filter(Boolean);
 };
 
 module.exports = { mergeSkinProfile, getCandidateProducts, mapRecommendations, normalize };
