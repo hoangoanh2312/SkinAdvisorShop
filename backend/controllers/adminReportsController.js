@@ -48,10 +48,10 @@ const exportReport = async (req, res) => {
       columns = [{ label: 'Ma don', get: o => o.orderCode || o._id }, { label: 'Ngay', get: o => o.createdAt?.toISOString() }, { label: 'Khach hang', get: o => o.user?.fullName }, { label: 'Email', get: o => o.user?.email }, { label: 'Trang thai', get: o => o.orderStatus }, { label: 'Thanh toan', get: o => o.paymentStatus }, { label: 'Phuong thuc', get: o => o.paymentMethod }, { label: 'Tong VND', get: o => o.total }];
     } else if (type === 'inventory') {
       records = await Variant.find().sort({ sku: 1 }).limit(10001).populate('product', 'name').lean();
-      columns = [{ label: 'San pham', get: v => v.product?.name }, { label: 'SKU', get: v => v.sku }, { label: 'Phien ban', get: v => v.name }, { label: 'Gia VND', get: v => v.price }, { label: 'Gia giam VND', get: v => v.salePrice }, { label: 'Ton kho', get: v => v.stock }, { label: 'Dang hoat dong', get: v => v.isActive ? 'Co' : 'Khong' }];
+      columns = [{ label: 'San pham', get: v => v.product?.name }, { label: 'Ma hang', get: v => v.sku }, { label: 'Phien ban', get: v => v.name }, { label: 'Gia VND', get: v => v.price }, { label: 'Gia giam VND', get: v => v.salePrice }, { label: 'Ton kho', get: v => v.stock }, { label: 'Dang hoat dong', get: v => v.isActive ? 'Co' : 'Khong' }];
     } else {
       records = await InventoryMovement.find({ createdAt: range.createdAt }).sort({ createdAt: -1 }).limit(10001).populate('variant', 'sku').populate('actor', 'fullName').lean();
-      columns = [{ label: 'Ngay', get: r => r.createdAt?.toISOString() }, { label: 'SKU', get: r => r.variant?.sku }, { label: 'Loai', get: r => r.kind }, { label: 'Thay doi', get: r => r.delta }, { label: 'Truoc', get: r => r.before }, { label: 'Sau', get: r => r.after }, { label: 'Ly do', get: r => r.note }, { label: 'Nguoi sua', get: r => r.actor?.fullName }];
+      columns = [{ label: 'Ngay', get: r => r.createdAt?.toISOString() }, { label: 'Ma hang', get: r => r.variant?.sku }, { label: 'Loai', get: r => r.kind }, { label: 'Thay doi', get: r => r.delta }, { label: 'Truoc', get: r => r.before }, { label: 'Sau', get: r => r.after }, { label: 'Ly do', get: r => r.note }, { label: 'Nguoi sua', get: r => r.actor?.fullName }];
     }
     if (records.length > 10000) return bad(res, 'Bộ dữ liệu quá lớn, vui lòng chia nhỏ khoảng ngày (tối đa 10.000 dòng)', 413);
     return sendCsv(res, `sandwich-${type}-${range.from}-${range.to}.csv`, csv(records, columns));
@@ -69,10 +69,10 @@ const catalogReadiness = async (_req, res) => {
       if (!p.images?.length) missing.push('Thiếu ảnh');
       if (!p.ingredients?.length) missing.push('Thiếu thành phần cho AI');
       if (!p.skinTypes?.length) missing.push('Thiếu loại da phù hợp');
-      if (!ps.length) missing.push('Chưa có SKU');
-      if (!ps.some(v => v.isActive && v.price > 0)) missing.push('Chưa có SKU hoạt động với giá hợp lệ');
+      if (!ps.length) missing.push('Chưa có mã hàng');
+      if (!ps.some(v => v.isActive && v.price > 0)) missing.push('Chưa có mã hàng hoạt động với giá hợp lệ');
       if (ps.some(v => !Number.isFinite(v.price) || v.price <= 0)) missing.push('Có phiên bản thiếu giá hợp lệ');
-      if (!ps.some(v => v.isActive && v.price > 0 && v.stock > 0)) missing.push('Chưa có SKU đủ hàng để bán');
+      if (!ps.some(v => v.isActive && v.price > 0 && v.stock > 0)) missing.push('Chưa có mã hàng đủ hàng để bán');
       if (!p.isCatalogVisible && !p.isActive) missing.push('Chưa công khai danh mục');
       return { id: p._id, name: p.name, isActive: p.isActive, issues: missing };
     }).filter(p => p.issues.length);

@@ -11,7 +11,7 @@ const aiRateLimiter = (req, res, next) => {
   if (recent.length >= AI_RATE_LIMIT_CONFIG.max) {
     return res.status(429).json({
       success: false,
-      message: "Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau ít phút.",
+      message: "Bạn đã gửi quá nhiều yêu cầu, vui lòng thử lại sau ít phút",
     });
   }
 

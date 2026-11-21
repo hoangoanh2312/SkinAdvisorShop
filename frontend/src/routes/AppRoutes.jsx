@@ -8,6 +8,9 @@ import SkinAdvisor from "../pages/SkinAdvisor";
 import SkinAnalysis from "../pages/SkinAnalysis";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
+import VerifyEmail from "../pages/VerifyEmail";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Profile from "../pages/Profile";
@@ -28,9 +31,15 @@ import OrderAdminDetail from "../pages/admin/OrderAdminDetail";
 import UsersAdmin from "../pages/admin/UsersAdmin";
 import VouchersAdmin from "../pages/admin/VouchersAdmin";
 import BrandsAdmin from "../pages/admin/BrandsAdmin";
+import NewsletterAdmin from "../pages/admin/NewsletterAdmin";
+import UnsubscribePage from "../pages/UnsubscribePage";
+import ContactPage from "../pages/ContactPage";
+import ContactAdmin from "../pages/admin/ContactAdmin";
 import OrderDetail from "../pages/OrderDetail";
 import PaymentResult from "../pages/PaymentResult";
 import BankTransfer from "../pages/BankTransfer";
+import Wishlist from "../pages/Wishlist";
+import { AboutPage, CommitmentsPage, FaqPage, ShippingReturnsPage } from "../pages/InfoPages";
 import { AdminRoute, CustomerRoute, ProtectedRoute } from "../components/common/RouteGuards";
 export default function AppRoutes() {
   return (
@@ -42,13 +51,23 @@ export default function AppRoutes() {
         <Route path="/skin-advisor" element={<SkinAdvisor />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment/result" element={<PaymentResult />} />
+        <Route path="/giao-hang-doi-tra" element={<ShippingReturnsPage />} />
+        <Route path="/cau-hoi-thuong-gap" element={<FaqPage />} />
+        <Route path="/cau-chuyen" element={<AboutPage />} />
+        <Route path="/cam-ket" element={<CommitmentsPage />} />
+        <Route path="/huy-nhan-ban-tin" element={<UnsubscribePage />} />
+        <Route path="/lien-he" element={<ContactPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/skin-analysis" element={<SkinAnalysis />} />
         </Route>
         <Route element={<CustomerRoute />}>
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
@@ -67,6 +86,8 @@ export default function AppRoutes() {
         <Route path="orders/:id" element={<OrderAdminDetail />} />
         <Route path="users" element={<UsersAdmin />} />
         <Route path="vouchers" element={<VouchersAdmin />} />
+        <Route path="newsletter" element={<NewsletterAdmin />} />
+        <Route path="contact" element={<ContactAdmin />} />
         <Route path="inventory" element={<InventoryAdmin />} />
         <Route path="returns" element={<ReturnsAdmin />} />
         <Route path="reports" element={<ReportsAdmin />} />

@@ -70,7 +70,7 @@ async function requestProvinceWards(url, province, signal) {
   const response = await fetch(url, { signal, headers: { Accept: "application/json" } });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const payload = await response.json();
-  if (!Array.isArray(payload?.dong)) throw new Error("API trả về danh sách phường/xã không hợp lệ");
+  if (!Array.isArray(payload?.dong)) throw new Error("Dữ liệu phường/xã trả về không hợp lệ");
   const rows = payload.dong.filter((item) => String(item?.ma_tinh) === province.code);
   const codes = new Set(rows.map((item) => String(item?.ma_xa || "")));
   if (rows.length !== province.expectedWards || codes.size !== rows.length) {
@@ -83,7 +83,7 @@ async function requestProvinceWards(url, province, signal) {
     .sort((a, b) => a.name.localeCompare(b.name, "vi"));
   // Mốc đối chiếu bắt buộc: xã Song Lộc, Vĩnh Long (Nghị quyết 1687/NQ-UBTVQH15).
   if (province.code === "86" && !entries.some((item) => normalizeAdministrativeText(item.name) === "xa song loc")) {
-    throw new Error("Nguồn dữ liệu thiếu Xã Song Lộc, tỉnh Vĩnh Long; không dùng danh sách không đầy đủ.");
+    throw new Error("Nguồn dữ liệu thiếu Xã Song Lộc, tỉnh Vĩnh Long; không dùng danh sách không đầy đủ");
   }
   return entries;
 }

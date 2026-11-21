@@ -7,7 +7,7 @@ const createAuthRateLimiter = ({ windowMs = 15 * 60_000, max = 20 } = {}) => {
     const row = (hits.get(key) || []).filter(time => now - time < windowMs);
     if (row.length >= max) {
       res.set('Retry-After', String(Math.ceil((windowMs - (now - row[0])) / 1000)));
-      return res.status(429).json({ success: false, message: 'Bạn đã thử quá nhiều lần. Vui lòng thử lại sau.' });
+      return res.status(429).json({ success: false, message: 'Bạn đã thử quá nhiều lần, vui lòng thử lại sau' });
     }
     row.push(now); hits.set(key, row);
     if (hits.size > 2000) for (const [ip, times] of hits) {

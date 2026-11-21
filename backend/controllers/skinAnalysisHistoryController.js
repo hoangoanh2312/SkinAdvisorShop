@@ -6,7 +6,7 @@ const listSkinAnalysisHistory = async (req, res) => {
   const limit = Math.min(Math.max(Number.parseInt(req.query.limit, 10) || 10, 1), 20);
   try {
     const items = await SkinAnalysis.find({ user: req.user._id })
-      .select('source createdAt result.skinType result.skinTypeLabel result.warnings result.analysisSource recommendedProducts')
+      .select('source createdAt result.skinType result.skinTypeLabel result.warnings result.analysisSource result.overallScore result.metrics.key result.metrics.label result.metrics.score result.metrics.status recommendedProducts')
       .sort({ createdAt: -1 }).limit(limit).lean();
     return res.set('Cache-Control', 'no-store').json({ success: true, data: { items } });
   } catch (_error) {

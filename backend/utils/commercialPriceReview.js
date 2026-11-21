@@ -59,17 +59,17 @@ function reviewRows(rows, products, variants) {
   const grouped = new Map();
   for (const variant of variants) grouped.set(String(variant.product), (grouped.get(String(variant.product)) || 0) + 1);
   const seen = new Set(), approved = [], skipped = [], errors = [];
-  if (rows.length !== variants.length) errors.push(`CSV phải chứa đủ ${variants.length} SKU; hiện có ${rows.length} dòng`);
+  if (rows.length !== variants.length) errors.push(`CSV phải chứa đủ ${variants.length} mã hàng; hiện có ${rows.length} dòng`);
   for (const row of rows) {
     const sku = row.sku.trim();
-    if (seen.has(sku) || !sku) { errors.push(`${sku || '(trống)'}: SKU trùng hoặc trống`); continue; }
+    if (seen.has(sku) || !sku) { errors.push(`${sku || '(trống)'}: Mã hàng trùng hoặc trống`); continue; }
     seen.add(sku);
     const variant = variantMap.get(sku), product = variant ? productMap.get(String(variant.product)) : null;
-    if (!variant || !product) { errors.push(`${sku}: không còn SKU trong DB`); continue; }
+    if (!variant || !product) { errors.push(`${sku}: không còn mã hàng trong cơ sở dữ liệu`); continue; }
     if (product.slug !== row.slug || product.name !== row.ten_san_pham ||
         `${variant.size || ''}${variant.unit || ''}` !== row.dung_tich ||
         String(variant.price) !== row.gia_dang_luu_vnd.trim()) {
-      errors.push(`${sku}: giá/tên/slug/dung tích đã đổi; cần xuất mẫu mới`); continue;
+      errors.push(`${sku}: giá/tên/đường dẫn/dung tích đã đổi; cần xuất mẫu mới`); continue;
     }
     if (!row.xac_nhan.trim()) { skipped.push(sku); continue; }
     if (row.xac_nhan.trim() !== 'XAC_NHAN_GIA') { errors.push(`${sku}: cột xác nhận phải là XAC_NHAN_GIA`); continue; }
@@ -85,7 +85,7 @@ function reviewRows(rows, products, variants) {
     if (grouped.get(String(product._id)) !== 1 || product.isActive !== false ||
         variant.stock !== 0 || (variant.salePrice != null) || (product.salePrice != null) ||
         !Number.isSafeInteger(variant.price) || variant.price < 0 || Number(product.basePrice) !== variant.price) {
-      errors.push(`${sku}: trạng thái đang bán, tồn kho, khuyến mãi hoặc giá gốc không phù hợp để nhập hàng loạt; hãy sửa trong Admin`); continue;
+      errors.push(`${sku}: trạng thái đang bán, tồn kho, khuyến mãi hoặc giá gốc không phù hợp để nhập hàng loạt; hãy sửa trong trang quản trị`); continue;
     }
     approved.push({ sku, productId: String(product._id), variantId: String(variant._id), oldPrice: variant.price, price,
       source, reviewer, changed: variant.price !== price });

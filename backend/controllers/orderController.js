@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { normalizeVnPhone, PHONE_MESSAGE, tooLong } = require("../utils/inputPolicy");
 const Order = require("../models/Order");
 const User = require("../models/User");
 const Product = require("../models/Product");
@@ -11,6 +12,7 @@ const { assertPerUserEligibility } = require("../services/voucherEligibilityServ
 const { withOrderCodeRetry } = require("../services/orderCodeService");
 const { parseIdempotencyKey, fingerprintOrder, isIdempotencyCollision } = require("../services/orderIdempotency");
 const { recordStockMovement } = require("../services/stockLedger");
+const { reservationDeadline } = require("../services/stockReservation");
 const { paymentCapabilities } = require("../services/paymentCapabilities");
 
 const SHIPPING_FEE = 0;
@@ -26,10 +28,23 @@ const normalizeShippingAddress = (rawAddress) => {
     ])
   );
 
-  return fields.every((field) => address[field]) ? address : null;
+  if (!fields.every((field) => address[field])) return null;
+  // Old saved addresses may hold an invalid phone; the order is refused until the address is updated.
+  if (address.fullName.length > 60 || ["address", "ward", "province"].some((field) => tooLong(address[field], field))) return null;
+  address.phone = normalizeVnPhone(address.phone);
+  return address.phone ? address : { invalidPhone: true };
+};
+
+const insufficientStock = (detail) => Object.assign(new Error("INSUFFICIENT_STOCK"), { detail });
+const stockMessage = ({ productName, variantName, available, requested }) => {
+  const name = `"${productName}${variantName ? ` – ${variantName}` : ""}"`;
+  return available > 0
+    ? `${name} chỉ còn ${available} sản phẩm, bạn đang đặt ${requested}. Vui lòng giảm số lượng trong giỏ hàng.`
+    : `${name} vừa hết hàng. Vui lòng xóa sản phẩm này khỏi giỏ hàng.`;
 };
 
 const commerceError = (res, error, fallback) => {
+  if (error.message === "INSUFFICIENT_STOCK" && error.detail) return res.status(409).json({ success: false, code: "INSUFFICIENT_STOCK", message: stockMessage(error.detail), data: { stock: error.detail } });
   const errors = {
     INVALID_ITEMS: [400, "Danh sách sản phẩm không hợp lệ"],
     INVALID_IDEMPOTENCY_KEY: [400, "Mã xác nhận yêu cầu không hợp lệ"],
@@ -38,11 +53,11 @@ const commerceError = (res, error, fallback) => {
     PRODUCT_NOT_FOUND: [400, "Sản phẩm không tồn tại hoặc đã bị vô hiệu hóa"],
     INSUFFICIENT_STOCK: [400, "Sản phẩm không đủ tồn kho"],
     PRODUCT_PRICE_UNAVAILABLE: [400, "Sản phẩm chưa có giá bán hợp lệ"],
-    VOUCHER_INVALID: [400, "Voucher không hoạt động"],
-    VOUCHER_EXPIRED: [400, "Voucher chưa có hiệu lực hoặc đã hết hạn"],
-    VOUCHER_LIMIT: [400, "Voucher đã hết lượt sử dụng"],
+    VOUCHER_INVALID: [400, "Mã giảm giá không hoạt động"],
+    VOUCHER_EXPIRED: [400, "Mã giảm giá chưa có hiệu lực hoặc đã hết hạn"],
+    VOUCHER_LIMIT: [400, "Mã giảm giá đã hết lượt sử dụng"],
     VOUCHER_MIN_ORDER: [400, "Đơn hàng chưa đạt giá trị tối thiểu"],
-    VOUCHER_USER_LIMIT: [400, "Bạn đã sử dụng hết lượt cho voucher này"],
+    VOUCHER_USER_LIMIT: [400, "Bạn đã sử dụng hết lượt cho mã giảm giá này"],
     ORDER_NOT_FOUND: [404, "Không tìm thấy đơn hàng"],
     ORDER_FORBIDDEN: [403, "Bạn không có quyền truy cập đơn hàng này"],
     INVALID_TRANSITION: [400, "Trạng thái đơn hàng không thể chuyển đổi như yêu cầu"],
@@ -58,12 +73,15 @@ const commerceError = (res, error, fallback) => {
 const createOrder = async (req, res) => {
   const rawItems = req.body?.items;
   if (!Array.isArray(rawItems) || rawItems.length === 0 || rawItems.length > 100) return res.status(400).json({ success: false, message: "Danh sách sản phẩm không hợp lệ" });
-  if (!["COD", "VNPAY", "BANK_TRANSFER"].includes(req.body?.paymentMethod)) return res.status(400).json({ success: false, message: "Phương thức thanh toán không hợp lệ" });
+  if (!["COD", "VNPAY", "ZALOPAY", "BANK_TRANSFER"].includes(req.body?.paymentMethod)) return res.status(400).json({ success: false, message: "Phương thức thanh toán không hợp lệ" });
   if (!paymentCapabilities()[req.body.paymentMethod].available) return res.status(503).json({ success: false, message: "Phương thức thanh toán này chưa được cấu hình để nhận đơn thực tế" });
 
   const shippingAddress = normalizeShippingAddress(req.body?.shippingAddress);
   if (!shippingAddress) {
     return res.status(400).json({ success: false, message: "Thông tin nhận hàng không hợp lệ" });
+  }
+  if (shippingAddress.invalidPhone) {
+    return res.status(400).json({ success: false, message: `${PHONE_MESSAGE}. Vui lòng sửa địa chỉ nhận hàng.` });
   }
 
   const quantities = new Map();
@@ -119,11 +137,13 @@ const createOrder = async (req, res) => {
         items.push({ product: product._id, variant: variant._id, productName: product.name, variantName: variant.name, sku: variant.sku, image: variant.image || product.images[0] || "", quantity, unitPrice, subtotal: itemSubtotal });
         subtotal += itemSubtotal;
 
-        if (req.body.paymentMethod === "COD") {
-          const stockUpdate = await Variant.updateOne({ _id: variant._id, isActive: true, stock: { $gte: quantity } }, { $inc: { stock: -quantity } }, { session });
-          if (stockUpdate.modifiedCount !== 1) throw new Error("INSUFFICIENT_STOCK");
-        } else if (variant.stock < quantity) {
-          throw new Error("INSUFFICIENT_STOCK");
+        // Giữ hàng ngay khi đặt với MỌI phương thức thanh toán: trừ kho có điều kiện "tồn >= số lượng" trong transaction.
+        // Hai khách đặt cùng lúc (còn 6, A đặt 5, B đặt 3): MongoDB chỉ cho một lệnh trừ thành công,
+        // lệnh còn lại không khớp điều kiện -> đơn đó bị từ chối kèm số lượng còn lại, không bao giờ bán vượt tồn.
+        const stockUpdate = await Variant.updateOne({ _id: variant._id, isActive: true, stock: { $gte: quantity } }, { $inc: { stock: -quantity } }, { session });
+        if (stockUpdate.modifiedCount !== 1) {
+          const current = await Variant.findById(variant._id).select("stock").session(session).lean();
+          throw insufficientStock({ productName: product.name, variantName: variant.name, available: Math.max(current?.stock ?? 0, 0), requested: quantity });
         }
       }
 
@@ -151,13 +171,13 @@ const createOrder = async (req, res) => {
         voucherCode,
         paymentMethod: req.body.paymentMethod,
         note: typeof req.body.note === "string" ? req.body.note : "",
-        stockDeducted: req.body.paymentMethod === "COD",
+        stockDeducted: true,
+        reservedUntil: reservationDeadline(req.body.paymentMethod),
       }], { session });
       orderId = order._id;
-      if (req.body.paymentMethod === "COD") {
-        for (const item of order.items) {
-          await recordStockMovement({ item, kind: 'sale', delta: -item.quantity, note: 'Xuất kho đặt hàng COD', reference: order.orderCode || order._id, session });
-        }
+      const movementNote = req.body.paymentMethod === "COD" ? "Xuất kho đặt hàng COD" : `Giữ hàng chờ thanh toán ${req.body.paymentMethod}`;
+      for (const item of order.items) {
+        await recordStockMovement({ item, kind: 'sale', delta: -item.quantity, note: movementNote, reference: order.orderCode || order._id, session });
       }
         });
         return orderId;
@@ -195,7 +215,7 @@ const getMyOrders = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "ID đơn hàng không hợp lệ" });
+  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "Mã đơn hàng không hợp lệ" });
   try {
     const order = await Order.findById(req.params.id);
     if (!order) return res.status(404).json({ success: false, message: "Không tìm thấy đơn hàng" });
@@ -222,6 +242,8 @@ const cancelOrderInternal = async (orderId, user, isAdmin) => {
         order.stockRestored = true;
       }
       order.orderStatus = "cancelled";
+      order.cancelReason = isAdmin ? "Quản trị viên hủy đơn" : "Khách hàng hủy đơn";
+      order.reservedUntil = null;
       await order.save({ session });
     });
     return Order.findById(orderId);
@@ -229,7 +251,7 @@ const cancelOrderInternal = async (orderId, user, isAdmin) => {
 };
 
 const cancelOrder = async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "ID đơn hàng không hợp lệ" });
+  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "Mã đơn hàng không hợp lệ" });
   try {
     const order = await cancelOrderInternal(req.params.id, req.user, false);
     return res.status(200).json({ success: true, message: "Hủy đơn hàng thành công", data: { order } });
@@ -267,7 +289,7 @@ const listAdminOrders = async (req, res) => {
 };
 
 const getAdminOrder = async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "ID đơn hàng không hợp lệ" });
+  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "Mã đơn hàng không hợp lệ" });
   try {
     const order = await Order.findById(req.params.id).populate("user", "fullName email phone");
     if (!order) throw new Error("ORDER_NOT_FOUND");
@@ -276,7 +298,7 @@ const getAdminOrder = async (req, res) => {
 };
 
 const verifyBankTransferPayment = async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "ID đơn hàng không hợp lệ" });
+  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "Mã đơn hàng không hợp lệ" });
   const session = await mongoose.startSession();
   let verifiedOrder;
   try {
@@ -317,7 +339,7 @@ const verifyBankTransferPayment = async (req, res) => {
 };
 
 const updateOrderStatus = async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "ID đơn hàng không hợp lệ" });
+  if (!isValidObjectId(req.params.id)) return res.status(400).json({ success: false, message: "Mã đơn hàng không hợp lệ" });
   const nextStatus = req.body.orderStatus;
   try {
     const existing = await Order.findById(req.params.id);
@@ -334,7 +356,7 @@ const updateOrderStatus = async (req, res) => {
         if (!order) throw new Error("ORDER_NOT_FOUND");
         const transitions = { pending: ["confirmed"], confirmed: ["shipping"], shipping: ["completed"] };
         if (!transitions[order.orderStatus]?.includes(nextStatus)) throw new Error("INVALID_TRANSITION");
-        if (nextStatus === "confirmed" && ["VNPAY", "BANK_TRANSFER"].includes(order.paymentMethod) && order.paymentStatus !== "paid") throw new Error("PAYMENT_REQUIRED");
+        if (nextStatus === "confirmed" && ["VNPAY", "ZALOPAY", "BANK_TRANSFER"].includes(order.paymentMethod) && order.paymentStatus !== "paid") throw new Error("PAYMENT_REQUIRED");
         order.orderStatus = nextStatus;
         if (nextStatus === "confirmed" && order.voucher) {
           const voucher = await Voucher.findById(order.voucher).session(session);
@@ -352,4 +374,4 @@ const updateOrderStatus = async (req, res) => {
   } catch (error) { return commerceError(res, error, "Không thể cập nhật trạng thái đơn hàng"); }
 };
 
-module.exports = { createOrder, getMyOrders, getOrder, cancelOrder, listAdminOrders, getAdminOrder, verifyBankTransferPayment, updateOrderStatus };
+module.exports = { stockMessage, createOrder, getMyOrders, getOrder, cancelOrder, listAdminOrders, getAdminOrder, verifyBankTransferPayment, updateOrderStatus };

@@ -1,3 +1,5 @@
+const { normalizeMetrics, normalizeImageQuality, toBox, overallScore, concernsFromMetrics, focusOptions } = require("./skinMetrics");
+
 const SKIN_TYPE_LABELS = { oily: "Da dầu", dry: "Da khô", normal: "Da thường", combination: "Da hỗn hợp", unknown: "Chưa xác định" };
 const CONCERN_LABELS = { acne: "Mụn", pigmentation: "Thâm sạm", redness: "Đỏ da", large_pores: "Lỗ chân lông to", dullness: "Da xỉn màu", dehydration: "Da thiếu ẩm" };
 const ALLOWED_SKIN_TYPES = new Set(Object.keys(SKIN_TYPE_LABELS).filter((key) => key !== "unknown"));
@@ -31,7 +33,11 @@ const normalizeConcern = (item) => {
 const normalizeSkinAnalysis = (raw = {}) => {
   const skinConfidence = confidence(raw.confidence);
   const skinType = ALLOWED_SKIN_TYPES.has(raw.skinType) && skinConfidence >= 0.55 ? raw.skinType : "unknown";
-  const candidateConcerns = Array.isArray(raw.concerns) ? raw.concerns.map(normalizeConcern).filter(Boolean) : [];
+  const imageQuality = normalizeImageQuality(raw.imageQuality);
+  const faceBox = toBox(raw.faceBox);
+  const metrics = imageQuality.faceDetected ? normalizeMetrics(raw.metrics, faceBox) : [];
+  // Chỉ số kém + đủ tin cậy cũng là "concern" để gợi ý thành phần/sản phẩm nhất quán với điểm số.
+  const candidateConcerns = [...(Array.isArray(raw.concerns) ? raw.concerns : []), ...concernsFromMetrics(metrics)].map(normalizeConcern).filter(Boolean);
   // Giữ duy nhất nhận xét có điểm cao nhất theo mỗi key, tránh hiển thị trùng.
   const strongest = [...new Map(candidateConcerns.sort((a, b) => a.confidence - b.confidence).map((c) => [c.key, c])).values()];
   const concerns = strongest.filter((item) => item.confidence >= 0.5);
@@ -41,8 +47,9 @@ const normalizeSkinAnalysis = (raw = {}) => {
   const possibleConcerns = strongest.filter((item) => item.confidence > 0 && item.confidence < 0.5 && item.evidence);
   const ingredients = Array.isArray(raw.recommendedIngredients) ? [...new Set(raw.recommendedIngredients.filter((item) => typeof item === "string" && item.trim()).map((item) => item.trim()))].slice(0, 10) : [];
   const warnings = Array.isArray(raw.warnings) ? raw.warnings.filter((item) => typeof item === "string" && item.trim()).map((item) => item.trim()).slice(0, 10) : [];
+  if (!imageQuality.faceDetected) warnings.unshift("Không thấy rõ khuôn mặt trong ảnh. Hãy chụp chính diện, đủ sáng, để lộ trán, hai má và cằm.");
   if (skinType === "unknown" && !warnings.length) warnings.push("Chưa đủ độ tin cậy để xác định loại da từ ảnh này.");
-  return { skinType, skinTypeLabel: SKIN_TYPE_LABELS[skinType], confidence: skinConfidence, concerns, possibleConcerns, recommendedIngredients: ingredients, warnings, analysisSource: typeof raw.analysisSource === "string" && raw.analysisSource.trim() ? raw.analysisSource.trim() : "unknown" };
+  return { skinType, skinTypeLabel: SKIN_TYPE_LABELS[skinType], confidence: skinConfidence, concerns, possibleConcerns, recommendedIngredients: ingredients, warnings, metrics, overallScore: overallScore(metrics), focusOptions: focusOptions(metrics), faceBox, imageQuality, summary: typeof raw.summary === "string" ? raw.summary.trim().slice(0, 400) : "", analysisSource: typeof raw.analysisSource === "string" && raw.analysisSource.trim() ? raw.analysisSource.trim() : "unknown" };
 };
 
-module.exports = { normalizeSkinAnalysis, SKIN_TYPE_LABELS, CONCERN_LABELS };
+module.exports = { normalizeSkinAnalysis, normalizeConcernKey, SKIN_TYPE_LABELS, CONCERN_LABELS };

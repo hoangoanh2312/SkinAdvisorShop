@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { protect, authorize } = require('../middleware/authMiddleware');
 const { listInventory, listMovements, adjustInventory } = require('../controllers/adminInventoryController');
+const { importInventory, parseImportFile, downloadTemplate } = require('../controllers/inventoryImportController');
 const { listReturns, createReturn, updateReturn } = require('../controllers/adminReturnsController');
 const { reportSummary, exportReport, catalogReadiness } = require('../controllers/adminReportsController');
 const { listAudit } = require('../controllers/adminAuditController');
@@ -9,6 +10,8 @@ router.use(protect, authorize('admin'));
 router.get('/inventory', listInventory);
 router.get('/inventory/movements', listMovements);
 router.post('/inventory/adjust', adjustInventory);
+router.post('/inventory/import', parseImportFile, importInventory);
+router.get('/inventory/import-template', downloadTemplate);
 router.get('/returns', listReturns);
 router.post('/returns', createReturn);
 router.patch('/returns/:id', updateReturn);

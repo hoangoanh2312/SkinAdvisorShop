@@ -12,11 +12,17 @@ const connectDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    // Fail in seconds rather than ~30s when Atlas is unreachable (IP not allowed, offline network).
+    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 });
     console.log("MongoDB connected successfully");
+    mongoose.connection.on("disconnected", () => console.error("MongoDB disconnected — API sẽ trả 503 cho tới khi kết nối lại. Kiểm tra mạng / Atlas Network Access."));
+    mongoose.connection.on("reconnected", () => console.log("MongoDB reconnected"));
   } catch (error) {
     const safeMessage = sanitizeErrorMessage(error.message);
     console.error(`MongoDB connection failed: ${safeMessage}`);
+    if (/whitelist|ETIMEDOUT|ECONNREFUSED|Server selection timed out|ENOTFOUND|querySrv/i.test(error.message || "")) {
+      console.error("Gợi ý: vào MongoDB Atlas > Network Access > Add Current IP Address, đợi trạng thái Active rồi chạy lại backend.");
+    }
     process.exit(1);
   }
 };

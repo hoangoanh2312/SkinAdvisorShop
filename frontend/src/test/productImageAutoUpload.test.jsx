@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const api = vi.hoisted(() => ({ get: vi.fn(), post: vi.fn(), put: vi.fn(), patch: vi.fn(), delete: vi.fn() }));
-vi.mock("../api/axiosClient", () => ({ default: api }));
+vi.mock("../api/axiosClient", () => ({ default: api, apiErrorMessage: (_error, fallback) => fallback }));
 
 import ProductForm from "../pages/admin/ProductForm";
 
@@ -17,7 +17,7 @@ function renderForm(path = "/admin/products/new") {
 
 async function fillRequiredFields() {
   await userEvent.type(screen.getByLabelText("Tên sản phẩm"), "Serum");
-  await userEvent.type(screen.getByLabelText("Slug"), "serum");
+  await userEvent.type(screen.getByLabelText("Đường dẫn"), "serum");
   await userEvent.type(screen.getByLabelText("Thương hiệu"), "Skinora");
   await userEvent.selectOptions(screen.getByLabelText("Danh mục"), "cat-1");
 }

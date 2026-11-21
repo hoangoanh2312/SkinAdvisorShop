@@ -1,3 +1,4 @@
+const { isConfigured: isZalopayConfigured } = require('./zalopayService');
 /** Read-only payment readiness: never send bank account data or gateway keys to the browser. */
 const isHttps = value => { try { return new URL(value).protocol === 'https:'; } catch { return false; } };
 const bankReady = (env = process.env) => /^[A-Z0-9]{2,20}$/i.test((env.BANK_CODE || '').trim())
@@ -15,9 +16,17 @@ const vnpayMode = (env = process.env) => {
   }
   return sandbox ? 'sandbox' : (isHttps(env.VNP_URL) && isHttps(env.VNP_RETURN_URL) ? 'live' : 'unavailable');
 };
+const zalopayMode = (env = process.env) => {
+  if (!isZalopayConfigured(env)) return 'unavailable';
+  const sandbox = /sb-openapi\.zalopay\.vn/i.test(env.ZALOPAY_ENDPOINT || 'https://sb-openapi.zalopay.vn/v2');
+  if (env.NODE_ENV === 'production' && sandbox) return 'unavailable';
+  return sandbox ? 'sandbox' : 'live';
+};
 const paymentCapabilities = (env = process.env) => ({
   COD: { available: true, mode: 'manual' },
   BANK_TRANSFER: { available: bankReady(env), mode: 'manual_verification' },
-  VNPAY: { available: vnpayMode(env) !== 'unavailable', mode: vnpayMode(env) },
+  // VNPAY_ENABLED=false hides VNPay without deleting its integration (e.g. while the sandbox terminal is not approved).
+  VNPAY: { available: env.VNPAY_ENABLED !== 'false' && vnpayMode(env) !== 'unavailable', mode: vnpayMode(env) },
+  ZALOPAY: { available: zalopayMode(env) !== 'unavailable', mode: zalopayMode(env) },
 });
-module.exports = { paymentCapabilities, bankReady, vnpayMode };
+module.exports = { paymentCapabilities, bankReady, vnpayMode, zalopayMode };

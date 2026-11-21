@@ -1,0 +1,93 @@
+{
+  "name": "acne_yolo",
+  "architecture": "yolo11n",
+  "task": "detect",
+  "outputLayout": "yolov8",
+  "imgsz": 640,
+  "names": [
+    "nodules and cysts",
+    "papules",
+    "pustules",
+    "whitehead and blackhead"
+  ],
+  "dataset": {
+    "source": "roboflow:acne-vulgaris-detection/acne04-detection/5",
+    "base": "ACNE04 (Wu et al., ICCV 2019)",
+    "stats": {
+      "train": {
+        "images": 2973,
+        "boxes": 39850,
+        "per_class": {
+          "nodules and cysts": 17102,
+          "papules": 9604,
+          "pustules": 11129,
+          "whitehead and blackhead": 2015
+        }
+      },
+      "valid": {
+        "images": 283,
+        "boxes": 3425,
+        "per_class": {
+          "nodules and cysts": 1185,
+          "papules": 914,
+          "pustules": 1102,
+          "whitehead and blackhead": 224
+        }
+      },
+      "test": {
+        "images": 142,
+        "boxes": 1737,
+        "per_class": {
+          "nodules and cysts": 733,
+          "papules": 358,
+          "pustules": 516,
+          "whitehead and blackhead": 130
+        }
+      }
+    }
+  },
+  "training": {
+    "epochs": 80,
+    "patience": 20,
+    "batch": 16,
+    "epochsRun": 0
+  },
+  "metrics": {
+    "split": "test",
+    "precision": 0.3254,
+    "recall": 0.2908,
+    "map50": 0.2074,
+    "map50_95": 0.0544,
+    "perClass": [
+      {
+        "name": "nodules and cysts",
+        "precision": 0.3344,
+        "recall": 0.221,
+        "map50": 0.1469,
+        "map50_95": 0.0388
+      },
+      {
+        "name": "papules",
+        "precision": 0.225,
+        "recall": 0.2179,
+        "map50": 0.1208,
+        "map50_95": 0.0323
+      },
+      {
+        "name": "pustules",
+        "precision": 0.3961,
+        "recall": 0.3902,
+        "map50": 0.3003,
+        "map50_95": 0.0738
+      },
+      {
+        "name": "whitehead and blackhead",
+        "precision": 0.3462,
+        "recall": 0.334,
+        "map50": 0.2616,
+        "map50_95": 0.073
+      }
+    ]
+  },
+  "trainedAt": "2026-11-14T01:50:17Z"
+}

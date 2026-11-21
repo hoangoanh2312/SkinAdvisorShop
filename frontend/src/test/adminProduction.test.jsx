@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 
 const { get } = vi.hoisted(() => ({ get: vi.fn() }));
-vi.mock("../api/axiosClient", () => ({ default: { get } }));
+vi.mock("../api/axiosClient", () => ({ default: { get }, apiErrorMessage: (_error, fallback) => fallback }));
 vi.mock("../contexts/AuthContext", () => ({ useAuth: () => ({ user: { fullName: "Admin", email: "admin@example.com", role: "admin" } }) }));
 
 import AdminLayout from "../layouts/AdminLayout";
@@ -43,7 +43,7 @@ describe("production admin UI", () => {
     }], pagination: { page: 1, total: 1, totalPages: 1 } } } });
     render(<MemoryRouter><ProductsAdmin /></MemoryRouter>);
     await waitFor(() => expect(screen.getByText(/339\.000/)).toBeInTheDocument());
-    expect(screen.getByText("Giá đã lưu · SKU đang tắt")).toBeInTheDocument();
+    expect(screen.getByText("Giá đã lưu, mã hàng đang tắt")).toBeInTheDocument();
     expect(screen.getByText("0/1 SKU đang bật")).toBeInTheDocument();
     expect(screen.queryByText("Chưa có giá")).not.toBeInTheDocument();
   });

@@ -3,7 +3,7 @@ const multer = require("multer");
 const MAX_SKIN_IMAGE_BYTES = 5 * 1024 * 1024;
 const uploadSkinImage = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: MAX_SKIN_IMAGE_BYTES, files: 1, fields: 2 },
+  limits: { fileSize: MAX_SKIN_IMAGE_BYTES, files: 1, fields: 6 },
 }).single("image");
 
 const parseSkinImage = (req, res, next) => {

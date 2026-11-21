@@ -1,0 +1,27 @@
+#root .brand-logo { display: inline-flex; align-items: baseline; gap: .2em; white-space: nowrap; font-family: 'Segoe Script','Brush Script MT',cursive !important; font-style: italic; font-weight: 600; font-size: clamp(20px, 2.1vw, 30px); line-height: 1.5; letter-spacing: -.065em; color: #572837; padding: .1em .15em .2em 0; }
+#root .brand-logo span { font-family: inherit !important; font-size: inherit; font-weight: inherit; line-height: inherit; }
+#root .brand-logo-light { color: #f7e9df; }
+#root .footer .brand-logo { font-size: clamp(30px, 4vw, 48px); }
+#root .header .brand-logo { font-size: clamp(19px, 1.9vw, 27px); }
+#root .wishlist-button { position: absolute; z-index: 3; top: 12px; right: 12px; width: 38px; height: 38px; border: 1px solid #eadbdc; border-radius: 50%; background: #fffdfbee; color: #6d4150; display: grid; place-items: center; cursor: pointer; }
+#root .wishlist-button.is-saved { color: #a72b55; }
+#root .wishlist-button:focus-visible, #root .wishlist-page button:focus-visible { outline: 3px solid #8b4260; outline-offset: 3px; }
+#root .wishlist-button:disabled { opacity: .55; cursor: wait; }
+#root .detail-info .wishlist-button { position: static; display: inline-grid; width: auto; padding: 0 16px; border-radius: 24px; gap: 8px; }
+#root .wishlist-page { padding-block: clamp(32px, 5vw, 70px); min-height: 55vh; }
+#root .wishlist-heading { margin-bottom: 34px; }
+#root .wishlist-heading h1 { margin: 6px 0 10px; }
+#root .wishlist-heading p { color: #6a5d5d; }
+#root .wishlist-stock { margin: 10px 0 0; color: #5c574e; font-size: 13px; }
+#root .wishlist-sku { margin: 8px 0 0; color: #756a67; font-size: 12px; overflow-wrap: anywhere; }
+#root .wishlist-nav-link { display: inline-flex; align-items: center; gap: 6px; }
+#root .wishlist-notice { position: fixed; z-index: 100; bottom: 20px; left: 50%; transform: translateX(-50%); max-width: min(420px, calc(100vw - 32px)); padding: 13px 19px; border-radius: 12px; background: #492c39; color: white; box-shadow: 0 12px 40px #0002; text-align: center; }
+@media (max-width: 680px) { #root .header .brand-logo { font-size: 19px; } #root .footer .brand-logo { font-size: 31px; } }
+#root .ingredient-explorer { padding-block: clamp(42px, 5vw, 72px); }
+#root .featured-editorial { min-height: 520px; }
+#root .routine-section { padding-block: clamp(52px, 6vw, 82px); }
+@media (max-width: 800px) { #root .featured-editorial { min-height: 0; } }
+@media (min-width: 1201px) and (max-width: 1450px) { #root .header-search { display: none; } #root .header .search-mobile { display: grid; } #root .header-inner { gap: 18px; } #root .nav { gap: 14px; } }
+@media (max-width: 1200px) { #root .header-inner { justify-content: space-between; gap: 14px; } #root .mobile-toggle { display: block; } #root .header .nav { display: none; position: absolute; top: 78px; left: 0; right: 0; padding: 16px 24px; max-height: calc(100vh - 78px); overflow-y: auto; background: #fffaf7; box-shadow: 0 14px 30px #0002; } #root .header .nav.open { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; } #root .header .nav a { padding: 10px 2px; } #root .header-search { display: none; } #root .header .search-mobile { display: grid; } }
+@media (min-width: 1100px) and (max-width: 1200px) { #root .mobile-toggle { display: block !important; } #root .header .nav { display: none !important; } #root .header .nav.open { display: flex !important; } }
+@media (max-width: 767px) { #root .header .nav { top: 66px; max-height: calc(100vh - 66px); } #root .header-inner { padding-inline: 14px; } #root .header-icons { gap: 10px; } }

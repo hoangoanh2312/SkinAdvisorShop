@@ -56,7 +56,7 @@ const verifyCallback = (query) => {
 
 const createTransactionRef = (orderId) => `${orderId}${Date.now()}${crypto.randomBytes(3).toString("hex")}`;
 
-const createPaymentUrl = ({ orderId, amount, ipAddress, transactionRef = createTransactionRef(orderId), now = new Date() }) => {
+const createPaymentUrl = ({ orderId, amount, ipAddress, transactionRef = createTransactionRef(orderId), now = new Date(), expireAt }) => {
   const config = requiredConfig();
   if (!Number.isSafeInteger(amount) || amount < 0) throw new VnpayError("VNPAY_INVALID_AMOUNT");
   const params = {
@@ -73,6 +73,8 @@ const createPaymentUrl = ({ orderId, amount, ipAddress, transactionRef = createT
     vnp_ReturnUrl: config.returnUrl,
     vnp_TxnRef: transactionRef,
   };
+  // Cổng VNPay ngừng nhận thanh toán khi hết hạn giữ hàng của đơn.
+  if (expireAt instanceof Date && expireAt > now) params.vnp_ExpireDate = formatDate(expireAt);
   const query = canonicalize(params);
   const secureHash = signParams(params, config.hashSecret);
   return { paymentUrl: `${config.paymentUrl}?${query}&vnp_SecureHash=${secureHash}`, transactionRef };

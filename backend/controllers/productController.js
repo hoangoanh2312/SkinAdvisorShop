@@ -6,13 +6,24 @@ const { isValidObjectId, escapeRegex, pick, sendControllerError } = require("../
 const { summarizeCatalogVariants } = require("../utils/catalogAvailability");
 
 const PRODUCT_FIELDS = [
-  "name", "slug", "brand", "brandRef", "category", "description", "shortDescription",
+  "name", "slug", "brand", "brandRef", "category", "description", "shortDescription", "benefitClaims", "contentSourceUrl",
   "skinTypes", "skinConcerns", "ingredients", "keyIngredients", "avoidFor", "usage",
   "warnings", "basePrice", "salePrice",
   "isFeatured", "isActive",
 ];
 
 const CATEGORY_POPULATE = { path: "category", select: "name slug image" };
+
+// Ảnh hiện khi rê chuột lên thẻ sản phẩm (giống kiểu đổi sang ảnh dùng thực tế):
+// - ưu tiên ảnh thứ hai của sản phẩm (ảnh cùng phong cách, hiện trọn ảnh)
+// - nếu không có, lấy ảnh phụ của dung tích (ảnh dùng thực tế, phủ kín khung)
+// Không dùng ảnh chính của dung tích khác: chỉ là chai to nhỏ khác nhau, đổi qua lại trông như lỗi
+const pickHoverImage = (images, variants = []) => {
+  const first = images[0];
+  if (images[1] && images[1] !== first) return { url: images[1], fit: "contain" };
+  const extra = variants.filter((v) => v.isActive !== false).flatMap((v) => (v.extraImages || []).map((item) => item.url)).find((url) => url && url !== first);
+  return extra ? { url: extra, fit: "cover" } : null;
+};
 
 const getProducts = async (req, res) => {
   try {
@@ -107,7 +118,7 @@ const getProducts = async (req, res) => {
     ]);
     const pageVariants = products.length
       ? await Variant.find({ product: { $in: products.map((product) => product._id) } })
-        .select("product price salePrice stock isActive").lean()
+        .select("product price salePrice stock isActive image extraImages").lean()
       : [];
     const byProduct = new Map();
     for (const variant of pageVariants) {
@@ -117,9 +128,12 @@ const getProducts = async (req, res) => {
     }
     const catalogProducts = products.map((product) => {
       const previewOnly = product.isActive === false && product.isCatalogVisible === true;
+      const plain = typeof product.toObject === "function" ? product.toObject() : product;
+      const variants = byProduct.get(String(product._id)) || [];
       return {
-        ...(typeof product.toObject === "function" ? product.toObject() : product),
-        ...summarizeCatalogVariants(byProduct.get(String(product._id)) || [], { previewOnly }),
+        ...plain,
+        ...summarizeCatalogVariants(variants.map(({ image, extraImages, ...rest }) => rest), { previewOnly }),
+        ...(() => { const hover = pickHoverImage(plain.images || [], variants); return { hoverImage: hover?.url || "", hoverFit: hover?.fit || "contain" }; })(),
       };
     });
     let total = totalBeforeSku;
@@ -187,6 +201,14 @@ const validateProductPrice = (data, existing = {}) => {
   return true;
 };
 
+const validContentSource = (data, existing = {}) => {
+  const claims = data.benefitClaims === undefined ? existing.benefitClaims : data.benefitClaims;
+  const source = data.contentSourceUrl === undefined ? existing.contentSourceUrl : data.contentSourceUrl;
+  if (source && (typeof source !== "string" || !/^https:\/\/[^\s]+$/i.test(source))) return false;
+  return !Array.isArray(claims) || !claims.some(value => String(value).trim()) || (typeof source === "string" && /^https:\/\/[^\s]+$/i.test(source));
+};
+const validIngredientSources = ingredients => ingredients === undefined || (Array.isArray(ingredients) && ingredients.every(item => !item?.sourceUrl || (typeof item.sourceUrl === "string" && /^https:\/\/[^\s]+$/i.test(item.sourceUrl))));
+
 const resolveBrand = async (data) => {
   if (data.brandRef === undefined || data.brandRef === null || data.brandRef === "") return data;
   if (!isValidObjectId(data.brandRef)) throw new Error("INVALID_BRAND");
@@ -200,8 +222,10 @@ const createProduct = async (req, res) => {
     let data = pick(req.body, PRODUCT_FIELDS);
     data = await resolveBrand(data);
     if (!validateProductPrice(data)) return res.status(400).json({ success: false, message: "Giá sản phẩm không hợp lệ" });
+    if (!validContentSource(data)) return res.status(400).json({ success: false, message: "Cần nguồn HTTPS cho công dụng sản phẩm" });
+    if (!validIngredientSources(data.ingredients)) return res.status(400).json({ success: false, message: "Nguồn thành phần phải là đường dẫn HTTPS" });
     if (!data.name?.trim() || !data.slug?.trim() || !data.brand?.trim() || data.basePrice === undefined) {
-      return res.status(400).json({ success: false, message: "Tên, slug, thương hiệu và giá cơ bản là bắt buộc" });
+      return res.status(400).json({ success: false, message: "Tên, đường dẫn, thương hiệu và giá cơ bản là bắt buộc" });
     }
     if (!(await validateActiveCategory(data.category))) {
       return res.status(400).json({ success: false, message: "Danh mục không hợp lệ hoặc đã bị vô hiệu hóa" });
@@ -223,9 +247,11 @@ const updateProduct = async (req, res) => {
   try {
     let data = pick(req.body, PRODUCT_FIELDS);
     data = await resolveBrand(data);
-    const current = await Product.findById(req.params.id).select("basePrice salePrice isActive images").lean();
+    const current = await Product.findById(req.params.id).select("basePrice salePrice isActive images benefitClaims contentSourceUrl").lean();
     if (!current) return res.status(404).json({ success: false, message: "Không tìm thấy sản phẩm" });
     if (!validateProductPrice(data, current)) return res.status(400).json({ success: false, message: "Giá sản phẩm không hợp lệ" });
+    if (!validContentSource(data, current)) return res.status(400).json({ success: false, message: "Cần nguồn HTTPS cho công dụng sản phẩm" });
+    if (!validIngredientSources(data.ingredients)) return res.status(400).json({ success: false, message: "Nguồn thành phần phải là đường dẫn HTTPS" });
     if (data.isActive === true && current.isActive === false) {
       if (!current.images?.length) return res.status(400).json({ success: false, message: "Cần tải lên ít nhất một ảnh trước khi mở bán" });
       const available = await Variant.exists({ product: req.params.id, isActive: true, stock: { $gt: 0 }, price: { $gt: 0 } });
@@ -234,7 +260,7 @@ const updateProduct = async (req, res) => {
     if (data.category !== undefined && !(await validateActiveCategory(data.category))) {
       return res.status(400).json({ success: false, message: "Danh mục không hợp lệ hoặc đã bị vô hiệu hóa" });
     }
-    const product = await Product.findByIdAndUpdate(req.params.id, data, { new: true, runValidators: true })
+    const product = await Product.findByIdAndUpdate(req.params.id, data, { returnDocument: "after", runValidators: true })
       .populate(CATEGORY_POPULATE);
     if (!product) {
       return res.status(404).json({ success: false, message: "Không tìm thấy sản phẩm" });
@@ -251,7 +277,7 @@ const deleteProduct = async (req, res) => {
     return res.status(400).json({ success: false, message: "ID sản phẩm không hợp lệ" });
   }
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, { isActive: false, isCatalogVisible: false }, { new: true });
+    const product = await Product.findByIdAndUpdate(req.params.id, { isActive: false, isCatalogVisible: false }, { returnDocument: "after" });
     if (!product) {
       return res.status(404).json({ success: false, message: "Không tìm thấy sản phẩm" });
     }

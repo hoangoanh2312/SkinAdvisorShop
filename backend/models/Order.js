@@ -50,17 +50,22 @@ const orderSchema = new mongoose.Schema(
     total: { type: Number, required: true, min: 0 },
     voucher: { type: mongoose.Schema.Types.ObjectId, ref: "Voucher", default: null },
     voucherCode: { type: String, uppercase: true, trim: true, default: "" },
-    paymentMethod: { type: String, enum: ["COD", "VNPAY", "BANK_TRANSFER"], required: true },
+    paymentMethod: { type: String, enum: ["COD", "VNPAY", "ZALOPAY", "BANK_TRANSFER"], required: true },
     paymentStatus: { type: String, enum: ["unpaid", "pending_verification", "paid", "failed", "refunded"], default: "unpaid" },
     vnpayTxnRef: { type: String, trim: true, default: undefined },
     vnpayTransactionNo: { type: String, trim: true, default: "" },
     vnpayBankCode: { type: String, trim: true, default: "" },
     vnpayResponseCode: { type: String, trim: true, default: "" },
     vnpayPayDate: { type: String, trim: true, default: "" },
+    zalopayAppTransId: { type: String, trim: true, default: undefined },
+    zalopayTransId: { type: String, trim: true, default: "" },
     paidAt: { type: Date, default: null },
     orderStatus: { type: String, enum: ["pending", "confirmed", "shipping", "completed", "cancelled"], default: "pending" },
     note: { type: String, trim: true, maxlength: 1000, default: "" },
     stockDeducted: { type: Boolean, default: false, select: false },
+    // Hàng được giữ (đã trừ kho) đến thời điểm này cho đơn chờ thanh toán online; quá hạn thì tự hủy và hoàn kho.
+    reservedUntil: { type: Date, default: null },
+    cancelReason: { type: String, default: "", maxlength: 200 },
     stockRestored: { type: Boolean, default: false, select: false },
   },
   { timestamps: true }
@@ -68,8 +73,10 @@ const orderSchema = new mongoose.Schema(
 
 orderSchema.index({ user: 1, createdAt: -1 });
 orderSchema.index({ orderStatus: 1, createdAt: -1 });
+orderSchema.index({ orderStatus: 1, reservedUntil: 1 });
 orderSchema.index({ orderCode: 1 }, { unique: true, sparse: true });
 orderSchema.index({ vnpayTxnRef: 1 }, { unique: true, sparse: true });
+orderSchema.index({ zalopayAppTransId: 1 }, { unique: true, sparse: true });
 // A retry of the same authenticated checkout must not create a second order.
 orderSchema.index(
   { user: 1, idempotencyKey: 1 },

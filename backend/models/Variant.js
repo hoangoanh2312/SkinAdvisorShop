@@ -25,6 +25,14 @@ const variantSchema = new mongoose.Schema(
       message: "Tồn kho phải là số nguyên không âm",
     } },
     image: { type: String, default: "" },
+    // Mã ảnh trên Cloudinary khi ảnh phiên bản được tải lên từ trang quản trị (để xóa ảnh cũ khi thay)
+    imagePublicId: { type: String, default: "" },
+    // Ảnh phụ của phiên bản (góc khác, ảnh dùng thực tế), hiện sau ảnh chính khi khách chọn dung tích này
+    extraImages: {
+      type: [{ _id: false, url: { type: String, required: true }, publicId: { type: String, default: "" }, source: { type: String, default: "" } }],
+      default: [],
+      validate: { validator: (value) => value.length <= 8, message: "Tối đa 8 ảnh phụ cho mỗi phiên bản" },
+    },
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }

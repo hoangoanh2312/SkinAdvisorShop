@@ -9,7 +9,7 @@ import { summarizeAdminSkuPrice } from "../../utils/adminProductSummary";
 const actionError = (error) => error.response?.data?.message || "Thao tác thất bại. Vui lòng thử lại.";
 
 const getBusinessStatus = (product) => {
-  if (!product.isActive) return product.isCatalogVisible ? "Sắp mở bán" : "Nháp · đang ẩn";
+  if (!product.isActive) return product.isCatalogVisible ? "Sắp mở bán" : "Nháp (đang ẩn)";
   const available = product.variants.some((v) => v.isActive !== false && Number(v.stock) > 0 && Number(v.price) > 0);
   return available ? "Đang bán" : "Hết hàng";
 };
@@ -22,7 +22,7 @@ const getBusinessStatusClass = (product) => {
 
 const statuses = [
   { value: "all", label: "Mọi trạng thái" },
-  { value: "draft", label: "Nháp · đang ẩn" },
+  { value: "draft", label: "Nháp (đang ẩn)" },
   { value: "preview", label: "Sắp mở bán" },
   { value: "selling", label: "Đang bán" },
   { value: "out-of-stock", label: "Hết hàng" },
@@ -65,14 +65,14 @@ export default function ProductsAdmin() {
   const changeVisibility = async (product) => {
     const visible = !product.isCatalogVisible;
     if (!visible && product.isActive) {
-      setError("Hãy tắt bán trong trang chỉnh sửa trước khi ẩn sản phẩm.");
+      setError("Hãy tắt bán trong trang chỉnh sửa trước khi ẩn sản phẩm");
       return;
     }
     if (!window.confirm(`${visible ? "Hiển thị" : "Ẩn"} sản phẩm “${product.name}” trên cửa hàng? Thao tác này không sửa tồn kho hoặc giá.`)) return;
     setBusyId(product.id); setError(""); setNotice("");
     try {
       await axiosClient.patch(`/admin/products/${product.id}/catalog-visibility`, { visible }, { sessionProtected: true });
-      setNotice(`Đã ${visible ? "hiển thị" : "ẩn"} sản phẩm “${product.name}”.`);
+      setNotice(`Đã ${visible ? "hiển thị" : "ẩn"} sản phẩm “${product.name}”`);
       await load();
     } catch (requestError) { setError(actionError(requestError)); }
     finally { setBusyId(""); }
@@ -84,14 +84,14 @@ export default function ProductsAdmin() {
       const { data } = await axiosClient.get("/admin/products/catalog-visibility/preview", { sessionProtected: true });
       const { eligible, skipped } = data.data;
       if (!eligible) {
-        setNotice(`Chưa có sản phẩm nháp đủ điều kiện để hiển thị (${skipped} sản phẩm cần bổ sung thông tin/ảnh/SKU có giá).`);
+        setNotice(`Chưa có sản phẩm nháp đủ điều kiện để hiển thị (${skipped} sản phẩm cần bổ sung thông tin/ảnh/mã hàng có giá)`);
         return;
       }
-      if (!window.confirm(`Có ${eligible} sản phẩm đủ thông tin (có SKU đã lưu giá, không nhất thiết đang bật) và ${skipped} sản phẩm chưa đủ điều kiện.\n\nHiển thị ${eligible} sản phẩm trên Catalog ở trạng thái “Sắp mở bán”? Không cập nhật giá, không tạo tồn kho giả và không cho khách đặt hàng.`)) return;
+      if (!window.confirm(`Có ${eligible} sản phẩm đủ thông tin (có mã hàng đã lưu giá, không nhất thiết đang bật) và ${skipped} sản phẩm chưa đủ điều kiện.\n\nHiển thị ${eligible} sản phẩm trên Catalog ở trạng thái “Sắp mở bán”? Không cập nhật giá, không tạo tồn kho giả và không cho khách đặt hàng.`)) return;
       const result = await axiosClient.patch("/admin/products/catalog-visibility/bulk", {
         action: "show-eligible", confirm: "SHOW_ELIGIBLE_CATALOG",
       }, { sessionProtected: true });
-      setNotice(`Đã hiển thị ${result.data.data.updated} sản phẩm; ${result.data.data.skipped} sản phẩm cần bổ sung thông tin.`);
+      setNotice(`Đã hiển thị ${result.data.data.updated} sản phẩm; ${result.data.data.skipped} sản phẩm cần bổ sung thông tin`);
       await load();
     } catch (requestError) { setError(actionError(requestError)); }
     finally { setBusyId(""); }
@@ -109,7 +109,7 @@ export default function ProductsAdmin() {
     </div>
     <p className="admin-products-help"><strong>Lưu ý:</strong> Hiển thị chỉ để khách xem. Muốn nhận đơn hàng, cần xác minh giá, nhập tồn kho thực tế và bật bán trong trang Sửa.</p>
     <div className="admin-products-toolbar">
-      <label className="admin-search"><Search size={17} /><input aria-label="Tìm sản phẩm" value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} placeholder="Tìm tên, slug hoặc thương hiệu" /></label>
+      <label className="admin-search"><Search size={17} /><input aria-label="Tìm sản phẩm" value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} placeholder="Tìm tên, đường dẫn hoặc thương hiệu" /></label>
       <label className="admin-image-filter">Trạng thái
         <select aria-label="Lọc theo trạng thái" value={status} onChange={(event) => { setStatus(event.target.value); setPage(1); }}>
           {statuses.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
@@ -136,8 +136,8 @@ export default function ProductsAdmin() {
             {product.images[0] ? <img src={product.images[0]} alt="" loading="lazy" /> : <span className="admin-compact-no-image">Chưa có ảnh</span>}
             <div className="admin-compact-product-info">
               <Link to={`/admin/products/${product.id}/edit`} title={product.name} className="admin-compact-name">{product.name}</Link>
-              <small>{[product.brand, product.categoryName].filter(Boolean).join(" · ")}</small>
-              <small title={primary?.sku || ""}>{primary?.sku ? `${primary.sku.length > 24 ? `${primary.sku.slice(0, 24)}…` : primary.sku}${product.variants.length > 1 ? ` (+${product.variants.length - 1} SKU)` : ""}` : "Chưa có SKU"}</small>
+              <small>{[product.brand, product.categoryName].filter(Boolean).join(", ")}</small>
+              <small title={primary?.sku || ""}>{primary?.sku ? `${primary.sku.length > 24 ? `${primary.sku.slice(0, 24)}…` : primary.sku}${product.variants.length > 1 ? ` (+${product.variants.length - 1} mã hàng)` : ""}` : "Chưa có mã hàng"}</small>
             </div>
           </div></td>
           <td data-label="Giá bán"><div className="admin-compact-price"><strong>{summary.main}</strong><small>{summary.detail}</small></div></td>

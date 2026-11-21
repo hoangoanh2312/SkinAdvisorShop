@@ -11,7 +11,7 @@ const quick = [
   "Tôi nên chọn sản phẩm nào cho da khô?",
   "Niacinamide phù hợp với loại da nào?",
 ];
-const greeting = { role: "ai", text: "Xin chào! Tôi là Skin Advisor AI. Hãy chia sẻ loại da, vấn đề bạn đang quan tâm và nhu cầu chăm sóc để nhận gợi ý phù hợp." };
+const greeting = { role: "ai", text: "Xin chào! Tôi là Trợ lý da AI. Hãy chia sẻ loại da, vấn đề bạn đang quan tâm và nhu cầu chăm sóc để nhận gợi ý phù hợp." };
 
 export default function SkinAdvisor() {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
@@ -21,10 +21,13 @@ export default function SkinAdvisor() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [lastFailed, setLastFailed] = useState("");
-  const end = useRef();
+  const list = useRef();
 
+  // Chỉ cuộn khung tin nhắn xuống tin mới nhất, không cuộn cả trang
+  // (scrollIntoView cuộn luôn cửa sổ trình duyệt, làm trang trôi xuống chân trang sau mỗi câu hỏi)
   useEffect(() => {
-    end.current?.scrollIntoView({ behavior: "smooth" });
+    const box = list.current;
+    if (box) box.scrollTo({ top: box.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
   const send = async (value) => {
@@ -60,8 +63,8 @@ export default function SkinAdvisor() {
       <div className="advisor-page">
         <div className="advisor-login">
           <span className="ai-mark"><Sparkles /></span>
-          <h1>Đăng nhập để trò chuyện với Skin Advisor AI</h1>
-          <p>Hồ sơ làn da trong tài khoản giúp trợ lý đưa ra gợi ý phù hợp và an toàn hơn.</p>
+          <h1>Đăng nhập để trò chuyện với Trợ lý da AI</h1>
+          <p>Hồ sơ làn da trong tài khoản giúp trợ lý đưa ra gợi ý phù hợp và an toàn hơn</p>
           <Link className="btn btn-primary" to="/login" state={{ from: location.pathname }}>Đăng nhập</Link>
         </div>
       </div>
@@ -72,15 +75,15 @@ export default function SkinAdvisor() {
     <div className="advisor-page">
       <div className="advisor-head">
         <span className="ai-mark"><Sparkles /></span>
-        <div><span className="eyebrow">SKIN ADVISOR AI</span><h1>Tìm sản phẩm phù hợp với làn da của bạn</h1><p>Chia sẻ nhu cầu chăm sóc để nhận gợi ý sản phẩm thực tế từ sandwich.</p></div>
+        <div><span className="eyebrow">TRỢ LÝ DA AI</span><h1>Tìm sản phẩm phù hợp với làn da của bạn</h1><p>Chia sẻ nhu cầu chăm sóc để nhận gợi ý sản phẩm thực tế từ sandwich beauty</p></div>
       </div>
       <div className="chat-shell">
         <aside className="chat-aside">
-          <Bot /><h2>Chào bạn!</h2><p>Chia sẻ loại da và vấn đề bạn đang quan tâm để bắt đầu tư vấn.</p>
-          <div className="privacy-note">Nội dung mang tính tham khảo và không thay thế tư vấn y khoa.</div>
+          <Bot /><h2>Chào bạn!</h2><p>Chia sẻ loại da và vấn đề bạn đang quan tâm để bắt đầu tư vấn</p>
+          <div className="privacy-note">Nội dung mang tính tham khảo và không thay thế tư vấn y khoa</div>
         </aside>
         <section className="chat-main">
-          <div className="messages">
+          <div className="messages" ref={list}>
             {messages.map((message, index) => (
               <div className={`message ${message.role}`} key={`${message.role}-${index}`}>
                 <span className="message-avatar">{message.role === "ai" ? <Bot /> : <UserRound />}</span>
@@ -92,7 +95,6 @@ export default function SkinAdvisor() {
               </div>
             ))}
             {loading && <div className="message ai"><span className="message-avatar"><Bot /></span><div className="typing" aria-label="Đang phân tích"><i /><i /><i /><span>Đang phân tích...</span></div></div>}
-            <div ref={end} />
           </div>
           {messages.length < 3 && <div className="quick-list" aria-label="Gợi ý câu hỏi"><span className="quick-label">GỢI Ý CÂU HỎI</span>{quick.map((question) => <button type="button" key={question} disabled={loading} onClick={() => send(question)}>{question}</button>)}</div>}
           {error && <div className="advisor-error" role="alert"><span>{error}</span><button type="button" disabled={loading} onClick={() => send(lastFailed)}>Thử lại</button></div>}

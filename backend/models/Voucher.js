@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const voucherSchema = new mongoose.Schema(
   {
-    code: { type: String, required: true, unique: true, uppercase: true, trim: true },
+    code: { type: String, required: true, unique: true, uppercase: true, trim: true, maxlength: [30, "Mã giảm giá tối đa 30 ký tự"], match: [/^[A-Z0-9_-]+$/, "Mã giảm giá chỉ gồm chữ in hoa, số, dấu - và _"] },
     description: { type: String, trim: true, default: "" },
     discountType: { type: String, enum: ["percent", "fixed"], required: true },
     discountValue: { type: Number, required: true, min: 0 },

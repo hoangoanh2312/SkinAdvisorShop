@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const { sendControllerError } = require("../utils/controllerHelpers");
+const { normalizeVnPhone, PHONE_MESSAGE, normalizeFullName, NAME_MESSAGE, tooLong, TEXT_LIMITS } = require("../utils/inputPolicy");
 
 const REQUIRED_FIELDS = ["fullName", "phone", "province", "ward", "address"];
 
@@ -9,7 +10,15 @@ const normalizeAddressInput = (body) => {
     REQUIRED_FIELDS.map((field) => [field, typeof body?.[field] === "string" ? body[field].trim() : ""])
   );
   address.label = typeof body?.label === "string" ? body.label.trim() : "";
-  return REQUIRED_FIELDS.every((field) => address[field]) ? address : null;
+  if (!REQUIRED_FIELDS.every((field) => address[field])) return null;
+  const fullName = normalizeFullName(address.fullName);
+  if (!fullName) return { invalid: NAME_MESSAGE };
+  address.fullName = fullName;
+  for (const field of ["address", "ward", "province", "label"]) {
+    if (tooLong(address[field], field)) return { invalid: `Trường “${{ address: "Địa chỉ cụ thể", ward: "Phường/Xã", province: "Tỉnh/Thành phố", label: "Nhãn" }[field]}” tối đa ${TEXT_LIMITS[field]} ký tự` };
+  }
+  address.phone = normalizeVnPhone(address.phone);
+  return address.phone ? address : { invalid: PHONE_MESSAGE };
 };
 
 const invalidAddressId = (addressId) => !mongoose.Types.ObjectId.isValid(addressId);
@@ -26,6 +35,7 @@ const getAddresses = async (req, res) => {
 const createAddress = async (req, res) => {
   const input = normalizeAddressInput(req.body);
   if (!input) return res.status(400).json({ success: false, message: "Vui lòng nhập đầy đủ thông tin địa chỉ" });
+  if (input.invalid) return res.status(400).json({ success: false, message: input.invalid });
 
   try {
     const user = await User.findById(req.user._id);
@@ -44,6 +54,7 @@ const updateAddress = async (req, res) => {
   if (invalidAddressId(req.params.addressId)) return res.status(400).json({ success: false, message: "ID địa chỉ không hợp lệ" });
   const input = normalizeAddressInput(req.body);
   if (!input) return res.status(400).json({ success: false, message: "Vui lòng nhập đầy đủ thông tin địa chỉ" });
+  if (input.invalid) return res.status(400).json({ success: false, message: input.invalid });
 
   try {
     const user = await User.findById(req.user._id);

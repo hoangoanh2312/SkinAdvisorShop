@@ -24,7 +24,7 @@ export default function BankTransfer() {
       setPayment(instructions.data.data);
       setStatus(orderResult.data.data.order.paymentStatus);
     }).catch((requestError) => {
-      if (active) setError(requestError.response?.data?.message || "Không thể tải thông tin chuyển khoản.");
+      if (active) setError(requestError.response?.data?.message || "Không thể tải thông tin chuyển khoản");
     }).finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, [orderId, reloadKey]);
@@ -51,7 +51,7 @@ export default function BankTransfer() {
       const { data } = await axiosClient.post(`/payments/bank-transfer/${orderId}/confirm`, {}, { sessionProtected: true });
       setStatus(data.data.order.paymentStatus);
     } catch (requestError) {
-      setError(requestError.response?.data?.message || "Không thể xác nhận chuyển khoản.");
+      setError(requestError.response?.data?.message || "Không thể xác nhận chuyển khoản");
     } finally { setConfirming(false); }
   };
 
@@ -62,19 +62,19 @@ export default function BankTransfer() {
   return <div className="container bank-transfer-page">
     <section className="bank-transfer-card">
       <div className="bank-transfer-heading"><span><Landmark /></span><div><small>CHUYỂN KHOẢN NGÂN HÀNG</small><h1>{pending ? "Chờ xác minh thanh toán" : "Quét mã để chuyển khoản"}</h1></div></div>
-      {pending && <div className="bank-transfer-pending"><CheckCircle2 /><span><strong>Đã ghi nhận thông báo của bạn</strong><small>Đơn hàng sẽ được quản trị viên xác minh thủ công.</small></span></div>}
+      {pending && <div className="bank-transfer-pending"><CheckCircle2 /><span><strong>Đã ghi nhận thông báo của bạn</strong><small>Đơn hàng sẽ được quản trị viên xác minh thủ công</small></span></div>}
       <div className="bank-transfer-layout">
         <div className="vietqr"><img src={payment.qrUrl} alt={`VietQR cho đơn hàng ${payment.orderCode}`} /><small>Quét bằng ứng dụng ngân hàng hỗ trợ VietQR</small></div>
         <dl className="bank-transfer-details">
           <div><dt>Ngân hàng</dt><dd>{payment.bankCode}</dd></div>
           <div><dt>Người nhận</dt><dd>{payment.accountName}</dd></div>
-          <div><dt>Số tài khoản</dt><dd><strong>{payment.accountNo}</strong><button type="button" onClick={() => copy(payment.accountNo, "account")}>{copied === "account" ? "Đã sao chép" : <><Clipboard /> Copy</>}</button></dd></div>
+          <div><dt>Số tài khoản</dt><dd><strong>{payment.accountNo}</strong><button type="button" onClick={() => copy(payment.accountNo, "account")}>{copied === "account" ? "Đã sao chép" : <><Clipboard /> Sao chép</>}</button></dd></div>
           <div><dt>Số tiền</dt><dd className="bank-transfer-amount">{formatCurrency(payment.amount)}</dd></div>
-          <div><dt>Nội dung chuyển khoản</dt><dd><strong>{payment.orderCode}</strong><button type="button" onClick={() => copy(payment.orderCode, "content")}>{copied === "content" ? "Đã sao chép" : <><Clipboard /> Copy</>}</button></dd></div>
+          <div><dt>Nội dung chuyển khoản</dt><dd><strong>{payment.orderCode}</strong><button type="button" onClick={() => copy(payment.orderCode, "content")}>{copied === "content" ? "Đã sao chép" : <><Clipboard /> Sao chép</>}</button></dd></div>
         </dl>
       </div>
       {error && <p className="form-error">{error}</p>}
-      <p className="bank-transfer-note">Vui lòng chuyển đúng số tiền và nội dung để đơn hàng được đối soát chính xác.</p>
+      <p className="bank-transfer-note">Vui lòng chuyển đúng số tiền và nội dung để đơn hàng được đối soát chính xác</p>
       <div className="bank-transfer-actions">
         <button className="btn btn-dark" disabled={confirming || pending} onClick={confirm}>{confirming ? "Đang ghi nhận..." : pending ? "Đã gửi xác nhận" : "Tôi đã chuyển khoản"}</button>
         <Link className="btn btn-light" to={`/orders/${orderId}`}>Xem đơn hàng</Link>

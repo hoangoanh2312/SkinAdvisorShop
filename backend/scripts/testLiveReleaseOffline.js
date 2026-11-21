@@ -66,7 +66,8 @@ const test = async () => {
     const methods = await fetch(`${base}/api/payments/methods`);
     assert.equal(methods.status, 200);
     const publicBody = await methods.json();
-    assert.deepEqual(Object.keys(publicBody.data).sort(), ['BANK_TRANSFER','COD','VNPAY']);
+    assert.deepEqual(Object.keys(publicBody.data).sort(), ['BANK_TRANSFER','COD','VNPAY','ZALOPAY']);
+    assert.ok(!JSON.stringify(publicBody).match(/key1|key2|PcY4|kLtg/i), 'ZaloPay keys never reach the browser');
     const unauthorized = await fetch(`${base}/api/ai/skin-analysis/history`);
     assert.equal(unauthorized.status, 401, 'AI history requires authentication');
     const adminDenied = await fetch(`${base}/api/admin/launch-readiness`);

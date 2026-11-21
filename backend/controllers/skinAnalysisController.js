@@ -2,6 +2,7 @@ const { analyzeSkin: analyzeSkinImage } = require("../services/skinAnalysis/skin
 const { SkinAnalysisProviderError } = require("../services/skinAnalysis/providers/geminiVisionProvider");
 const SkinAnalysis = require("../models/SkinAnalysis");
 
+const SELF_SKIN_TYPES = new Set(["oily", "dry", "normal", "combination", "sensitive"]);
 const ALLOWED_MIME_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const hasImageSignature = (buffer, mimeType) => {
   if (!Buffer.isBuffer(buffer)) return false;
@@ -18,8 +19,14 @@ const analyzeSkin = async (req, res) => {
     return res.status(400).json({ success: false, message: "Ảnh phải có định dạng JPEG, PNG hoặc WebP hợp lệ" });
   }
   const source = req.body?.source === "camera" ? "camera" : "upload";
+  // Optional, user-provided context (like SkinCam's age + skin type step). Never inferred from the photo.
+  const age = Number.parseInt(req.body?.age, 10);
+  const context = {
+    age: Number.isInteger(age) && age >= 13 && age <= 100 ? age : null,
+    selfSkinType: SELF_SKIN_TYPES.has(req.body?.selfSkinType) ? req.body.selfSkinType : null,
+  };
   try {
-    const data = await analyzeSkinImage({ buffer: req.file.buffer, mimeType: req.file.mimetype, source });
+    const data = await analyzeSkinImage({ buffer: req.file.buffer, mimeType: req.file.mimetype, source, context });
     await SkinAnalysis.create({ user: req.user._id, source, image: { url: null, publicId: null }, result: data.analysis, recommendedProducts: data.recommendations.map((item) => ({ product: item.product.id, score: item.score, reasons: item.reasons })) });
     return res.status(200).json({ success: true, data });
   } catch (error) {

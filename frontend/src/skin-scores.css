@@ -1,0 +1,114 @@
+/* Phân tích da kiểu SkinCam: điểm từng chỉ số, đánh dấu trên ảnh, kiểm tra ảnh, chu trình 4 bước. */
+.skin-analysis-experience { --tone-good: #2f7a57; --tone-watch: #b7791f; --tone-attention: #b8433b; --tone-unknown: #8b8380; }
+.skin-analysis-experience .tone-good { --tone: var(--tone-good); }
+.skin-analysis-experience .tone-watch { --tone: var(--tone-watch); }
+.skin-analysis-experience .tone-attention { --tone: var(--tone-attention); }
+.skin-analysis-experience .tone-unknown { --tone: var(--tone-unknown); }
+
+/* Score ring */
+.skin-score-ring { --size: 64px; width: var(--size); height: var(--size); flex: none; border-radius: 50%; display: inline-grid; place-items: center; align-content: center;
+  background: radial-gradient(closest-side, #fffaf6 78%, transparent 80% 100%), conic-gradient(var(--tone) calc(var(--p) * 1%), #eadfd9 0); color: var(--tone); line-height: 1; }
+.skin-score-ring b { font-size: calc(var(--size) * .32); font-weight: 700; }
+.skin-score-ring small { font-size: calc(var(--size) * .15); color: #8b7f7c; margin-top: 2px; }
+
+/* Camera guide + quality checks */
+.skin-analysis-experience .camera-frame { position: relative; }
+.skin-face-guide { position: absolute; left: 50%; top: 50%; width: min(52%, 300px); aspect-ratio: 3 / 4; transform: translate(-50%, -50%); border: 2px dashed rgba(255,255,255,.85); border-radius: 50% 50% 46% 46%; box-shadow: 0 0 0 9999px rgba(25, 18, 20, .28); pointer-events: none; }
+.skin-face-guide em { position: absolute; left: 50%; transform: translateX(-50%); font-style: normal; font-size: 12px; letter-spacing: .08em; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.5); }
+.skin-face-guide em:first-child { top: 8%; } .skin-face-guide em:last-child { bottom: 4%; }
+.skin-quality-checks { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+.skin-quality-checks.is-live { position: absolute; left: 12px; right: 12px; top: 12px; margin: 0; justify-content: center; }
+.skin-quality-checks span { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #fff; border: 1px solid #e3d8d3; }
+.skin-quality-checks span.ok { color: var(--tone-good); border-color: #bcd9c9; background: #f1f8f4; }
+.skin-quality-checks span.bad { color: var(--tone-attention); border-color: #ecc3be; background: #fdf3f2; }
+.skin-quality-checks span.neutral { color: #6d6260; }
+
+/* Profile inputs */
+.skin-profile { border: 1px solid #eadfd9; border-radius: 14px; padding: 14px 16px 16px; margin: 16px 0 0; display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: end; background: #fffaf7; }
+.skin-profile legend { padding: 0 6px; font-weight: 700; color: #3b2a2f; font-size: 14px; }
+.skin-profile legend small { font-weight: 400; color: #8b7f7c; }
+.skin-age { display: grid; gap: 6px; font-size: 13px; color: #5d5252; }
+.skin-age input { border: 1px solid #dccfc9; border-radius: 10px; padding: 9px 12px; font-size: 15px; width: 100%; background: #fff; }
+.skin-self-type > span { display: block; font-size: 13px; color: #5d5252; margin-bottom: 6px; }
+.skin-self-type > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.skin-self-type button { border: 1px solid #dccfc9; background: #fff; border-radius: 999px; padding: 7px 13px; font-size: 13px; color: #4a3d40; }
+.skin-self-type button.is-active { background: #6e2b46; border-color: #6e2b46; color: #fff; }
+
+/* Overall score in summary */
+.skin-result-summary .skin-overall { display: grid; justify-items: center; gap: 6px; background: transparent; width: auto; height: auto; }
+.skin-result-summary .skin-overall small { font-size: 12px; color: #6d6260; }
+
+/* Face map + metrics */
+.skin-score-layout { display: grid; grid-template-columns: minmax(260px, 420px) 1fr; gap: 26px; align-items: start; margin: 18px 0 26px; }
+.skin-face-map { position: relative; border-radius: 18px; overflow: hidden; background: #f3ebe7; }
+.skin-face-map img { display: block; width: 100%; height: auto; }
+.skin-face-map-empty { position: absolute; left: 12px; right: 12px; bottom: 12px; margin: 0; background: rgba(255,255,255,.9); border-radius: 10px; padding: 8px 10px; font-size: 12px; }
+.skin-marker { position: absolute; width: 0; height: 0; padding: 0; border: 0; background: none; cursor: pointer; }
+.skin-marker i { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border: 2px solid var(--tone); border-radius: 6px; background: rgba(255,255,255,.18); box-shadow: 0 0 0 3px rgba(255,255,255,.35); }
+.skin-marker i::after { content: ""; position: absolute; inset: 6px; border-radius: 2px; background: var(--tone); }
+.skin-marker span { position: absolute; top: -34px; white-space: nowrap; padding: 4px 9px; border-radius: 6px; background: rgba(28, 20, 23, .78); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .02em; border-bottom: 2px solid var(--tone); }
+.skin-marker.label-left span { right: 14px; } .skin-marker.label-right span { left: 14px; }
+.skin-marker.is-dim { opacity: .45; } .skin-marker.is-active i { animation: skin-pulse 1.8s ease-in-out infinite; }
+@keyframes skin-pulse { 50% { box-shadow: 0 0 0 7px rgba(255,255,255,.15); } }
+.skin-metric-picker { display: grid; gap: 16px; }
+.skin-metric-picker h4 { display: flex; align-items: center; gap: 7px; margin: 0 0 10px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--tone); }
+.skin-metric-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.skin-metric-chip { display: grid; justify-items: center; gap: 6px; width: 96px; padding: 10px 6px; border: 1px solid #eadfd9; border-radius: 14px; background: #fff; font-size: 12px; font-weight: 600; color: #3b2a2f; }
+.skin-metric-chip.is-selected { border-color: #6e2b46; box-shadow: 0 0 0 2px rgba(110,43,70,.15); }
+.skin-metric-detail { margin-top: 18px; border: 1px solid #eadfd9; border-left: 4px solid var(--tone); border-radius: 14px; padding: 16px 18px; background: #fff; }
+.skin-metric-detail-head { display: flex; gap: 16px; align-items: center; }
+.skin-metric-detail-head span { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tone); }
+.skin-metric-detail-head h3 { margin: 2px 0 8px; font-size: 22px; }
+.skin-score-bar { width: min(260px, 100%); height: 6px; border-radius: 6px; background: #eadfd9; overflow: hidden; }
+.skin-score-bar i { display: block; height: 100%; background: var(--tone); }
+.skin-metric-detail p { margin: 12px 0 0; line-height: 1.6; color: #463b3d; }
+.skin-metric-detail small { display: block; margin-top: 10px; color: #8b7f7c; }
+.skin-metric-regions strong { color: #3b2a2f; }
+
+/* 4-step routine */
+.skin-step-routine { margin: 8px 0 30px; }
+.skin-focus-head h3 { margin: 0 0 4px; font-size: 22px; }
+.skin-focus-head p { margin: 0 0 14px; color: #6d6260; }
+.skin-focus-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.skin-focus-options button { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #dccfc9; background: #fff; border-radius: 999px; padding: 5px 14px 5px 6px; font-size: 13px; font-weight: 600; color: #4a3d40; }
+.skin-focus-options button:not(:has(.skin-score-ring)) { padding-left: 14px; }
+.skin-focus-options button.is-active { background: #6e2b46; border-color: #6e2b46; color: #fff; }
+.skin-focus-options button.is-active .skin-score-ring { background: radial-gradient(closest-side, #fff 78%, transparent 80% 100%), conic-gradient(var(--tone) calc(var(--p) * 1%), #eadfd9 0); }
+.skin-routine-note { background: #fdf6ec; border: 1px solid #f0dcbc; border-radius: 10px; padding: 10px 12px; font-size: 13px; color: #6b4f1f; }
+.skin-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.skin-steps > li { border: 1px solid #eadfd9; border-radius: 16px; background: #fff; padding: 16px 18px; }
+.skin-step-title { display: flex; gap: 14px; align-items: flex-start; }
+.skin-step-title > span { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #6e2b46; color: #fff; font-weight: 700; font-size: 13px; }
+.skin-step-title h4 { margin: 0; font-size: 18px; }
+.skin-step-title p { margin: 3px 0 0; color: #6d6260; font-size: 13px; }
+.skin-step-title em { font-style: normal; font-weight: 600; color: #6e2b46; margin-left: 4px; }
+.skin-step-products { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 14px; }
+.skin-step-empty { margin: 12px 0 0 52px; color: #8b7f7c; font-size: 13px; }
+.skin-routine-product { display: grid; grid-template-columns: 74px 1fr; grid-template-rows: 1fr auto; gap: 10px 12px; border: 1px solid #f0e6e1; border-radius: 12px; padding: 10px; }
+.skin-routine-thumb { grid-row: span 2; width: 74px; height: 86px; border-radius: 10px; overflow: hidden; background: #f4ece8; display: grid; place-items: center; font-size: 10px; color: #8b7f7c; }
+.skin-routine-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.skin-routine-product small { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #8e5d6c; font-weight: 700; }
+.skin-routine-product strong { display: block; font-size: 14px; line-height: 1.35; margin: 2px 0 4px; color: #2d2326; }
+.skin-routine-product p { margin: 0 0 4px; font-size: 12px; color: #6d6260; line-height: 1.45; }
+.skin-routine-product b { font-size: 14px; color: #6e2b46; } .skin-routine-product del { margin-left: 6px; color: #a69a97; font-weight: 400; font-size: 12px; }
+.skin-routine-product .btn { justify-self: start; }
+.skin-view-cart { margin-top: 16px; }
+
+@media (max-width: 860px) {
+  .skin-score-layout { grid-template-columns: 1fr; }
+  .skin-profile { grid-template-columns: 1fr; }
+  .skin-step-empty { margin-left: 0; }
+}
+.skin-acne-box { position: absolute; box-sizing: border-box; min-width: 8px; min-height: 8px; border: 2px solid var(--box); border-radius: 4px; box-shadow: 0 0 0 1px rgba(255,255,255,.75), inset 0 0 0 1px rgba(255,255,255,.35); pointer-events: none; animation: skin-box-in .35s ease-out both; }
+.skin-acne-box-count { position: absolute; left: 12px; top: 12px; margin: 0; padding: 4px 10px; border-radius: 999px; background: rgba(28, 20, 23, .78); color: #fff; font-size: 12px; font-weight: 600; }
+.skin-acne-breakdown { margin: 10px 0; padding: 12px 14px; border-radius: 12px; background: #fbf6f3; border: 1px solid #f0e2dc; }
+.skin-acne-breakdown > strong { display: block; margin-bottom: 6px; }
+.skin-acne-breakdown ul { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; }
+.skin-acne-breakdown li { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.skin-acne-breakdown li i { width: 12px; height: 12px; border: 2px solid var(--box); border-radius: 3px; flex: none; }
+.skin-acne-breakdown li b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.skin-acne-breakdown small { color: #7a6a66; line-height: 1.45; }
+@keyframes skin-box-in { from { opacity: 0; transform: scale(1.6); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .skin-acne-box { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .skin-marker.is-active i { animation: none; } }
+.skin-analysis-experience .result-grid.is-single { grid-template-columns: 1fr; }

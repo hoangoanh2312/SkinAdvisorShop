@@ -1,6 +1,7 @@
 import { ArrowRight, Bot, Check, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import ProductCard from "../components/product/ProductCard";
+import ProductCarousel from "../components/product/ProductCarousel";
+import IngredientExplorer from "../components/product/IngredientExplorer";
 import SectionTitle from "../components/common/SectionTitle";
 import { formatCurrency } from "../utils/formatters";
 const concerns = [
@@ -21,61 +22,24 @@ const concerns = [
   ["THÂM SẠM", "Hỗ trợ làm sáng và cải thiện da không đều màu", "photo-1571781926291-c477ebfd024b", "wide"],
   ["LÃO HÓA", "Chăm sóc nếp nhăn và độ đàn hồi của da", "photo-1612817288484-6f916006741a", ""],
 ];
-const ingredients = [
-  [
-    "NIACINAMIDE",
-    "Kiểm soát dầu · Hỗ trợ làm sáng · Củng cố hàng rào da",
-    "Phù hợp: Da dầu, da mụn, da xỉn màu",
-    "N°01",
-  ],
-  [
-    "BHA",
-    "Làm sạch lỗ chân lông · Hỗ trợ giảm bít tắc",
-    "Phù hợp: Da dầu, da dễ nổi mụn",
-    "N°02",
-  ],
-  [
-    "RETINOL",
-    "Hỗ trợ cải thiện nếp nhăn · Chăm sóc dấu hiệu lão hóa",
-    "Phù hợp: Da có dấu hiệu lão hóa",
-    "N°03",
-  ],
-  [
-    "VITAMIN C",
-    "Chống oxy hóa · Hỗ trợ làm sáng và đều màu da",
-    "Phù hợp: Da xỉn màu, không đều màu",
-    "N°04",
-  ],
-  [
-    "HYALURONIC ACID",
-    "Cấp ẩm · Hỗ trợ duy trì làn da mềm mại và căng mịn",
-    "Phù hợp: Mọi loại da, đặc biệt là da khô",
-    "N°05",
-  ],
-  [
-    "CERAMIDE",
-    "Hỗ trợ phục hồi hàng rào bảo vệ da · Duy trì độ ẩm",
-    "Phù hợp: Da khô, da nhạy cảm",
-    "N°06",
-  ],
-];
 export default function HomeContentVi({ products = [], brands = [], loading, error, productSource = "featured", onRetry }) {
-  const featured = products[0];
+  // Spotlight a product that has a photo; a half-screen "Chưa có ảnh" panel reads as empty space.
+  const featured = products.find((item) => item.images?.[0]);
   return (
     <div className="new-home">
-      <section className="manifesto">
+      <section className="manifesto" data-reveal>
         <div className="container manifesto-grid">
-          <span className="eyebrow">TRIẾT LÝ sandwich</span>
+          <span className="eyebrow">TRIẾT LÝ sandwich beauty</span>
           <p>
-            Không phải nhiều hơn.
+            Không phải nhiều hơn
             <br />
-            Mà là <em>đúng hơn</em> cho <span className="keep-together">làn da.</span>
+            Mà là <em>đúng hơn</em> cho <span className="keep-together">làn da</span>
           </p>
           <div>
             <p>
               Chúng tôi kết hợp hoạt chất được nghiên cứu, sản phẩm chọn lọc và
               công nghệ AI để giúp bạn lựa chọn chu trình chăm sóc phù hợp và dễ
-              áp dụng.
+              áp dụng
             </p>
             <div>
               <span>
@@ -88,34 +52,32 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
           </div>
         </div>
       </section>
-      <section className="editorial-products container">
+      <section className="editorial-products container" data-reveal>
         <SectionTitle
           eyebrow={productSource === "featured" ? "SẢN PHẨM NỔI BẬT" : "GỢI Ý TỪ GIAN HÀNG"}
           title={productSource === "featured"
             ? <><span className="keep-together">Sản phẩm</span> nổi bật</>
             : <><span className="keep-together">Khám phá</span> sản phẩm</>}
-          description="Khám phá những sản phẩm mỹ phẩm đã được đưa lên gian hàng sandwich."
+          description="Khám phá những sản phẩm mỹ phẩm đã được đưa lên gian hàng sandwich beauty"
           action={
             <Link className="editorial-link" to="/products">
               Xem toàn bộ <ArrowRight />
             </Link>
           }
         />
-        <div className="product-grid luxury-grid">
-          {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
+        <div>
+          {!!products.length && <ProductCarousel products={products} />}
           {loading && <div className="home-featured-feedback" role="status">Đang tải sản phẩm từ gian hàng…</div>}
           {!loading && !products.length && (
             <div className="home-featured-feedback" role="status">
-              <p>{error || "Chưa có sản phẩm được công khai trên gian hàng."}</p>
+              <p>{error || "Chưa có sản phẩm được công khai trên gian hàng"}</p>
               {error && <button type="button" onClick={onRetry}>Thử tải lại</button>}
               <Link to="/products">Xem tất cả sản phẩm</Link>
             </div>
           )}
         </div>
       </section>
-      <section id="skin-concerns" className="concern-editorial">
+      <section id="skin-concerns" className="concern-editorial" data-reveal>
         <div className="container">
           <div className="split-heading">
             <span className="eyebrow">CHỌN THEO VẤN ĐỀ DA</span>
@@ -125,7 +87,7 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
               <em className="keep-together">đang cần gì?</em>
             </h2>
             <p>
-              Chọn vấn đề bạn đang quan tâm để tìm sản phẩm phù hợp dễ dàng hơn.
+              Chọn vấn đề bạn đang quan tâm để tìm sản phẩm phù hợp dễ dàng hơn
             </p>
           </div>
           <div className="concern-bento">
@@ -151,7 +113,7 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
           </div>
         </div>
       </section>
-      <section className="ai-signature">
+      <section className="ai-signature" data-reveal>
         <div className="container ai-signature-grid">
           <div className="ai-editorial-copy">
             <span className="eyebrow light">
@@ -163,8 +125,8 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
               <em>với <span className="keep-together">làn da của bạn</span></em>
             </h2>
             <p>
-              Chia sẻ loại da, vấn đề bạn đang gặp và nhu cầu chăm sóc. Skin
-              Advisor AI sẽ phân tích thông tin và gợi ý sản phẩm phù hợp để bạn
+              Chia sẻ loại da, vấn đề bạn đang gặp và nhu cầu chăm sóc. Trợ lý
+              da AI sẽ phân tích thông tin và gợi ý sản phẩm phù hợp để bạn
               tham khảo.
             </p>
             <div className="ai-chip-row">
@@ -185,7 +147,7 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
             </div>
             <div className="mock-body">
               <div className="mock-msg user">
-                Da mình dầu và thường nổi mụn ở vùng chữ T.
+                Da mình dầu và thường nổi mụn ở vùng chữ T
               </div>
               <div className="mock-msg ai">
                 <span>
@@ -199,7 +161,7 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
               <Link className="recommended-label" to="/skin-advisor">Trải nghiệm tư vấn với thông tin của bạn →</Link>
             </div>
             <div className="mock-input">
-              Hỏi Skin Advisor...{" "}
+              Hỏi Trợ lý da AI...{" "}
               <span>
                 <ArrowRight />
               </span>
@@ -207,63 +169,30 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
           </div>
         </div>
       </section>
-      <section className="ingredient-section">
-        <div className="container ingredient-grid">
-          <div className="ingredient-intro">
-            <span className="eyebrow">KHÁM PHÁ THEO THÀNH PHẦN</span>
-            <h2>
-              Hiểu thành phần để
-              <br />
-              <em>chọn đúng <span className="keep-together">sản phẩm.</span></em>
-            </h2>
-            <p>
-              Tìm hiểu công dụng và loại da phù hợp của các thành phần chăm sóc
-              da phổ biến.
-            </p>
-            <div className="ingredient-orb">
-              <span>KHOA HỌC</span>
-              <i>×</i>
-              <span>LÀN DA</span>
-            </div>
-          </div>
-          <div className="ingredient-list">
-            {ingredients.map(([name, use, skin, num]) => (
-              <Link to={`/products?ingredient=${encodeURIComponent(name.toLowerCase())}`} key={name}>
-                <small>{num}</small>
-                <div>
-                  <h3>{name}</h3>
-                  <p>{use}</p>
-                  <span>{skin}</span>
-                </div>
-                <ArrowRight />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      {featured && <section className="featured-editorial">
+      <IngredientExplorer />
+      {featured && <section className="featured-editorial" data-reveal>
         <div className="featured-image">
-          {featured.images?.[0] ? <img src={featured.images[0]} alt={featured.name} /> : <span className="catalog-image-missing">Chưa có ảnh sản phẩm</span>}
+          <img src={featured.images[0]} alt={featured.name} />
           <span>{featured.brand}</span>
         </div>
         <div className="featured-copy">
           <span className="eyebrow">GIỚI THIỆU SẢN PHẨM</span>
           <h2>{featured.name}</h2>
-          {featured.reviewCount > 0 && <div className="featured-rating">{featured.rating}/5 · {featured.reviewCount} đánh giá</div>}
+          {featured.reviewCount > 0 && <div className="featured-rating">{featured.rating}/5 ({featured.reviewCount} đánh giá)</div>}
           {featured.description && <p>{featured.description}</p>}
           {!!featured.ingredients?.length && <div className="ingredient-chips">
             {featured.ingredients.slice(0, 3).map(item => <span key={item.normalizedName || item.name}>{item.name}</span>)}
           </div>}
           <div className="featured-buy">
-            <strong>{formatCurrency(featured.salePrice)}</strong>
-            {featured.price > featured.salePrice && <del>{formatCurrency(featured.price)}</del>}
+            <strong>{Number(featured.salePrice) > 0 ? formatCurrency(featured.salePrice) : "Đang cập nhật giá"}</strong>
+            {Number(featured.salePrice) > 0 && featured.price > featured.salePrice && <del>{formatCurrency(featured.price)}</del>}
           </div>
           <Link className="btn btn-burgundy" to={`/products/${featured.slug || featured.id}`}>
             Khám phá sản phẩm <ArrowRight />
           </Link>
         </div>
       </section>}
-      <section className="routine-section container">
+      <section className="routine-section container" data-reveal>
         <div className="split-heading">
           <span className="eyebrow">QUY TRÌNH TƯ VẤN</span>
           <h2>
@@ -272,7 +201,7 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
             <em>chỉ với <span className="keep-together">vài bước</span></em>
           </h2>
           <p>
-            Chia sẻ nhu cầu để nhận gợi ý sản phẩm và các bước chăm sóc phù hợp.
+            Chia sẻ nhu cầu để nhận gợi ý sản phẩm và các bước chăm sóc phù hợp
           </p>
         </div>
         <div className="routine-steps">
@@ -280,17 +209,17 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
             [
               "01",
               "Chia sẻ về làn da",
-              "Mô tả loại da, vấn đề và nhu cầu chăm sóc của bạn.",
+              "Mô tả loại da, vấn đề và nhu cầu chăm sóc của bạn",
             ],
             [
               "02",
               "AI phân tích nhu cầu",
-              "Skin Advisor AI phân tích thông tin bạn cung cấp.",
+              "Trợ lý da AI phân tích thông tin bạn cung cấp",
             ],
             [
               "03",
               "Nhận gợi ý phù hợp",
-              "Tham khảo sản phẩm, thành phần và các bước chăm sóc phù hợp.",
+              "Tham khảo sản phẩm, thành phần và các bước chăm sóc phù hợp",
             ],
           ].map(([n, t, d], i) => (
             <article key={n}>
@@ -302,7 +231,7 @@ export default function HomeContentVi({ products = [], brands = [], loading, err
           ))}
         </div>
       </section>
-      {brands.length > 0 && <section className="brand-marquee">
+      {brands.length > 0 && <section className="brand-marquee" data-reveal>
         <span>KHÁM PHÁ THƯƠNG HIỆU</span>
         {brands.map(brand => <Link key={brand._id || brand.slug} to={`/products?brand=${encodeURIComponent(brand.name)}`}>{brand.name}</Link>)}
       </section>}

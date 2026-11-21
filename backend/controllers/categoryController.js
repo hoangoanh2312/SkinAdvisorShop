@@ -33,7 +33,7 @@ const createCategory = async (req, res) => {
   try {
     const data = pick(req.body, CATEGORY_FIELDS);
     if (!data.name?.trim() || !data.slug?.trim()) {
-      return res.status(400).json({ success: false, message: "Tên và slug danh mục là bắt buộc" });
+      return res.status(400).json({ success: false, message: "Tên và đường dẫn danh mục là bắt buộc" });
     }
     const category = await Category.create(data);
     return res.status(201).json({ success: true, message: "Tạo danh mục thành công", data: { category } });
@@ -49,7 +49,7 @@ const updateCategory = async (req, res) => {
 
   try {
     const category = await Category.findByIdAndUpdate(req.params.id, pick(req.body, CATEGORY_FIELDS), {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     });
     if (!category) {
@@ -67,7 +67,7 @@ const deleteCategory = async (req, res) => {
   }
 
   try {
-    const category = await Category.findByIdAndUpdate(req.params.id, { isActive: false }, { new: true });
+    const category = await Category.findByIdAndUpdate(req.params.id, { isActive: false }, { returnDocument: "after" });
     if (!category) {
       return res.status(404).json({ success: false, message: "Không tìm thấy danh mục" });
     }

@@ -7,7 +7,8 @@ export const formatDate = (value) =>
 export const orderStatusLabel = { pending: "Chờ xác nhận", confirmed: "Đang chuẩn bị", shipping: "Đang giao", completed: "Hoàn thành", cancelled: "Đã hủy" };
 export const paymentStatusLabel = { unpaid: "Chưa thanh toán", pending_verification: "Chờ xác minh", paid: "Đã thanh toán", failed: "Thanh toán thất bại", refunded: "Đã hoàn tiền" };
 
-export const isAwaitingVnpayPayment = (order) => order?.paymentMethod === "VNPAY"
+// Online gateway orders (VNPay or ZaloPay) that can still be paid.
+export const isAwaitingVnpayPayment = (order) => ["VNPAY", "ZALOPAY"].includes(order?.paymentMethod)
   && order.paymentStatus !== "paid"
   && !["completed", "cancelled"].includes(order.orderStatus);
 

@@ -29,3 +29,8 @@ Thumbs.db
 # Private operational worksheets (operator-reviewed only)
 XAC_MINH_GIA_BAN_THAT_SKINORA.csv
 NHAP_TON_KHO_MO_BAN_SKINORA.csv
+
+# Sao luu va ban dong goi
+SAO_LUU_*
+release/
+*.zip

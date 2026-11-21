@@ -74,6 +74,14 @@ const userSchema = new mongoose.Schema(
       default: "customer",
     },
     isActive: { type: Boolean, default: true },
+    // Undefined for accounts created before e-mail verification existed.
+    emailVerified: { type: Boolean },
+    emailVerifyTokenHash: { type: String, select: false },
+    emailVerifyExpires: { type: Date, select: false },
+    passwordResetTokenHash: { type: String, select: false },
+    passwordResetExpires: { type: Date, select: false },
+    // Tokens issued before this instant are rejected (logout everywhere after a password change/reset).
+    passwordChangedAt: { type: Date },
     skinProfile: { type: skinProfileSchema, default: () => ({}) },
     addresses: { type: [addressSchema], default: [] },
   },

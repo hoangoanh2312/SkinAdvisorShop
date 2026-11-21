@@ -16,6 +16,7 @@ const paymentMethodNames = {
   COD: "Thanh toán khi nhận hàng (COD)",
   BANK_TRANSFER: "Chuyển khoản ngân hàng",
   VNPAY: "VNPay",
+  ZALOPAY: "ZaloPay",
 };
 
 export default function OrderDetail() {
@@ -30,24 +31,24 @@ export default function OrderDetail() {
 
   const load = useCallback(() => axiosClient.get(`/orders/${id}`, { sessionProtected: true })
     .then(({ data }) => setOrder(data.data.order))
-    .catch((requestError) => setError(requestError.response?.data?.message || "Không thể tải đơn hàng."))
+    .catch((requestError) => setError(requestError.response?.data?.message || "Không thể tải đơn hàng"))
     .finally(() => setLoading(false)), [id]);
   useEffect(() => { load(); }, [load]);
 
   const cancel = async () => {
     setError(""); setActing(true);
     try { await axiosClient.put(`/orders/${id}/cancel`, {}, { sessionProtected: true }); await load(); }
-    catch (requestError) { setError(requestError.response?.data?.message || "Không thể hủy đơn hàng."); }
+    catch (requestError) { setError(requestError.response?.data?.message || "Không thể hủy đơn hàng"); }
     finally { setActing(false); }
   };
 
   const payNow = async () => {
     setError(""); setActing(true);
     try {
-      const { data } = await axiosClient.post("/payments/vnpay/create", { orderId: order._id }, { sessionProtected: true });
+      const { data } = await axiosClient.post(`/payments/${order.paymentMethod === "ZALOPAY" ? "zalopay" : "vnpay"}/create`, { orderId: order._id }, { sessionProtected: true });
       window.location.assign(data.data.paymentUrl);
     } catch (requestError) {
-      setError(requestError.response?.data?.message || "Không thể tạo yêu cầu thanh toán.");
+      setError(requestError.response?.data?.message || "Không thể tạo yêu cầu thanh toán");
       setActing(false);
     }
   };
@@ -64,8 +65,8 @@ export default function OrderDetail() {
         } catch { return false; }
       }));
       const added = results.filter(Boolean).length;
-      if (!added) setError("Các sản phẩm trong đơn hiện không còn khả dụng.");
-      else if (added < order.items.length) setNotice("Đã thêm các sản phẩm còn bán và còn hàng vào giỏ.");
+      if (!added) setError("Các sản phẩm trong đơn hiện không còn khả dụng");
+      else if (added < order.items.length) setNotice("Đã thêm các sản phẩm còn bán và còn hàng vào giỏ");
       else navigate("/cart");
     } finally { setActing(false); }
   };
@@ -94,7 +95,7 @@ export default function OrderDetail() {
       <Link className="order-detail-back" to="/orders"><ArrowLeft size={16} aria-hidden="true" /> Tất cả đơn hàng</Link>
       <div className="order-detail-hero-row">
         <div className="order-detail-hero-copy">
-          <span className="eyebrow">sandwich · THEO DÕI ĐƠN HÀNG</span>
+          <span className="eyebrow">THEO DÕI ĐƠN HÀNG</span>
           <h1>Chi tiết đơn hàng</h1>
           <div className="order-meta-line">
             <span className="order-code">#{displayOrderCode(order)}</span>
@@ -128,7 +129,7 @@ export default function OrderDetail() {
             <img src={item.image} alt={item.productName || "Sản phẩm"} loading="lazy" />
             <div className="order-detail-item-info">
               <strong>{item.productName}</strong>
-              <span>{item.variantName} · Số lượng: {item.quantity}</span>
+              <span>Phân loại: {item.variantName}, số lượng: {item.quantity}</span>
               {item.sku && <small title={item.sku}>{item.sku}</small>}
             </div>
             <b className="order-detail-item-price">{formatCurrency(item.subtotal)}</b>
@@ -150,6 +151,8 @@ export default function OrderDetail() {
         <h2>Thông tin thanh toán</h2>
         <p><span>Phương thức</span><strong>{paymentMethodNames[order.paymentMethod] || order.paymentMethod}</strong></p>
         <p><span>Trạng thái</span><strong className="order-payment-status">{paymentStatusLabel[order.paymentStatus] || "Đang cập nhật"}</strong></p>
+        {order.orderStatus === "pending" && order.paymentStatus === "unpaid" && order.reservedUntil && <p><span>Giữ hàng đến</span><strong>{formatDate(order.reservedUntil)}</strong></p>}
+        {cancelled && order.cancelReason && <p><span>Lý do hủy</span><strong>{order.cancelReason}</strong></p>}
         <p><span>Tạm tính</span><strong>{formatCurrency(order.subtotal)}</strong></p>
         {order.discount > 0 && <p><span>Giảm giá</span><strong>-{formatCurrency(order.discount)}</strong></p>}
         <p><span>Phí vận chuyển</span><strong>{formatCurrency(order.shippingFee)}</strong></p>

@@ -63,14 +63,14 @@ async function main() {
       await session.withTransaction(async () => {
         for (const row of result.planned) {
           const variant = await Variant.findOneAndUpdate({ _id: row.variantId, product: row.productId,
-            sku: row.sku, price: row.price, stock: 0 }, { $set: { stock: row.qty, isActive: true } }, { session, new: true });
+            sku: row.sku, price: row.price, stock: 0 }, { $set: { stock: row.qty, isActive: true } }, { session, returnDocument: "after" });
           if (!variant) throw new Error(`SKU_CHANGED_ROLLBACK:${row.sku}`);
           await InventoryMovement.create([{ variant: variant._id, product: row.productId,
             kind: 'receipt', delta: row.qty, before: 0, after: row.qty,
             note: 'Nhập hàng đã kiểm kê theo CSV xác nhận mở bán', reference: 'PUBLISH_WITH_REAL_STOCK' }], { session });
           const product = await Product.findOneAndUpdate({ _id: row.productId, slug: productMap.get(row.productId).slug,
             isActive: false, basePrice: row.price, "images.0": { $exists: true } },
-          { $set: { isActive: true } }, { session, new: true });
+          { $set: { isActive: true } }, { session, returnDocument: "after" });
           if (!product) throw new Error(`PRODUCT_CHANGED_ROLLBACK:${row.sku}`);
         }
       });

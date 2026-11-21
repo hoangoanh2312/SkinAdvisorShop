@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({ get: vi.fn(), post: vi.fn() }));
-vi.mock("../api/axiosClient", () => ({ default: mocks }));
+vi.mock("../api/axiosClient", () => ({ default: mocks, apiErrorMessage: (_error, fallback) => fallback }));
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
 
 function Probe() {

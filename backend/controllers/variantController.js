@@ -82,7 +82,7 @@ const updateVariant = async (req, res) => {
     return res.status(400).json({ success: false, message: 'Vui lòng ghi lý do điều chỉnh tồn kho (tối thiểu 6 ký tự)' });
   try {
     if (!stockChange) {
-      const variant = await Variant.findByIdAndUpdate(req.params.id, data, { new: true, runValidators: true });
+      const variant = await Variant.findByIdAndUpdate(req.params.id, data, { returnDocument: "after", runValidators: true });
       return res.status(200).json({ success: true, message: 'Cập nhật phiên bản thành công', data: { variant } });
     }
     const session = await mongoose.startSession();
@@ -95,7 +95,7 @@ const updateVariant = async (req, res) => {
         if (refreshed) throw new Error('INVALID_VARIANT');
         const delta = Number(data.stock) - previous.stock;
         if (!Number.isSafeInteger(delta)) throw new Error('INVALID_VARIANT');
-        variant = await Variant.findOneAndUpdate({ _id: req.params.id, stock: previous.stock }, data, { new: true, runValidators: true, session });
+        variant = await Variant.findOneAndUpdate({ _id: req.params.id, stock: previous.stock }, data, { returnDocument: "after", runValidators: true, session });
         if (!variant) throw new Error('STOCK_CHANGED');
         if (delta !== 0) {
           await InventoryMovement.create([{ variant: variant._id, product: variant.product, actor: req.user._id, kind: 'adjustment', delta, before: previous.stock, after: variant.stock, note: req.body.stockChangeNote.trim() }], { session });
@@ -116,7 +116,7 @@ const deleteVariant = async (req, res) => {
     return res.status(400).json({ success: false, message: "ID phiên bản không hợp lệ" });
   }
   try {
-    const variant = await Variant.findByIdAndUpdate(req.params.id, { isActive: false }, { new: true });
+    const variant = await Variant.findByIdAndUpdate(req.params.id, { isActive: false }, { returnDocument: "after" });
     if (!variant) return res.status(404).json({ success: false, message: "Không tìm thấy phiên bản" });
     return res.status(200).json({ success: true, message: "Đã vô hiệu hóa phiên bản", data: { variant } });
   } catch (error) {

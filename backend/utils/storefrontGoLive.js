@@ -43,17 +43,17 @@ function validateImport(rows, productMap, variantMap) {
   const seen = new Set(), planned = [], skipped = [], errors = [];
   for (const row of rows) {
     const sku = row.sku.trim();
-    if (!sku || seen.has(sku)) { errors.push(`${sku || "(trống)"}: SKU trống hoặc lặp`); continue; }
+    if (!sku || seen.has(sku)) { errors.push(`${sku || "(trống)"}: Mã hàng trống hoặc lặp`); continue; }
     seen.add(sku);
     // Blank approval is intentional; it must never silently become a stock update.
     if (!row.xac_nhan_mo_ban.trim()) { skipped.push({ sku, reason: "CHUA_XAC_NHAN" }); continue; }
     if (row.xac_nhan_mo_ban.trim() !== "MO_BAN") { errors.push(`${sku}: xác nhận phải là MO_BAN`); continue; }
     const productAndVariant = variantMap.get(sku), variant = productAndVariant?.variant;
     const product = productAndVariant?.product;
-    if (!variant || !product) { errors.push(`${sku}: không tìm thấy SKU trong database`); continue; }
+    if (!variant || !product) { errors.push(`${sku}: không tìm thấy mã hàng trong cơ sở dữ liệu`); continue; }
     if (String(product.slug) !== row.slug || String(product.name) !== row.ten_san_pham ||
       String(`${variant.size || ""}${variant.unit || ""}`).replace(/\s+/g, "").toLowerCase() !== row.dung_tich.replace(/\s+/g, "").toLowerCase()) {
-      errors.push(`${sku}: tên/slug/dung tích đã thay đổi so với CSV`); continue;
+      errors.push(`${sku}: tên/đường dẫn/dung tích đã thay đổi so với CSV`); continue;
     }
     if (row.gia_hien_tai_vnd !== String(variant.price) || !(variant.price > 0) || Number(product.basePrice) !== Number(variant.price)) {
       errors.push(`${sku}: giá chưa xác minh hoặc giá đã đổi; xuất mẫu CSV mới`); continue;
@@ -66,13 +66,13 @@ function validateImport(rows, productMap, variantMap) {
       errors.push(`${sku}: sản phẩm chưa có đường dẫn ảnh HTTPS`); continue;
     }
     if (product.isActive !== false || variant.stock !== 0) {
-      errors.push(`${sku}: sản phẩm đã mở bán hoặc tồn kho đã thay đổi; xử lý trong Admin thay vì ghi đè`); continue;
+      errors.push(`${sku}: sản phẩm đã mở bán hoặc tồn kho đã thay đổi; xử lý trong trang quản trị thay vì ghi đè`); continue;
     }
     planned.push({ sku, name: product.name, price: variant.price, size: row.dung_tich,
       qty: Number(qtyText), productId: String(product._id), variantId: String(variant._id) });
   }
   // productMap is a separate integrity guard: don't accept foreign SKU rows.
-  if (seen.size > productMap.size) errors.push("CSV chứa nhiều SKU hơn số sản phẩm trong database");
+  if (seen.size > productMap.size) errors.push("CSV chứa nhiều mã hàng hơn số sản phẩm trong cơ sở dữ liệu");
   return { planned, skipped, errors };
 }
 module.exports = { HEADERS, csvStringify, csvParse, validateImport };

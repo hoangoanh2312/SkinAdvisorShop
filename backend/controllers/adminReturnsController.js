@@ -67,7 +67,7 @@ const updateReturn = async (req, res) => {
           for (const item of order.items) {
             const before = await Variant.findById(item.variant).session(session);
             if (!before || !Number.isSafeInteger(before.stock + item.quantity)) throw new Error('VARIANT_UNAVAILABLE');
-            const updated = await Variant.findOneAndUpdate({ _id: item.variant, stock: before.stock }, { $inc: { stock: item.quantity } }, { session, new: true, runValidators: true });
+            const updated = await Variant.findOneAndUpdate({ _id: item.variant, stock: before.stock }, { $inc: { stock: item.quantity } }, { session, returnDocument: "after", runValidators: true });
             if (!updated) throw new Error('STOCK_CHANGED');
             await InventoryMovement.create([{ variant: item.variant, product: item.product, actor: req.user._id, kind: 'return', delta: item.quantity, before: before.stock, after: updated.stock, note: `Nhập lại hàng hoàn trả đơn ${order.orderCode || order._id}`, reference: String(record._id) }], { session });
           }
@@ -91,7 +91,7 @@ const updateReturn = async (req, res) => {
     });
     return res.json({ success: true, message: 'Cập nhật hồ sơ trả hàng thành công', data: { item: result } });
   } catch (error) {
-    const messages = { RETURN_NOT_FOUND: ['Không tìm thấy hồ sơ trả hàng', 404], INVALID_RETURN_TRANSITION: ['Không thể chuyển trạng thái này hoặc thao tác đã hoàn tất', 409], ORDER_NOT_COMPLETED: ['Đơn hàng không còn ở trạng thái hoàn thành', 409], VARIANT_UNAVAILABLE: ['SKU không còn tồn tại hoặc tồn kho vượt giới hạn', 409], STOCK_CHANGED: ['Tồn kho đã thay đổi, vui lòng thử lại', 409] };
+    const messages = { RETURN_NOT_FOUND: ['Không tìm thấy hồ sơ trả hàng', 404], INVALID_RETURN_TRANSITION: ['Không thể chuyển trạng thái này hoặc thao tác đã hoàn tất', 409], ORDER_NOT_COMPLETED: ['Đơn hàng không còn ở trạng thái hoàn thành', 409], VARIANT_UNAVAILABLE: ['Mã hàng không còn tồn tại hoặc tồn kho vượt giới hạn', 409], STOCK_CHANGED: ['Tồn kho đã thay đổi, vui lòng thử lại', 409] };
     if (messages[error.message]) return bad(res, ...messages[error.message]);
     return sendControllerError(res, error, 'Không thể cập nhật trả hàng');
   } finally { await session.endSession(); }

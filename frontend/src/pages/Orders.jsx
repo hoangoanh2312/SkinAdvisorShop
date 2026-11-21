@@ -57,6 +57,7 @@ const paymentMethodLabel = {
   COD: "Thanh toán khi nhận hàng",
   BANK_TRANSFER: "Chuyển khoản",
   VNPAY: "VNPay",
+  ZALOPAY: "ZaloPay",
 };
 
 function OrderCard({ order }) {
@@ -89,7 +90,7 @@ function OrderCard({ order }) {
         <div className="sw-order-product-copy">
           <strong>{featured?.productName || "Đơn hàng của bạn"}</strong>
           {featured?.variantName && <span className="sw-order-variant">Phân loại: {featured.variantName}</span>}
-          <span className="sw-order-quantity">Số lượng: {featured?.quantity || itemCount || 1}{extraCount > 0 ? ` · Và ${extraCount} sản phẩm khác` : ""}</span>
+          <span className="sw-order-quantity">Số lượng: {featured?.quantity || itemCount || 1}{extraCount > 0 ? `, và ${extraCount} sản phẩm khác` : ""}</span>
         </div>
         <ArrowRight className="sw-order-product-arrow" size={19} aria-hidden="true" />
       </Link>
@@ -143,9 +144,9 @@ export default function Orders() {
       <div className="sw-orders-heading-copy">
         <span className="sw-orders-eyebrow">TÀI KHOẢN / ĐƠN HÀNG</span>
         <h1>Đơn hàng của tôi</h1>
-        <p>Theo dõi tình trạng đơn hàng và xem lại các sản phẩm đã chọn.</p>
+        <p>Theo dõi tình trạng đơn hàng và xem lại các sản phẩm đã chọn</p>
       </div>
-      <div className="sw-orders-heading-art" aria-hidden="true"><ShoppingBag size={44} strokeWidth={1.4} /><span>sandwich.</span></div>
+      <div className="sw-orders-heading-art" aria-hidden="true"><ShoppingBag size={44} strokeWidth={1.4} /><span>sandwich beauty</span></div>
     </section>
 
     <section className="sw-orders-content" aria-label="Danh sách đơn hàng">
@@ -160,10 +161,10 @@ export default function Orders() {
         </button>)}
       </div>
 
-      {loading ? <div className="sw-orders-state" role="status"><div className="sw-orders-state-icon"><Package size={27} /></div><strong>Đang tải đơn hàng...</strong><p>sandwich đang cập nhật danh sách mới nhất.</p></div>
+      {loading ? <div className="sw-orders-state" role="status"><div className="sw-orders-state-icon"><Package size={27} /></div><strong>Đang tải đơn hàng...</strong><p>sandwich beauty đang cập nhật danh sách mới nhất</p></div>
         : error ? <div className="sw-orders-state" role="alert"><div className="sw-orders-state-icon"><XCircle size={27} /></div><strong>Không thể tải đơn hàng</strong><p>{error}</p><button type="button" onClick={loadOrders} className="sw-order-view-btn">Thử lại <RefreshCw size={16} /></button></div>
           : visibleOrders.length ? <div className="sw-orders-list">{visibleOrders.map((order) => <OrderCard order={order} key={order._id} />)}</div>
-            : <div className="sw-orders-state"><div className="sw-orders-state-icon"><ShoppingBag size={30} /></div><strong>{activeTab === "all" ? "Bạn chưa có đơn hàng nào" : "Chưa có đơn hàng ở trạng thái này"}</strong><p>Khám phá các sản phẩm chăm sóc da và chọn món phù hợp với bạn.</p><Link to="/products" className="sw-order-view-btn">Khám phá sản phẩm <ArrowRight size={16} /></Link></div>}
+            : <div className="sw-orders-state"><div className="sw-orders-state-icon"><ShoppingBag size={30} /></div><strong>{activeTab === "all" ? "Bạn chưa có đơn hàng nào" : "Chưa có đơn hàng ở trạng thái này"}</strong><p>Khám phá các sản phẩm chăm sóc da và chọn món phù hợp với bạn</p><Link to="/products" className="sw-order-view-btn">Khám phá sản phẩm <ArrowRight size={16} /></Link></div>}
     </section>
   </main>;
 }

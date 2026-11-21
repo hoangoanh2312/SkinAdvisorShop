@@ -1,0 +1,85 @@
+/* Original, restrained motion for sandwich beauty. No third-party visual assets. */
+#root .home-motion-root { overflow: clip; }
+/* Sections are never hidden while waiting to scroll into view: hiding them (opacity: 0) left large blank
+   areas on fast scroll, on the "Loại da" anchor jump, in print and in screenshots. They only fade in once
+   they are actually entering the viewport. */
+#root .home-motion-root [data-reveal].is-revealing { animation: sandwich-reveal .6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes sandwich-reveal { from { opacity: .2; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+#root .hero-art-frame img { animation: sandwich-float 8s ease-in-out infinite; will-change: transform; }
+@keyframes sandwich-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+#root .sandwich-carousel { position: relative; min-width: 0; }
+#root .sandwich-carousel-controls { display: flex; justify-content: flex-end; gap: 8px; margin: 0 0 18px; }
+#root .sandwich-carousel-controls button { width: 42px; height: 42px; border: 1px solid #cbb9af; border-radius: 50%; background: #fffaf5; display: grid; place-items: center; }
+#root .sandwich-carousel-controls button:hover { background: #f3e5df; transform: translateY(-2px); }
+#root .sandwich-carousel-controls button:focus-visible, #root .ingredient-explorer button:focus-visible, #root .product-detail-accordion summary:focus-visible { outline: 3px solid #8b4260; outline-offset: 3px; }
+#root .sandwich-carousel-controls svg { width: 18px; }
+#root .sandwich-carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, calc((100% - 60px)/4)); gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 4px; overscroll-behavior-inline: contain; scrollbar-width: thin; padding: 5px 4px 18px; touch-action: pan-x pan-y; }
+#root .sandwich-carousel-track .product-card { scroll-snap-align: start; min-width: 0; }
+
+#root .product-image > a:first-child { display: block; position: relative; width: 100%; height: 100%; overflow: hidden; }
+#root .product-image .product-primary-image, #root .product-image .product-secondary-image { width: 100%; height: 100%; object-fit: contain; transition: opacity .45s ease, transform .65s ease; }
+#root .product-image .product-secondary-image { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+/* Đổi ảnh khi rê chuột: luôn bật trên máy có chuột; máy tắt hiệu ứng chuyển động thì đổi ngay, không phóng to */
+@media (hover: hover) {
+  #root .product-card:hover .product-secondary-image,
+  #root .product-card:focus-within .product-secondary-image { opacity: 1; }
+  #root .product-card:hover .product-primary-image:has(+ .product-secondary-image),
+  #root .product-card:focus-within .product-primary-image:has(+ .product-secondary-image) { opacity: 0; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #root .product-card:hover .product-secondary-image { transform: scale(1.025); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #root .product-image .product-primary-image, #root .product-image .product-secondary-image { transition: none; }
+}
+
+#root .ingredient-explorer { padding-block: clamp(70px,8vw,110px); }
+#root .ingredient-explorer-heading { max-width: 650px; }
+#root .ingredient-explorer h2 { font-size: clamp(32px,4vw,52px); margin: 8px 0 12px; }
+#root .ingredient-explorer-heading p, #root .ingredient-explorer-detail p { color: #695a5d; line-height: 1.7; }
+#root .ingredient-explorer-body { display: grid; grid-template-columns: minmax(180px, 280px) minmax(0,1fr); gap: clamp(20px,4vw,58px); margin-top: 30px; }
+#root .ingredient-explorer-options { display: flex; flex-direction: column; gap: 6px; max-height: 410px; overflow-y: auto; }
+#root .ingredient-explorer-options button { border: 0; border-bottom: 1px solid #dfd4ce; background: transparent; text-align: left; padding: 13px 15px; color: #5c4c4e; }
+#root .ingredient-explorer-options button.is-active { background: #f2e1db; color: #5b1d2b; font-weight: 700; }
+#root .ingredient-explorer-detail { min-height: 285px; background: #f6ebe6; display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 22px; padding: clamp(22px,4vw,48px); }
+#root .ingredient-explorer-detail:not(:has(img)) { grid-template-columns: 1fr; }
+#root .ingredient-explorer-detail img { width: min(210px,25vw); aspect-ratio: 1; object-fit: contain; }
+#root .ingredient-explorer-detail h3 { font-size: clamp(25px,3vw,38px); margin: 10px 0; }
+#root .ingredient-explorer-links { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+#root .ingredient-explorer-detail a { display: inline-block; border-bottom: 1px solid currentColor; margin-top: 16px; padding-bottom: 4px; color: #6e2b46; }
+
+#root .product-detail-accordion { max-width: 900px; margin: 40px auto 70px; }
+#root .product-detail-accordion > p { color: #6c6261; font-size: 13px; }
+#root .product-detail-accordion details { border-top: 1px solid #d9ccc7; }
+#root .product-detail-accordion details:last-child { border-bottom: 1px solid #d9ccc7; }
+#root .product-detail-accordion summary { cursor: pointer; list-style: none; padding: 20px 5px; font-weight: 700; display: flex; justify-content: space-between; }
+#root .product-detail-accordion summary::-webkit-details-marker { display: none; }
+#root .product-detail-accordion summary::after { content: '+'; font-size: 22px; font-weight: 400; }
+#root .product-detail-accordion details[open] summary::after { content: '−'; }
+#root .product-detail-accordion details > div { color: #5d5554; line-height: 1.7; padding: 0 5px 20px; }
+#root .product-detail-accordion li + li { margin-top: 8px; }
+
+#root .sandwich-footer-logo { display: inline-flex; flex-wrap: wrap; gap: .25em; align-items: baseline; letter-spacing: 0; line-height: 1.1; }
+#root .sandwich-footer-logo span { font-family: 'Segoe Script','Brush Script MT','Comic Sans MS',cursive !important; font-style: italic; font-size: clamp(29px,3vw,42px); font-weight: 600; color: #f7e9df; letter-spacing: -.05em; }
+
+@media (max-width: 800px) { #root .sandwich-carousel-track { grid-auto-columns: minmax(210px,42%); } #root .ingredient-explorer-body { grid-template-columns: 1fr; } #root .ingredient-explorer-options { flex-direction: row; overflow-x: auto; max-height: none; scroll-snap-type: x mandatory; } #root .ingredient-explorer-options button { flex: 0 0 auto; scroll-snap-align: start; } }
+@media (max-width: 560px) { #root .sandwich-carousel-track { grid-auto-columns: minmax(205px,75%); } #root .ingredient-explorer-detail { grid-template-columns: 1fr; } #root .ingredient-explorer-detail img { width: min(200px,100%); } #root .hero-ai-card { right: 0; left: auto; width: min(205px,58vw); max-width: 100%; } #root .topbar { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+@media (prefers-reduced-motion: reduce) { #root .home-motion-root.motion-ready [data-reveal], #root .home-motion-root [data-reveal], #root .hero-art-frame img, #root .product-image img { animation: none !important; transition: none !important; transform: none !important; opacity: 1 !important; } #root .sandwich-carousel-track { scroll-behavior: auto; } }
+
+/* Nút "Chọn phiên bản" chỉ là một dải nhỏ ở đáy ảnh, không che cả ảnh khi rê chuột */
+#root .product-card .product-image > .quick-add {
+  top: auto; bottom: 14px; left: 50%; right: auto; height: auto; width: auto;
+  transform: translate(-50%, 12px); opacity: 0;
+  padding: 9px 16px; border-radius: 999px; white-space: nowrap;
+  background: rgba(255, 255, 255, .92) !important; color: #6b2240 !important;
+  font-size: 11px; font-weight: 600; letter-spacing: .12em;
+  box-shadow: 0 6px 18px rgba(60, 20, 35, .14); backdrop-filter: blur(6px);
+  transition: opacity .3s ease, transform .3s ease, background .2s ease;
+}
+#root .product-card:hover .product-image > .quick-add,
+#root .product-card:focus-within .product-image > .quick-add { opacity: 1; transform: translate(-50%, 0); }
+#root .product-card .product-image > .quick-add:hover { background: #6b2240 !important; color: #fff !important; }
+@media (hover: none) { #root .product-card .product-image > .quick-add { display: none; } }
+#root .product-image .product-secondary-image.fit-contain { object-fit: contain; }
+#root .product-image .product-secondary-image.fit-cover { object-fit: cover; }

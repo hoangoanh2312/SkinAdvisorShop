@@ -1,0 +1,110 @@
+{
+  "_note": "Mô tả thành phần cho website sandwich beauty. Mỗi mục là tóm tắt thận trọng (viết lại bằng tiếng Việt) từ một bài tổng quan/nghiên cứu khoa học có link HTTPS. Đây là thông tin tham khảo về thành phần, KHÔNG phải công dụng đã kiểm chứng của một sản phẩm cụ thể (còn phụ thuộc nồng độ và công thức). Soạn ngày 2026-11-13.",
+  "ingredients": [
+    {
+      "normalizedName": "niacinamide",
+      "name": "Niacinamide",
+      "description": "Dạng vitamin B3 dùng phổ biến trong mỹ phẩm, thường được da dung nạp tốt. Các tổng quan ghi nhận niacinamide bôi ngoài da hỗ trợ hàng rào bảo vệ da và được nghiên cứu cho da dầu mụn, sắc tố không đều và lão hóa da.",
+      "benefits": ["Hỗ trợ hàng rào bảo vệ da", "Được nghiên cứu cho mụn và sắc tố không đều"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11047333/"
+    },
+    {
+      "normalizedName": "hyaluronic acid",
+      "name": "Hyaluronic Acid",
+      "description": "Glycosaminoglycan có sẵn trong da, có khả năng giữ nước nên được dùng như chất cấp ẩm (humectant). Tác dụng phụ thuộc kích thước phân tử: loại phân tử lớn chủ yếu tạo lớp giữ ẩm trên bề mặt da.",
+      "benefits": ["Cấp ẩm, giữ nước cho da"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12452154/"
+    },
+    {
+      "normalizedName": "ceramide",
+      "name": "Ceramides",
+      "description": "Lipid chiếm tỉ lệ lớn trong lớp sừng, cùng cholesterol và acid béo tạo nên hàng rào bảo vệ da. Tổng quan lâm sàng ghi nhận sản phẩm chứa ceramide giúp cải thiện khả năng giữ nước và chức năng hàng rào, đặc biệt ở da khô.",
+      "benefits": ["Hỗ trợ hàng rào bảo vệ da", "Giảm mất nước qua da"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9293121/"
+    },
+    {
+      "normalizedName": "centella asiatica",
+      "name": "Centella Asiatica (rau má)",
+      "description": "Chiết xuất rau má chứa các triterpene như asiaticoside và madecassoside. Tổng quan nghiên cứu ghi nhận tác dụng hỗ trợ lành thương và kháng viêm; bằng chứng trên mỹ phẩm dưỡng da hằng ngày còn hạn chế hơn.",
+      "benefits": ["Làm dịu da", "Được nghiên cứu cho hỗ trợ phục hồi da"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8627341/"
+    },
+    {
+      "normalizedName": "panthenol",
+      "name": "Panthenol (provitamin B5)",
+      "description": "Tiền chất của vitamin B5, được da chuyển hóa thành acid pantothenic. Tổng quan ghi nhận dexpanthenol bôi ngoài da giúp dưỡng ẩm, hỗ trợ hàng rào bảo vệ và phục hồi da.",
+      "benefits": ["Dưỡng ẩm", "Hỗ trợ phục hồi hàng rào da"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9322723/"
+    },
+    {
+      "normalizedName": "snail secretion filtrate",
+      "name": "Snail Secretion Filtrate (dịch nhầy ốc sên)",
+      "description": "Dịch tiết ốc sên đã lọc, dùng trong mỹ phẩm dưỡng ẩm và phục hồi. Một số nghiên cứu nhỏ có đối chứng ghi nhận cải thiện dấu hiệu lão hóa da; cần thêm nghiên cứu lớn để khẳng định.",
+      "benefits": ["Dưỡng ẩm", "Bằng chứng còn hạn chế về chống lão hóa"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7159309/"
+    },
+    {
+      "normalizedName": "aha",
+      "name": "AHA (Alpha Hydroxy Acid)",
+      "description": "Nhóm acid như glycolic acid và lactic acid, giúp tẩy tế bào chết trên bề mặt và cải thiện bề mặt da. Hiệu quả và mức kích ứng phụ thuộc nồng độ và pH; có thể làm da nhạy cảm hơn với ánh nắng nên cần dùng kem chống nắng.",
+      "benefits": ["Tẩy tế bào chết bề mặt"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3047947/"
+    },
+    {
+      "normalizedName": "glycolic acid",
+      "name": "Glycolic Acid",
+      "description": "AHA có phân tử nhỏ nhất, dùng phổ biến trong sản phẩm tẩy tế bào chết và peel. Hiệu quả và độ kích ứng phụ thuộc nồng độ và pH; nên dùng kem chống nắng khi sử dụng.",
+      "benefits": ["Tẩy tế bào chết", "Cải thiện bề mặt da"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3047947/"
+    },
+    {
+      "normalizedName": "bha",
+      "name": "BHA (Beta Hydroxy Acid)",
+      "description": "Đại diện phổ biến là salicylic acid, tan trong dầu nên đi được vào lỗ chân lông. Thường dùng cho da dầu, mụn đầu đen và mụn nhẹ; có thể gây khô hoặc kích ứng ở da nhạy cảm.",
+      "benefits": ["Làm thông thoáng lỗ chân lông", "Hỗ trợ da dầu mụn"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3047947/"
+    },
+    {
+      "normalizedName": "salicylic acid",
+      "name": "Salicylic Acid",
+      "description": "BHA tan trong dầu, có tác dụng tẩy tế bào chết trong lỗ chân lông, thường dùng cho da dầu và mụn nhẹ đến vừa. Có thể gây khô, kích ứng; nên bắt đầu với tần suất thấp.",
+      "benefits": ["Làm thông thoáng lỗ chân lông", "Hỗ trợ da mụn"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10608815/"
+    },
+    {
+      "normalizedName": "betaine salicylate",
+      "name": "Betaine Salicylate",
+      "description": "Dạng kết hợp giữa betaine và salicylic acid, được dùng như một lựa chọn BHA dịu nhẹ hơn. Nghiên cứu độc lập còn ít; một nghiên cứu năm 2025 ghi nhận ít kích ứng hơn salicylic acid trong thử nghiệm.",
+      "benefits": ["Tẩy tế bào chết dịu nhẹ", "Bằng chứng độc lập còn hạn chế"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11865917/"
+    },
+    {
+      "normalizedName": "retinol",
+      "name": "Retinol",
+      "description": "Dẫn xuất vitamin A dùng trong mỹ phẩm chống lão hóa; trên da được chuyển dần thành dạng có hoạt tính. Tổng quan ghi nhận retinol dịu hơn tretinoin, nhưng bằng chứng lâm sàng cho mỹ phẩm còn hạn chế. Có thể gây khô, bong da; không dùng khi mang thai, nên dùng buổi tối kèm chống nắng ban ngày.",
+      "benefits": ["Hỗ trợ cải thiện dấu hiệu lão hóa"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9618501/"
+    },
+    {
+      "normalizedName": "tranexamic acid",
+      "name": "Tranexamic Acid",
+      "description": "Dẫn xuất tổng hợp của lysine, được nghiên cứu cho nám và tăng sắc tố. Bằng chứng mạnh nhất là ở dạng uống theo chỉ định bác sĩ; dạng bôi cần thêm nghiên cứu lớn để khẳng định.",
+      "benefits": ["Được nghiên cứu cho tăng sắc tố, nám"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10969640/"
+    },
+    {
+      "normalizedName": "azelaic acid",
+      "name": "Azelaic Acid",
+      "description": "Acid dicarboxylic có tác dụng kháng khuẩn, kháng viêm và ức chế tạo sắc tố. Ở nồng độ 15–20% được dùng điều trị trứng cá đỏ (rosacea) và mụn; nồng độ thấp trong mỹ phẩm có thể cho tác dụng nhẹ hơn.",
+      "benefits": ["Hỗ trợ da mụn, da đỏ", "Hỗ trợ sắc tố không đều"],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11512533/"
+    },
+    {
+      "normalizedName": "zinc pca",
+      "name": "Zinc PCA",
+      "description": "Muối kẽm của PCA (một thành phần giữ ẩm tự nhiên của da). Tổng quan hệ thống về kẽm cho thấy kẽm có tác dụng kháng khuẩn, kháng viêm và có thể giảm tiết bã nhờn, nhưng bằng chứng mới ở mức hạn chế.",
+      "benefits": ["Hỗ trợ kiểm soát dầu", "Bằng chứng còn hạn chế"],
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/23652948/"
+    }
+  ]
+}

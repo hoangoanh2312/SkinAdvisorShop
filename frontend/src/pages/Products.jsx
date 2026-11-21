@@ -1,12 +1,13 @@
 import { Filter, Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import axiosClient from "../api/axiosClient";
+import axiosClient, { apiErrorMessage } from "../api/axiosClient";
 import ProductCard from "../components/product/ProductCard";
 import { normalizeProduct } from "../utils/productAdapter";
 
 const skins = [["oily", "Da dầu"], ["dry", "Da khô"], ["sensitive", "Da nhạy cảm"], ["combination", "Da hỗn hợp"], ["normal", "Da thường"]];
-const ingredients = ["niacinamide", "bha", "aha", "retinol", "vitamin c", "hyaluronic acid", "ceramide"];
+// Values must equal Product.ingredients.normalizedName (filled from the catalog by applyIngredientEvidence.js).
+const ingredients = ["niacinamide", "hyaluronic acid", "ceramide", "centella asiatica", "panthenol", "bha", "salicylic acid", "aha", "glycolic acid", "retinol", "azelaic acid", "tranexamic acid", "vitamin c"];
 
 export default function Products() {
   const [urlParams, setUrlParams] = useSearchParams();
@@ -17,7 +18,8 @@ export default function Products() {
   const [skinConcern, setSkinConcern] = useState(urlParams.get("skinConcern") || "");
   const [ingredient, setIngredient] = useState(urlParams.get("ingredient") || "");
   const [maxPrice, setMaxPrice] = useState("");
-  const [sort, setSort] = useState("newest");
+  const SORTS = ["newest", "popular", "price_asc", "price_desc", "rating"];
+  const [sort, setSort] = useState(SORTS.includes(urlParams.get("sort")) ? urlParams.get("sort") : "newest");
   const [sellableOnly, setSellableOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [mobile, setMobile] = useState(false);
@@ -70,7 +72,7 @@ export default function Products() {
         }
       } catch (requestError) {
         if (active) {
-          setError(requestError.response?.data?.message || "Không thể tải sản phẩm.");
+          setError(apiErrorMessage(requestError, "Không thể tải sản phẩm"));
           setProducts([]);
         }
       } finally {
@@ -88,7 +90,7 @@ export default function Products() {
   const selectFilter = (setter) => (value) => { setter(value); setPage(1); };
 
   return <div className="container catalog-page">
-    <div className="page-intro"><span className="eyebrow">BỘ SƯU TẬP CHĂM SÓC DA</span><h1>Sản phẩm chăm sóc da</h1><p>Chọn mỹ phẩm theo thương hiệu, thành phần và nhu cầu của làn da.</p></div>
+    <div className="page-intro"><span className="eyebrow">BỘ SƯU TẬP CHĂM SÓC DA</span><h1>Sản phẩm chăm sóc da</h1><p>Chọn mỹ phẩm theo thương hiệu, thành phần và nhu cầu của làn da</p></div>
     <button className="btn filter-mobile" type="button" onClick={() => setMobile(true)}><Filter /> Bộ lọc</button>
     <div className="catalog-layout">
       <aside className={mobile ? "filter-panel open" : "filter-panel"} aria-label="Bộ lọc sản phẩm">
@@ -104,7 +106,7 @@ export default function Products() {
       </aside>
       <section className="catalog-results">
         <div className="catalog-toolbar"><div className="catalog-search"><Search /><input aria-label="Tìm sản phẩm" value={query} onChange={(event) => selectFilter(setQuery)(event.target.value)} placeholder="Tìm theo tên hoặc thương hiệu..." /></div><select aria-label="Sắp xếp sản phẩm" value={sort} onChange={(event) => selectFilter(setSort)(event.target.value)}><option value="newest">Mới nhất</option><option value="price_asc">Giá thấp đến cao</option><option value="price_desc">Giá cao đến thấp</option><option value="popular">Bán chạy</option><option value="rating">Đánh giá cao</option></select></div>
-        {loading ? <div className="empty"><p>Đang tải sản phẩm...</p></div> : error ? <div className="empty" role="alert"><h3>Không thể tải sản phẩm</h3><p>{error}</p><button className="btn btn-light" onClick={() => window.location.reload()}>Thử lại</button></div> : <><p className="result-count">Tìm thấy <strong>{pagination.total}</strong> sản phẩm</p>{products.length ? <div className="product-grid three">{products.map((product) => <ProductCard key={product.id} product={product} />)}</div> : <div className="empty"><h3>Chưa tìm thấy sản phẩm</h3><p>{sellableOnly ? "Hiện chưa có sản phẩm có thể đặt mua. Bạn có thể bỏ bộ lọc để xem danh mục tham khảo." : brand || category || skinType || skinConcern || ingredient || query ? "Hãy thử thay đổi từ khóa hoặc bộ lọc." : "sandwich đang cập nhật các sản phẩm đã xác minh."}</p><button type="button" className="btn btn-light" onClick={reset}>Xem tất cả</button></div>}{pagination.totalPages > 1 && <div className="form-row"><button className="btn btn-light" disabled={page <= 1} onClick={() => setPage((value) => value - 1)}>Trang trước</button><span>{pagination.page}/{pagination.totalPages}</span><button className="btn btn-light" disabled={page >= pagination.totalPages} onClick={() => setPage((value) => value + 1)}>Trang sau</button></div>}</>}
+        {loading ? <div className="empty"><p>Đang tải sản phẩm...</p></div> : error ? <div className="empty" role="alert"><h3>Không thể tải sản phẩm</h3><p>{error}</p><button className="btn btn-light" onClick={() => window.location.reload()}>Thử lại</button></div> : <><p className="result-count">Tìm thấy <strong>{pagination.total}</strong> sản phẩm</p>{products.length ? <div className="product-grid three">{products.map((product) => <ProductCard key={product.id} product={product} />)}</div> : <div className="empty"><h3>Chưa tìm thấy sản phẩm</h3><p>{sellableOnly ? "Hiện chưa có sản phẩm có thể đặt mua. Bạn có thể bỏ bộ lọc để xem danh mục tham khảo." : brand || category || skinType || skinConcern || ingredient || query ? "Hãy thử thay đổi từ khóa hoặc bộ lọc" : "sandwich beauty đang cập nhật các sản phẩm đã xác minh"}</p><button type="button" className="btn btn-light" onClick={reset}>Xem tất cả</button></div>}{pagination.totalPages > 1 && <div className="form-row"><button className="btn btn-light" disabled={page <= 1} onClick={() => setPage((value) => value - 1)}>Trang trước</button><span>{pagination.page}/{pagination.totalPages}</span><button className="btn btn-light" disabled={page >= pagination.totalPages} onClick={() => setPage((value) => value + 1)}>Trang sau</button></div>}</>}
       </section>
     </div>
   </div>;

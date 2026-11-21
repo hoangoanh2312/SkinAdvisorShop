@@ -40,7 +40,7 @@ const mimeFor = filePath => filePath.endsWith(".webp") ? "image/webp" : filePath
 const defaultRepository = {
   list: () => Product.find({ isActive: true }).populate("category", "name").sort({ createdAt: 1 }),
   get: id => Product.findById(id).select("images imageAssets __v"),
-  save: (id, version, state) => Product.findOneAndUpdate({ _id: id, __v: Number(version) }, { $set: state, $inc: { __v: 1 } }, { new: true, runValidators: true }).select("images imageAssets __v"),
+  save: (id, version, state) => Product.findOneAndUpdate({ _id: id, __v: Number(version) }, { $set: state, $inc: { __v: 1 } }, { returnDocument: "after", runValidators: true }).select("images imageAssets __v"),
   isPublicIdReferenced: publicId => Product.exists({ "imageAssets.publicId": publicId }),
 };
 const defaultCleanupRepository = { create: task => ImageCleanupTask.create(task) };

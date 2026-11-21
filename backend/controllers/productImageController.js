@@ -6,7 +6,7 @@ const { ProductImageService, ProductImageError, entriesFor } = require("../servi
 let cloudinaryAdapter = cloudinaryImageService;
 const repository = {
   get: (id) => Product.findById(id).select("images imageAssets __v"),
-  save: (id, version, state) => Product.findOneAndUpdate({ _id: id, __v: Number(version) }, { $set: state, $inc: { __v: 1 } }, { new: true, runValidators: true }).select("images imageAssets __v"),
+  save: (id, version, state) => Product.findOneAndUpdate({ _id: id, __v: Number(version) }, { $set: state, $inc: { __v: 1 } }, { returnDocument: "after", runValidators: true }).select("images imageAssets __v"),
   isPublicIdReferenced: (publicId) => Product.exists({ "imageAssets.publicId": publicId }),
 };
 const cleanupRepository = { create: (task) => ImageCleanupTask.create(task) };

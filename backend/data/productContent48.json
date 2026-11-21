@@ -1,0 +1,713 @@
+{
+ "_note": "Nội dung mô tả hoàn chỉnh cho 48 sản phẩm, viết lại bằng tiếng Việt dựa trên thông tin công bố của thương hiệu (link nguồn ở sourceUrl trong catalog48Drafts.json). Soạn ngày 2026-11-21",
+ "products": {
+  "cosrx-advanced-snail-96-mucin-power-essence": {
+   "shortDescription": "Tinh chất chứa 96% dịch nhầy ốc sên giúp cấp ẩm và làm dịu da, kết cấu sánh nhẹ thấm nhanh",
+   "description": "COSRX Advanced Snail 96 Mucin Power Essence là tinh chất bán chạy của COSRX với 96% dịch lọc ốc sên (Snail Secretion Filtrate). Kết cấu dạng gel lỏng hơi sánh, thấm nhanh và không để lại cảm giác nhờn dính. Sản phẩm phù hợp với hầu hết loại da, đặc biệt là da khô, da thiếu ẩm hoặc da đang trong giai đoạn cần phục hồi sau mụn",
+   "benefitClaims": [
+    "Cấp ẩm và giữ nước cho da",
+    "Làm dịu và hỗ trợ phục hồi làn da",
+    "Giúp da mềm mịn, căng bóng hơn"
+   ],
+   "usage": "Sau bước làm sạch và toner, lấy 2–3 giọt ra lòng bàn tay, vỗ nhẹ lên mặt đến khi thấm. Tiếp theo dùng kem dưỡng. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cosrx-low-ph-good-morning-gel-cleanser": {
+   "shortDescription": "Gel rửa mặt có độ pH thấp, làm sạch dịu nhẹ, phù hợp dùng buổi sáng",
+   "description": "COSRX Low pH Good Morning Gel Cleanser là gel rửa mặt có độ pH gần với pH tự nhiên của da, giúp làm sạch dầu thừa và bụi bẩn mà không gây khô căng. Công thức có betaine salicylate (một dạng BHA dịu nhẹ) và tinh dầu tràm trà, phù hợp với da dầu, da hỗn hợp và da dễ nổi mụn",
+   "benefitClaims": [
+    "Làm sạch dịu nhẹ, không gây khô căng",
+    "Độ pH thấp, thân thiện với hàng rào da",
+    "Hỗ trợ làm thông thoáng lỗ chân lông"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Betaine Salicylate",
+    "Tinh dầu tràm trà"
+   ]
+  },
+  "cosrx-bha-blackhead-power-liquid": {
+   "shortDescription": "Dung dịch BHA 4% betaine salicylate giúp làm thông thoáng lỗ chân lông và giảm mụn đầu đen",
+   "description": "COSRX BHA Blackhead Power Liquid là dung dịch tẩy tế bào chết hóa học chứa 4% betaine salicylate cùng nước vỏ cây liễu. Sản phẩm giúp loại bỏ tế bào chết và bã nhờn trong lỗ chân lông, cải thiện tình trạng mụn đầu đen và bề mặt da sần. Phù hợp với da dầu, da hỗn hợp và da có lỗ chân lông to",
+   "benefitClaims": [
+    "Hỗ trợ giảm mụn đầu đen và bã nhờn",
+    "Làm thông thoáng lỗ chân lông",
+    "Giúp bề mặt da mịn hơn"
+   ],
+   "usage": "Dùng buổi tối sau bước làm sạch và toner. Thấm sản phẩm ra bông tẩy trang hoặc tay rồi thoa đều lên vùng da cần dùng, chờ 15–20 phút trước khi dưỡng ẩm. Bắt đầu 2–3 lần mỗi tuần, tăng dần khi da đã quen",
+   "warnings": [
+    "Có thể gây châm chích nhẹ trong những lần đầu, bắt đầu với tần suất thấp",
+    "Dùng kem chống nắng mỗi ngày khi đang dùng sản phẩm tẩy tế bào chết",
+    "Không dùng chung cùng lúc với retinol hoặc acid mạnh khác nếu da chưa quen"
+   ]
+  },
+  "cosrx-advanced-snail-92-all-in-one-cream": {
+   "shortDescription": "Kem dưỡng chứa 92% dịch nhầy ốc sên, cấp ẩm và làm dịu, kết cấu gel kem nhẹ",
+   "description": "COSRX Advanced Snail 92 All In One Cream là kem dưỡng chứa 92% dịch lọc ốc sên, kết cấu gel kem mềm, thấm nhanh. Sản phẩm giúp khóa ẩm, làm dịu và hỗ trợ da phục hồi, dùng được cho cả da dầu lẫn da khô nhờ kết cấu nhẹ không bí",
+   "benefitClaims": [
+    "Cấp ẩm và khóa ẩm cho da",
+    "Làm dịu da và hỗ trợ phục hồi",
+    "Kết cấu nhẹ, không gây bí da"
+   ],
+   "usage": "Dùng ở bước cuối của chu trình dưỡng da sáng và tối. Lấy một lượng vừa đủ, chấm lên trán, má, cằm rồi tán đều và vỗ nhẹ cho thấm",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cosrx-aha-bha-clarifying-treatment-toner": {
+   "shortDescription": "Toner chứa AHA và BHA nồng độ nhẹ giúp làm sạch sâu và làm đều bề mặt da",
+   "description": "COSRX AHA/BHA Clarifying Treatment Toner kết hợp AHA và BHA ở nồng độ nhẹ cùng nước vỏ cây liễu, giúp loại bỏ tế bào chết và bã nhờn còn sót lại sau khi rửa mặt. Sản phẩm phù hợp với da dầu, da hỗn hợp, da có lỗ chân lông to và dễ nổi mụn ẩn",
+   "benefitClaims": [
+    "Hỗ trợ loại bỏ tế bào chết nhẹ nhàng",
+    "Giúp lỗ chân lông thông thoáng",
+    "Làm đều và sáng bề mặt da"
+   ],
+   "usage": "Sau khi rửa mặt, thấm sản phẩm ra bông tẩy trang và lau nhẹ toàn mặt, tránh vùng mắt. Có thể dùng hằng ngày khi da đã quen, nên bắt đầu vào buổi tối",
+   "warnings": [
+    "Có thể gây châm chích nhẹ trong những lần đầu, bắt đầu với tần suất thấp",
+    "Dùng kem chống nắng mỗi ngày khi đang dùng sản phẩm tẩy tế bào chết",
+    "Không dùng chung cùng lúc với retinol hoặc acid mạnh khác nếu da chưa quen"
+   ]
+  },
+  "cerave-hydrating-facial-cleanser": {
+   "shortDescription": "Sữa rửa mặt không tạo bọt với 3 loại ceramide và hyaluronic acid, dành cho da thường đến khô",
+   "description": "CeraVe Hydrating Facial Cleanser là sữa rửa mặt dạng kem lỏng không tạo bọt, làm sạch bụi bẩn và lớp trang điểm nhẹ mà vẫn giữ ẩm cho da. Công thức có 3 loại ceramide thiết yếu và hyaluronic acid, không mùi, được phát triển cùng bác sĩ da liễu. Phù hợp với da thường, da khô và da nhạy cảm",
+   "benefitClaims": [
+    "Làm sạch mà không làm mất độ ẩm tự nhiên",
+    "Hỗ trợ hàng rào bảo vệ da nhờ ceramide",
+    "Không mùi, dịu nhẹ cho da nhạy cảm"
+   ],
+   "usage": "Làm ướt mặt, massage một lượng vừa đủ lên da rồi rửa lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cerave-foaming-facial-cleanser": {
+   "shortDescription": "Gel rửa mặt tạo bọt với ceramide và niacinamide, làm sạch dầu thừa cho da thường đến dầu",
+   "description": "CeraVe Foaming Facial Cleanser là gel rửa mặt tạo bọt nhẹ, giúp loại bỏ dầu thừa, bụi bẩn và lớp trang điểm mà không làm khô căng da. Công thức chứa 3 loại ceramide, niacinamide và hyaluronic acid, không mùi. Phù hợp với da thường, da hỗn hợp và da dầu",
+   "benefitClaims": [
+    "Làm sạch dầu thừa hiệu quả",
+    "Hỗ trợ hàng rào bảo vệ da",
+    "Không gây khô căng sau khi rửa"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cerave-moisturizing-cream": {
+   "shortDescription": "Kem dưỡng ẩm với 3 loại ceramide và hyaluronic acid, dùng cho mặt và toàn thân",
+   "description": "CeraVe Moisturizing Cream là kem dưỡng ẩm đậm đặc chứa 3 loại ceramide thiết yếu và hyaluronic acid, ứng dụng công nghệ MVE giúp giải phóng dưỡng chất từ từ để giữ ẩm lâu. Sản phẩm không mùi, không gây bít tắc lỗ chân lông, phù hợp với da khô đến rất khô, dùng được cho cả mặt và cơ thể",
+   "benefitClaims": [
+    "Dưỡng ẩm sâu và lâu dài",
+    "Hỗ trợ phục hồi hàng rào bảo vệ da",
+    "Không mùi, không gây bít tắc lỗ chân lông"
+   ],
+   "usage": "Thoa lên mặt và cơ thể khi cần, đặc biệt sau khi tắm lúc da còn hơi ẩm. Dùng hằng ngày",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cerave-pm-facial-moisturizing-lotion": {
+   "shortDescription": "Sữa dưỡng ẩm ban đêm mỏng nhẹ với niacinamide và ceramide, không chứa dầu",
+   "description": "CeraVe PM Facial Moisturizing Lotion là sữa dưỡng ẩm dành cho buổi tối, kết cấu mỏng nhẹ, không chứa dầu. Công thức gồm niacinamide, 3 loại ceramide và hyaluronic acid giúp cấp ẩm và làm dịu da qua đêm. Phù hợp với da thường, da hỗn hợp và da dầu",
+   "benefitClaims": [
+    "Cấp ẩm nhẹ nhàng suốt đêm",
+    "Làm dịu da nhờ niacinamide",
+    "Không chứa dầu, không gây bít tắc"
+   ],
+   "usage": "Dùng buổi tối ở bước cuối sau serum. Thoa một lượng vừa đủ lên mặt và cổ",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cerave-resurfacing-retinol-serum": {
+   "shortDescription": "Serum retinol dạng bao bọc giúp làm mờ thâm sau mụn và làm mịn bề mặt da",
+   "description": "CeraVe Resurfacing Retinol Serum chứa retinol được bao bọc (encapsulated) cùng chiết xuất rễ cam thảo, niacinamide và 3 loại ceramide. Sản phẩm hỗ trợ làm mờ vết thâm sau mụn, thu nhỏ lỗ chân lông và làm mịn bề mặt da, đồng thời hạn chế cảm giác khô và kích ứng thường gặp khi dùng retinol",
+   "benefitClaims": [
+    "Hỗ trợ làm mờ thâm sau mụn",
+    "Giúp bề mặt da mịn và đều màu hơn",
+    "Có ceramide hỗ trợ hàng rào da khi dùng retinol"
+   ],
+   "usage": "Chỉ dùng buổi tối sau bước làm sạch. Lấy một lượng nhỏ thoa đều lên mặt, sau đó dùng kem dưỡng ẩm. Bắt đầu 2–3 tối mỗi tuần rồi tăng dần",
+   "warnings": [
+    "Dùng kem chống nắng mỗi ngày khi đang dùng retinol",
+    "Không dùng khi mang thai hoặc cho con bú",
+    "Có thể gây khô, bong tróc nhẹ trong thời gian đầu"
+   ]
+  },
+  "la-roche-posay-toleriane-hydrating-gentle-facial-cleanser": {
+   "shortDescription": "Sữa rửa mặt dạng kem dịu nhẹ với ceramide và niacinamide, dành cho da nhạy cảm và da khô",
+   "description": "La Roche-Posay Toleriane Hydrating Gentle Facial Cleanser là sữa rửa mặt dạng kem không tạo bọt, làm sạch nhẹ nhàng mà vẫn giữ lại độ ẩm cho da. Công thức có ceramide, niacinamide, glycerin và nước khoáng La Roche-Posay, không mùi. Phù hợp với da thường đến khô và da nhạy cảm",
+   "benefitClaims": [
+    "Làm sạch dịu nhẹ, không gây khô căng",
+    "Hỗ trợ hàng rào bảo vệ da",
+    "Phù hợp với da nhạy cảm"
+   ],
+   "usage": "Làm ướt mặt, massage nhẹ một lượng vừa đủ lên da rồi rửa lại với nước hoặc lau bằng bông tẩy trang. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Ceramide",
+    "Niacinamide",
+    "Glycerin"
+   ]
+  },
+  "la-roche-posay-effaclar-purifying-foaming-gel": {
+   "shortDescription": "Gel rửa mặt tạo bọt làm sạch dầu thừa, dành cho da dầu và da dễ nổi mụn",
+   "description": "La Roche-Posay Effaclar Purifying Foaming Gel là gel rửa mặt tạo bọt giúp loại bỏ dầu thừa và tạp chất mà không làm khô da. Công thức có kẽm PCA và nước khoáng La Roche-Posay, phù hợp với da dầu, da hỗn hợp thiên dầu và da dễ nổi mụn, kể cả da nhạy cảm",
+   "benefitClaims": [
+    "Làm sạch dầu thừa và tạp chất",
+    "Giúp da thông thoáng, giảm bóng nhờn",
+    "Dịu nhẹ, dùng được cho da nhạy cảm"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Zinc PCA"
+   ]
+  },
+  "la-roche-posay-cicaplast-balm-b5": {
+   "shortDescription": "Kem dưỡng phục hồi với panthenol và madecassoside, làm dịu da khô ráp và kích ứng",
+   "description": "La Roche-Posay Cicaplast Baume B5+ là kem dưỡng phục hồi đa năng chứa 5% panthenol (vitamin B5), madecassoside và phức hợp Tribioma. Sản phẩm giúp làm dịu da khô ráp, da kích ứng và hỗ trợ phục hồi hàng rào bảo vệ da. Dùng được cho mặt và cơ thể, cho cả người lớn và trẻ em",
+   "benefitClaims": [
+    "Làm dịu da khô ráp, kích ứng",
+    "Hỗ trợ phục hồi hàng rào bảo vệ da",
+    "Dùng được cho mặt và cơ thể"
+   ],
+   "usage": "Thoa một lớp lên vùng da cần chăm sóc 2 lần mỗi ngày, sáng và tối, sau bước làm sạch",
+   "warnings": [
+    "Chỉ dùng ngoài da, không thoa lên vết thương hở hoặc nhiễm trùng",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "la-roche-posay-hyalu-b5-pure-hyaluronic-acid-serum": {
+   "shortDescription": "Serum hyaluronic acid kết hợp vitamin B5 giúp cấp ẩm, làm căng mịn và dịu da",
+   "description": "La Roche-Posay Hyalu B5 Serum chứa hai dạng hyaluronic acid kết hợp vitamin B5 (panthenol) và madecassoside. Sản phẩm giúp cấp ẩm, làm da căng mịn, giảm cảm giác khô ráp và hỗ trợ làm dịu da. Kết cấu mỏng nhẹ, thấm nhanh, phù hợp với nhiều loại da kể cả da nhạy cảm",
+   "benefitClaims": [
+    "Cấp ẩm và làm căng mịn da",
+    "Làm dịu và hỗ trợ phục hồi",
+    "Kết cấu nhẹ, thấm nhanh"
+   ],
+   "usage": "Sau bước làm sạch, nhỏ vài giọt lên tay và thoa đều lên mặt, cổ. Tiếp theo dùng kem dưỡng. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "la-roche-posay-anthelios-ultra-light-fluid-facial-sunscreen-spf-60": {
+   "shortDescription": "Kem chống nắng dạng lỏng siêu nhẹ SPF 60, bảo vệ phổ rộng khỏi tia UVA và UVB",
+   "description": "La Roche-Posay Anthelios Ultra-Light Fluid SPF 60 là kem chống nắng cho da mặt dạng lỏng, mỏng nhẹ và nhanh khô, bảo vệ phổ rộng khỏi tia UVA và UVB. Kết cấu ít gây bóng nhờn, có thể dùng làm lớp lót trước khi trang điểm. Phù hợp với da thường, da hỗn hợp và da dầu",
+   "benefitClaims": [
+    "Chống nắng phổ rộng SPF 60",
+    "Kết cấu siêu nhẹ, nhanh khô",
+    "Có thể dùng trước khi trang điểm"
+   ],
+   "usage": "Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ]
+  },
+  "bioderma-sensibio-h2o": {
+   "shortDescription": "Nước tẩy trang micellar dịu nhẹ dành cho da nhạy cảm, làm sạch lớp trang điểm và bụi bẩn",
+   "description": "Bioderma Sensibio H2O là nước tẩy trang công nghệ micellar, giúp làm sạch lớp trang điểm, bụi bẩn và dầu thừa trên mặt và vùng mắt. Công thức không mùi, có độ pH sinh lý, được thiết kế cho làn da nhạy cảm và dễ kích ứng",
+   "benefitClaims": [
+    "Làm sạch lớp trang điểm và bụi bẩn",
+    "Dịu nhẹ cho da nhạy cảm",
+    "Dùng được cho vùng mắt và môi"
+   ],
+   "usage": "Thấm sản phẩm ra bông tẩy trang, áp nhẹ lên da vài giây rồi lau theo chiều từ trong ra ngoài. Lặp lại đến khi bông sạch. Sau đó rửa lại với sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "bioderma-sensibio-gel-moussant": {
+   "shortDescription": "Gel rửa mặt tạo bọt không chứa xà phòng, làm sạch dịu nhẹ cho da nhạy cảm",
+   "description": "Bioderma Sensibio Gel Moussant là gel rửa mặt tạo bọt nhẹ, không chứa xà phòng, giúp làm sạch và làm dịu da nhạy cảm. Sản phẩm không làm khô căng da sau khi rửa, phù hợp với da thường đến hỗn hợp và da nhạy cảm",
+   "benefitClaims": [
+    "Làm sạch dịu nhẹ, không xà phòng",
+    "Làm dịu cảm giác khó chịu ở da nhạy cảm",
+    "Không gây khô căng"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "bioderma-sebium-gel-moussant": {
+   "shortDescription": "Gel rửa mặt tạo bọt làm sạch sâu, kiểm soát dầu thừa cho da dầu và da hỗn hợp",
+   "description": "Bioderma Sébium Gel Moussant là gel rửa mặt tạo bọt không chứa xà phòng, giúp làm sạch dầu thừa và tạp chất, hạn chế bít tắc lỗ chân lông. Công thức chứa kẽm sulfat và đồng sulfat, phù hợp với da dầu, da hỗn hợp và da dễ nổi mụn",
+   "benefitClaims": [
+    "Làm sạch sâu và kiểm soát dầu thừa",
+    "Hạn chế bít tắc lỗ chân lông",
+    "Không chứa xà phòng, không gây khô da"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "bioderma-atoderm-intensive-baume": {
+   "shortDescription": "Kem dưỡng đậm đặc cho da rất khô, da dễ kích ứng, dùng cho mặt và toàn thân",
+   "description": "Bioderma Atoderm Intensive Baume là kem dưỡng dạng balm đậm đặc dành cho da rất khô và da cơ địa dễ kích ứng. Sản phẩm giúp nuôi dưỡng, làm dịu cảm giác ngứa do khô da và hỗ trợ phục hồi hàng rào bảo vệ da. Dùng được cho mặt và cơ thể, cho cả người lớn và trẻ em",
+   "benefitClaims": [
+    "Dưỡng ẩm sâu cho da rất khô",
+    "Làm dịu cảm giác ngứa do khô da",
+    "Hỗ trợ phục hồi hàng rào bảo vệ da"
+   ],
+   "usage": "Thoa lên mặt và cơ thể đã làm sạch 1–2 lần mỗi ngày hoặc bất cứ khi nào da cảm thấy khô",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "bioderma-sebium-mat-control": {
+   "shortDescription": "Kem dưỡng kiềm dầu, giúp da ráo mịn và hạn chế bóng nhờn cho da dầu",
+   "description": "Bioderma Sébium Mat Control là kem dưỡng dạng gel kem mỏng nhẹ dành cho da dầu và da hỗn hợp. Sản phẩm giúp hấp thụ dầu thừa, hạn chế bóng nhờn trong ngày và giữ ẩm vừa đủ mà không gây bít tắc lỗ chân lông. Có thể dùng làm lớp nền trước khi trang điểm",
+   "benefitClaims": [
+    "Kiềm dầu, giảm bóng nhờn",
+    "Dưỡng ẩm nhẹ, không gây bí da",
+    "Có thể dùng làm lớp lót trang điểm"
+   ],
+   "usage": "Sau bước làm sạch, thoa một lượng vừa đủ lên toàn mặt, tập trung vùng chữ T. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "hada-labo-advanced-nourish-hyaluronic-acid-serum": {
+   "shortDescription": "Serum cấp ẩm với nhiều dạng hyaluronic acid, giúp da căng mướt và mềm mịn",
+   "description": "Hada Labo Advanced Nourish Hyaluronic Acid Serum là tinh chất dưỡng ẩm chứa nhiều dạng hyaluronic acid với kích thước phân tử khác nhau, giúp cấp ẩm cho da và giữ ẩm lâu. Kết cấu sánh nhẹ, thấm nhanh, không mùi, phù hợp với da thường đến khô",
+   "benefitClaims": [
+    "Cấp ẩm sâu nhờ nhiều dạng hyaluronic acid",
+    "Giữ ẩm lâu, da căng mướt",
+    "Không mùi, dịu nhẹ"
+   ],
+   "usage": "Sau bước làm sạch và dung dịch dưỡng, lấy 2–3 giọt thoa đều lên mặt và vỗ nhẹ cho thấm. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "hada-labo-advanced-nourish-hyaluronic-acid-cream": {
+   "shortDescription": "Kem dưỡng ẩm với nhiều dạng hyaluronic acid, khóa ẩm giúp da mềm mịn",
+   "description": "Hada Labo Advanced Nourish Hyaluronic Acid Cream là kem dưỡng ẩm chứa nhiều dạng hyaluronic acid, giúp cấp ẩm và tạo lớp khóa ẩm trên bề mặt da. Kết cấu kem mềm, không gây nhờn dính, không mùi, phù hợp với da thường và da khô",
+   "benefitClaims": [
+    "Dưỡng ẩm và khóa ẩm",
+    "Giúp da mềm mịn, đàn hồi",
+    "Không mùi, dịu nhẹ"
+   ],
+   "usage": "Dùng ở bước cuối của chu trình dưỡng da. Lấy một lượng vừa đủ, thoa đều lên mặt và cổ. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "hada-labo-perfect-white-tranexamic-acid-serum": {
+   "shortDescription": "Serum dưỡng sáng với tranexamic acid và niacinamide, hỗ trợ làm mờ vết thâm",
+   "description": "Hada Labo Perfect White Tranexamic Acid Serum là tinh chất dưỡng sáng chứa tranexamic acid và niacinamide, hỗ trợ làm mờ vết thâm, đốm nâu và giúp da đều màu hơn. Công thức có hyaluronic acid giữ ẩm, kết cấu nhẹ thấm nhanh, phù hợp với nhiều loại da",
+   "benefitClaims": [
+    "Hỗ trợ làm mờ vết thâm và đốm nâu",
+    "Giúp da sáng và đều màu hơn",
+    "Đồng thời cấp ẩm cho da"
+   ],
+   "usage": "Sau bước làm sạch và dung dịch dưỡng, lấy 2–3 giọt thoa đều lên mặt, tập trung vào vùng da có vết thâm. Dùng sáng và tối, ban ngày cần thoa kem chống nắng",
+   "warnings": [
+    "Dùng kem chống nắng mỗi ngày để duy trì hiệu quả dưỡng sáng",
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "hada-labo-acne-care-calming-gel-cream": {
+   "shortDescription": "Gel kem dưỡng mỏng nhẹ cho da dầu mụn, cấp ẩm và làm dịu da",
+   "description": "Hada Labo Acne Care Calming Gel Cream là kem dưỡng dạng gel mỏng nhẹ dành cho da dầu và da dễ nổi mụn. Sản phẩm giúp cấp ẩm vừa đủ, làm dịu da và mang lại cảm giác thoáng nhẹ, không gây bết dính hay bít tắc lỗ chân lông",
+   "benefitClaims": [
+    "Cấp ẩm nhẹ cho da dầu mụn",
+    "Làm dịu da",
+    "Kết cấu gel thoáng nhẹ, không bết dính"
+   ],
+   "usage": "Dùng ở bước cuối sau serum. Lấy một lượng vừa đủ, thoa đều lên mặt. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "hada-labo-advanced-nourish-hyaluronic-acid-lotion-oily-skin": {
+   "shortDescription": "Dung dịch dưỡng ẩm với hyaluronic acid, kết cấu loãng nhẹ dành cho da dầu",
+   "description": "Hada Labo Advanced Nourish Hyaluronic Acid Lotion bản dành cho da dầu là dung dịch dưỡng ẩm (lotion) kết cấu loãng nhẹ, chứa nhiều dạng hyaluronic acid. Sản phẩm giúp cấp nước cho da, làm mềm da và chuẩn bị cho các bước dưỡng tiếp theo mà không gây nhờn rít",
+   "benefitClaims": [
+    "Cấp nước nhẹ nhàng cho da dầu",
+    "Làm mềm da, tăng hiệu quả bước dưỡng sau",
+    "Không gây nhờn rít"
+   ],
+   "usage": "Sau khi rửa mặt, lấy một lượng vừa đủ ra tay hoặc bông tẩy trang, vỗ nhẹ lên toàn mặt đến khi thấm. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "anessa-perfect-uv-sunscreen-skincare-milk-na-spf50-pa": {
+   "shortDescription": "Sữa chống nắng SPF50+ PA++++ chống nước và mồ hôi, phù hợp hoạt động ngoài trời",
+   "description": "Anessa Perfect UV Sunscreen Skincare Milk là sữa chống nắng dạng lỏng với chỉ số SPF50+ PA++++, ứng dụng công nghệ Auto Booster giúp lớp chống nắng bền hơn khi gặp mồ hôi, nước và nhiệt. Kết cấu mỏng nhẹ, nhanh khô, phù hợp đi biển, chơi thể thao hoặc hoạt động ngoài trời",
+   "benefitClaims": [
+    "Chống nắng SPF50+ PA++++",
+    "Bền vững khi gặp nước và mồ hôi",
+    "Kết cấu sữa mỏng nhẹ, nhanh khô"
+   ],
+   "usage": "Lắc đều trước khi dùng. Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ]
+  },
+  "anessa-perfect-uv-sunscreen-mild-milk-na-spf50-pa": {
+   "shortDescription": "Sữa chống nắng SPF50+ PA++++ dịu nhẹ, dành cho da nhạy cảm",
+   "description": "Anessa Perfect UV Sunscreen Mild Milk là phiên bản sữa chống nắng dịu nhẹ dành cho da nhạy cảm, chỉ số SPF50+ PA++++. Sản phẩm vẫn giữ khả năng bảo vệ cao khi gặp nước và mồ hôi, kết cấu nhẹ, dễ tán và có thể làm sạch bằng sữa rửa mặt thông thường",
+   "benefitClaims": [
+    "Chống nắng SPF50+ PA++++",
+    "Dịu nhẹ, phù hợp da nhạy cảm",
+    "Dễ làm sạch"
+   ],
+   "usage": "Lắc đều trước khi dùng. Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ]
+  },
+  "anessa-perfect-uv-sunscreen-skincare-gel-nb-spf50-pa": {
+   "shortDescription": "Gel chống nắng SPF50+ PA++++ kết cấu mềm nhẹ, dùng cho mặt và toàn thân",
+   "description": "Anessa Perfect UV Sunscreen Skincare Gel là gel chống nắng chỉ số SPF50+ PA++++, kết cấu gel mềm, dễ tán và thấm nhanh, không gây bết dính. Sản phẩm bền vững khi gặp nước và mồ hôi, dùng được cho cả mặt và cơ thể trong sinh hoạt hằng ngày",
+   "benefitClaims": [
+    "Chống nắng SPF50+ PA++++",
+    "Kết cấu gel nhẹ, không bết dính",
+    "Dùng cho mặt và toàn thân"
+   ],
+   "usage": "Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ]
+  },
+  "anessa-brightening-uv-sunscreen-gel-na-spf50-pa": {
+   "shortDescription": "Gel chống nắng SPF50+ PA++++ kết hợp dưỡng sáng da, kết cấu nhẹ",
+   "description": "Anessa Brightening UV Sunscreen Gel là gel chống nắng chỉ số SPF50+ PA++++ có thêm thành phần dưỡng sáng, giúp bảo vệ da khỏi tác hại của tia UV đồng thời hỗ trợ da sáng và đều màu hơn. Kết cấu gel mỏng nhẹ, thấm nhanh, dùng được cho mặt và cơ thể",
+   "benefitClaims": [
+    "Chống nắng SPF50+ PA++++",
+    "Hỗ trợ dưỡng sáng da",
+    "Kết cấu gel mỏng nhẹ"
+   ],
+   "usage": "Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ]
+  },
+  "skin1004-madagascar-centella-ampoule": {
+   "shortDescription": "Tinh chất chiết xuất rau má Madagascar giúp làm dịu và cấp ẩm cho da nhạy cảm",
+   "description": "SKIN1004 Madagascar Centella Ampoule là tinh chất chứa chiết xuất rau má (Centella Asiatica) từ Madagascar, kết cấu lỏng nhẹ như nước, thấm rất nhanh. Sản phẩm giúp làm dịu da đang kích ứng, cấp ẩm nhẹ nhàng và hỗ trợ da phục hồi, phù hợp với da nhạy cảm và da dầu mụn",
+   "benefitClaims": [
+    "Làm dịu da kích ứng",
+    "Cấp ẩm nhẹ nhàng",
+    "Hỗ trợ da phục hồi"
+   ],
+   "usage": "Sau bước toner, lấy vài giọt thoa đều lên mặt và vỗ nhẹ cho thấm. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "skin1004-madagascar-centella-light-cleansing-oil": {
+   "shortDescription": "Dầu tẩy trang mỏng nhẹ với rau má, làm sạch lớp trang điểm và kem chống nắng",
+   "description": "SKIN1004 Madagascar Centella Light Cleansing Oil là dầu tẩy trang kết cấu mỏng nhẹ, chứa chiết xuất rau má. Sản phẩm hòa tan lớp trang điểm, kem chống nắng và bã nhờn, nhũ hóa nhanh khi gặp nước và rửa sạch dễ dàng mà không để lại cảm giác nhờn",
+   "benefitClaims": [
+    "Làm sạch lớp trang điểm và kem chống nắng",
+    "Nhũ hóa nhanh, rửa sạch dễ dàng",
+    "Dịu nhẹ nhờ chiết xuất rau má"
+   ],
+   "usage": "Dùng với tay và mặt khô. Lấy 2–3 lần nhấn, massage nhẹ khắp mặt khoảng 1 phút, thêm chút nước để nhũ hóa rồi rửa sạch. Sau đó dùng sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "skin1004-madagascar-centella-ampoule-foam": {
+   "shortDescription": "Sữa rửa mặt tạo bọt mịn với rau má, làm sạch dịu nhẹ không khô căng",
+   "description": "SKIN1004 Madagascar Centella Ampoule Foam là sữa rửa mặt tạo bọt mịn chứa chiết xuất rau má, giúp loại bỏ bụi bẩn và dầu thừa một cách dịu nhẹ. Sau khi rửa da sạch thoáng nhưng không bị khô căng, phù hợp với da nhạy cảm và da dầu mụn",
+   "benefitClaims": [
+    "Làm sạch dịu nhẹ",
+    "Bọt mịn, không gây khô căng",
+    "Phù hợp da nhạy cảm"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "skin1004-madagascar-centella-soothing-cream": {
+   "shortDescription": "Kem dưỡng làm dịu với rau má và ceramide, cấp ẩm cho da nhạy cảm",
+   "description": "SKIN1004 Madagascar Centella Soothing Cream là kem dưỡng chứa chiết xuất rau má Madagascar và ceramide, giúp làm dịu, cấp ẩm và hỗ trợ củng cố hàng rào bảo vệ da. Kết cấu kem mềm, thấm nhanh, phù hợp với da nhạy cảm và da đang cần phục hồi",
+   "benefitClaims": [
+    "Làm dịu da nhạy cảm",
+    "Cấp ẩm và giữ ẩm",
+    "Hỗ trợ củng cố hàng rào bảo vệ da"
+   ],
+   "usage": "Dùng ở bước cuối của chu trình dưỡng da. Thoa một lượng vừa đủ lên mặt, vỗ nhẹ cho thấm. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "skin1004-madagascar-centella-hyalu-cica-water-fit-sun-serum": {
+   "shortDescription": "Serum chống nắng SPF50+ PA++++ mỏng nhẹ như nước, có rau má và hyaluronic acid",
+   "description": "SKIN1004 Hyalu-Cica Water-Fit Sun Serum là kem chống nắng dạng serum với chỉ số SPF50+ PA++++, kết cấu mỏng nhẹ, thấm nhanh và không để lại vệt trắng. Công thức có chiết xuất rau má và hyaluronic acid giúp làm dịu, cấp ẩm cho da, phù hợp dùng hằng ngày và trước khi trang điểm",
+   "benefitClaims": [
+    "Chống nắng SPF50+ PA++++",
+    "Kết cấu serum mỏng nhẹ, không vệt trắng",
+    "Cấp ẩm và làm dịu da"
+   ],
+   "usage": "Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ]
+  },
+  "paulas-choice-skin-perfecting-2-bha-liquid-exfoliant": {
+   "shortDescription": "Dung dịch tẩy tế bào chết 2% BHA giúp thông thoáng lỗ chân lông và làm mịn da",
+   "description": "Paula's Choice Skin Perfecting 2% BHA Liquid Exfoliant là dung dịch tẩy tế bào chết không cần rửa lại, chứa 2% salicylic acid. Sản phẩm giúp loại bỏ lớp tế bào chết trên bề mặt và trong lỗ chân lông, hỗ trợ giảm mụn đầu đen, làm mịn và đều màu da. Phù hợp với da dầu, da hỗn hợp và da dễ nổi mụn",
+   "benefitClaims": [
+    "Làm thông thoáng lỗ chân lông",
+    "Hỗ trợ giảm mụn đầu đen và mụn ẩn",
+    "Giúp da mịn và đều màu hơn"
+   ],
+   "usage": "Sau khi rửa mặt và toner, thấm sản phẩm ra bông tẩy trang hoặc tay rồi thoa đều lên mặt, không cần rửa lại. Bắt đầu 1 lần mỗi ngày hoặc cách ngày, có thể tăng lên 2 lần mỗi ngày nếu da dung nạp tốt",
+   "warnings": [
+    "Có thể gây châm chích nhẹ trong những lần đầu, bắt đầu với tần suất thấp",
+    "Dùng kem chống nắng mỗi ngày khi đang dùng sản phẩm tẩy tế bào chết",
+    "Không dùng chung cùng lúc với retinol hoặc acid mạnh khác nếu da chưa quen"
+   ]
+  },
+  "paulas-choice-10-niacinamide-booster": {
+   "shortDescription": "Tinh chất 10% niacinamide giúp se khít lỗ chân lông và cải thiện da không đều màu",
+   "description": "Paula's Choice 10% Niacinamide Booster là tinh chất cô đặc chứa 10% niacinamide, giúp làm se lỗ chân lông, cải thiện bề mặt da sần và hỗ trợ làm đều màu da. Kết cấu nhẹ, có thể dùng riêng hoặc trộn với serum, kem dưỡng. Phù hợp với hầu hết loại da",
+   "benefitClaims": [
+    "Hỗ trợ se khít lỗ chân lông",
+    "Cải thiện vùng da không đều màu",
+    "Hỗ trợ hàng rào bảo vệ da"
+   ],
+   "usage": "Sau bước toner và tẩy tế bào chết, lấy vài giọt thoa đều lên mặt hoặc trộn với kem dưỡng. Dùng 1–2 lần mỗi ngày",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "paulas-choice-calm-ultra-gentle-cleanser": {
+   "shortDescription": "Sữa rửa mặt siêu dịu nhẹ, không mùi, dành cho da nhạy cảm",
+   "description": "Paula's Choice CALM Ultra-Gentle Cleanser là sữa rửa mặt dạng kem lỏng, ít bọt, không chứa hương liệu, được thiết kế cho da nhạy cảm và da dễ đỏ. Sản phẩm làm sạch bụi bẩn và lớp trang điểm nhẹ mà không làm mất độ ẩm tự nhiên của da",
+   "benefitClaims": [
+    "Làm sạch siêu dịu nhẹ",
+    "Không chứa hương liệu",
+    "Không làm khô căng da"
+   ],
+   "usage": "Làm ướt mặt, lấy một lượng vừa đủ ra tay, tạo bọt hoặc xoa nhẹ lên da khoảng 30–60 giây rồi rửa sạch lại với nước. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "paulas-choice-resist-barrier-repair-advanced-moisturizer": {
+   "shortDescription": "Kem dưỡng chống lão hóa giúp phục hồi hàng rào bảo vệ da, dành cho da thường đến khô",
+   "description": "Paula's Choice RESIST Barrier Repair Advanced Moisturizer là kem dưỡng thuộc dòng chống lão hóa RESIST, chứa các chất chống oxy hóa và thành phần hỗ trợ hàng rào bảo vệ da. Sản phẩm giúp cấp ẩm, làm mềm da và cải thiện dấu hiệu lão hóa, phù hợp với da thường đến khô",
+   "benefitClaims": [
+    "Dưỡng ẩm và làm mềm da",
+    "Hỗ trợ phục hồi hàng rào bảo vệ da",
+    "Hỗ trợ cải thiện dấu hiệu lão hóa"
+   ],
+   "usage": "Dùng buổi tối ở bước cuối sau serum. Thoa một lượng vừa đủ lên mặt và cổ",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "the-ordinary-niacinamide-10-zinc-1": {
+   "shortDescription": "Serum 10% niacinamide và 1% kẽm giúp giảm thâm mụn và kiểm soát dầu thừa",
+   "description": "The Ordinary Niacinamide 10% + Zinc 1% là serum gốc nước chứa nồng độ cao niacinamide kết hợp kẽm PCA. Sản phẩm giúp cải thiện vẻ ngoài của vết thâm, làm đều màu da, hỗ trợ kiểm soát bã nhờn và làm lỗ chân lông trông nhỏ hơn. Phù hợp với da dầu và da dễ nổi mụn",
+   "benefitClaims": [
+    "Hỗ trợ kiểm soát dầu thừa",
+    "Giúp da đều màu, mờ thâm",
+    "Làm lỗ chân lông trông nhỏ hơn"
+   ],
+   "usage": "Thoa vài giọt lên toàn mặt sáng và tối, trước các loại kem dưỡng đặc hơn",
+   "warnings": [
+    "Không dùng cùng lúc với sản phẩm chứa vitamin C dạng nguyên chất",
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "the-ordinary-hyaluronic-acid-2-b5-with-ceramides": {
+   "shortDescription": "Serum hyaluronic acid 2% kết hợp vitamin B5 và ceramide giúp cấp nước cho da",
+   "description": "The Ordinary Hyaluronic Acid 2% + B5 (with Ceramides) là serum cấp nước chứa hyaluronic acid ở nhiều kích thước phân tử, kết hợp vitamin B5 và ceramide. Sản phẩm giúp da được cấp nước nhiều tầng, căng mịn hơn và hỗ trợ hàng rào bảo vệ da. Phù hợp với mọi loại da",
+   "benefitClaims": [
+    "Cấp nước nhiều tầng cho da",
+    "Giúp da căng mịn",
+    "Hỗ trợ hàng rào bảo vệ da"
+   ],
+   "usage": "Thoa vài giọt lên mặt sáng và tối, trước kem dưỡng",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "the-ordinary-glycolic-acid-7-exfoliating-toner": {
+   "shortDescription": "Toner tẩy tế bào chết 7% glycolic acid giúp da sáng mịn và đều màu",
+   "description": "The Ordinary Glycolic Acid 7% Exfoliating Toner là toner tẩy tế bào chết chứa 7% glycolic acid (AHA), giúp loại bỏ tế bào chết, cải thiện độ sáng và độ mịn của da. Công thức có thêm chiết xuất nhân sâm và lô hội giúp làm dịu. Phù hợp với da thường, da dầu và da xỉn màu",
+   "benefitClaims": [
+    "Hỗ trợ tẩy tế bào chết bề mặt",
+    "Giúp da sáng mịn hơn",
+    "Cải thiện bề mặt da không đều"
+   ],
+   "usage": "Dùng buổi tối, tối đa 1 lần mỗi ngày. Thấm ra bông tẩy trang và lau nhẹ toàn mặt sau khi rửa mặt, tránh vùng mắt. Không cần rửa lại",
+   "warnings": [
+    "Có thể gây châm chích nhẹ, không dùng trên da đang tổn thương",
+    "Dùng kem chống nắng mỗi ngày khi đang dùng AHA",
+    "Không dùng cùng lúc với retinol hoặc acid mạnh khác"
+   ]
+  },
+  "the-ordinary-azelaic-acid-suspension-10": {
+   "shortDescription": "Kem gel chứa 10% azelaic acid giúp da sáng và đều màu, cải thiện bề mặt da",
+   "description": "The Ordinary Azelaic Acid Suspension 10% là kem dạng gel chứa 10% azelaic acid, giúp làm sáng và đều màu da, cải thiện bề mặt da sần và hỗ trợ da dễ nổi mụn. Kết cấu kem nhẹ, có thể dùng sáng và tối",
+   "benefitClaims": [
+    "Giúp da sáng và đều màu hơn",
+    "Cải thiện bề mặt da",
+    "Phù hợp với da dễ nổi mụn"
+   ],
+   "usage": "Thoa một lượng nhỏ lên toàn mặt sáng và tối sau serum gốc nước, trước kem dưỡng",
+   "warnings": [
+    "Có thể gây cảm giác ngứa hoặc châm chích nhẹ trong thời gian đầu",
+    "Dùng kem chống nắng khi dùng ban ngày",
+    "Chỉ dùng ngoài da, tránh vùng mắt"
+   ]
+  },
+  "the-ordinary-natural-moisturizing-factors-ha": {
+   "shortDescription": "Kem dưỡng ẩm bề mặt với các yếu tố giữ ẩm tự nhiên và hyaluronic acid",
+   "description": "The Ordinary Natural Moisturizing Factors + HA là kem dưỡng ẩm bổ sung các yếu tố giữ ẩm tự nhiên của da (amino acid, lipid, đường) cùng hyaluronic acid. Kết cấu kem mỏng, không nhờn, giúp cấp ẩm và bảo vệ bề mặt da. Phù hợp với mọi loại da",
+   "benefitClaims": [
+    "Cấp ẩm bề mặt da",
+    "Kết cấu mỏng nhẹ, không nhờn",
+    "Phù hợp với mọi loại da"
+   ],
+   "usage": "Thoa một lượng nhỏ lên mặt ở bước cuối sau serum. Dùng sáng và tối",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ]
+  },
+  "cocoon-tinh-chat-bi-ao-n7": {
+   "shortDescription": "Tinh chất bí đao chứa niacinamide 7% giúp giảm mụn, mờ thâm cho da dầu mụn",
+   "description": "Tinh chất bí đao N7 của Cocoon chứa 7% niacinamide kết hợp chiết xuất bí đao, hỗ trợ giảm mụn, làm mờ vết thâm và kiểm soát dầu thừa. Kết cấu lỏng nhẹ, thấm nhanh, phù hợp với da dầu và da dễ nổi mụn. Sản phẩm thuần chay của thương hiệu Việt Nam Cocoon, không thử nghiệm trên động vật",
+   "benefitClaims": [
+    "Hỗ trợ giảm mụn và kiểm soát dầu",
+    "Giúp làm mờ vết thâm",
+    "Kết cấu nhẹ, thấm nhanh"
+   ],
+   "usage": "Sau bước toner, lấy 3–4 giọt thoa đều lên mặt và vỗ nhẹ cho thấm, sau đó dùng kem dưỡng. Dùng sáng và tối, ban ngày thoa thêm kem chống nắng",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Niacinamide",
+    "Chiết xuất bí đao"
+   ]
+  },
+  "cocoon-nuoc-tay-trang-bi-ao": {
+   "shortDescription": "Nước tẩy trang bí đao làm sạch dịu nhẹ, phù hợp da dầu mụn",
+   "description": "Nước tẩy trang bí đao của Cocoon ứng dụng công nghệ micellar giúp làm sạch lớp trang điểm, bụi bẩn và dầu thừa một cách nhẹ nhàng. Chiết xuất bí đao giúp làm dịu và phù hợp với da dầu, da dễ nổi mụn. Sản phẩm thuần chay của thương hiệu Việt Nam Cocoon, không thử nghiệm trên động vật",
+   "benefitClaims": [
+    "Làm sạch lớp trang điểm và bụi bẩn",
+    "Dịu nhẹ, không gây khô căng",
+    "Phù hợp da dầu mụn"
+   ],
+   "usage": "Thấm sản phẩm ra bông tẩy trang, áp nhẹ lên da vài giây rồi lau nhẹ nhàng. Lặp lại đến khi bông sạch, sau đó rửa lại với sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Chiết xuất bí đao"
+   ]
+  },
+  "cocoon-sua-chong-nang-bi-ao": {
+   "shortDescription": "Sữa chống nắng bí đao kết cấu mỏng nhẹ, bảo vệ da hằng ngày",
+   "description": "Sữa chống nắng bí đao của Cocoon có kết cấu dạng sữa mỏng nhẹ, dễ tán và nhanh khô, giúp bảo vệ da khỏi tác hại của tia UV trong sinh hoạt hằng ngày. Chiết xuất bí đao giúp làm dịu, phù hợp với da dầu và da dễ nổi mụn. Chỉ số chống nắng xem trên bao bì sản phẩm. Sản phẩm thuần chay của thương hiệu Việt Nam Cocoon, không thử nghiệm trên động vật",
+   "benefitClaims": [
+    "Bảo vệ da khỏi tia UV hằng ngày",
+    "Kết cấu mỏng nhẹ, nhanh khô",
+    "Phù hợp da dầu mụn"
+   ],
+   "usage": "Lắc đều trước khi dùng. Thoa đều lên mặt và vùng da hở khoảng 15 phút trước khi ra nắng, lượng đủ phủ kín da. Thoa lại sau mỗi 2 giờ hoặc sau khi ra nhiều mồ hôi, bơi lội, lau khăn. Cuối ngày làm sạch bằng tẩy trang và sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh để dính vào mắt",
+    "Ngưng dùng nếu da bị đỏ, ngứa hoặc kích ứng"
+   ],
+   "ingredients": [
+    "Chiết xuất bí đao"
+   ]
+  },
+  "cocoon-nuoc-tay-trang-hoa-hong": {
+   "shortDescription": "Nước tẩy trang hoa hồng làm sạch dịu nhẹ và giữ ẩm, phù hợp da thường và da khô",
+   "description": "Nước tẩy trang hoa hồng của Cocoon ứng dụng công nghệ micellar giúp làm sạch lớp trang điểm, bụi bẩn và dầu thừa mà không làm khô da. Chiết xuất hoa hồng giúp làm dịu và giữ ẩm, mang lại cảm giác mềm mại sau khi tẩy trang. Phù hợp với da thường, da khô và da nhạy cảm. Sản phẩm thuần chay của thương hiệu Việt Nam Cocoon, không thử nghiệm trên động vật",
+   "benefitClaims": [
+    "Làm sạch lớp trang điểm và bụi bẩn",
+    "Giữ ẩm, không gây khô căng",
+    "Dịu nhẹ cho da nhạy cảm"
+   ],
+   "usage": "Thấm sản phẩm ra bông tẩy trang, áp nhẹ lên da vài giây rồi lau nhẹ nhàng. Lặp lại đến khi bông sạch, sau đó rửa lại với sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Chiết xuất hoa hồng"
+   ]
+  },
+  "cocoon-dau-tay-trang-hoa-hong": {
+   "shortDescription": "Dầu tẩy trang hoa hồng làm sạch lớp trang điểm và kem chống nắng, nhũ hóa nhanh với nước",
+   "description": "Dầu tẩy trang hoa hồng của Cocoon giúp hòa tan lớp trang điểm, kem chống nắng và bã nhờn, nhũ hóa thành dạng sữa khi gặp nước nên rửa sạch dễ dàng. Sản phẩm phù hợp với da thường và da khô, mang lại cảm giác mềm mại sau khi làm sạch. Sản phẩm thuần chay của thương hiệu Việt Nam Cocoon, không thử nghiệm trên động vật",
+   "benefitClaims": [
+    "Làm sạch lớp trang điểm và kem chống nắng",
+    "Nhũ hóa nhanh, rửa sạch dễ dàng",
+    "Da mềm mại sau khi làm sạch"
+   ],
+   "usage": "Dùng với tay và mặt khô. Lấy 2–3 lần nhấn, massage nhẹ khắp mặt khoảng 1 phút, thêm chút nước để nhũ hóa rồi rửa sạch. Sau đó dùng sữa rửa mặt",
+   "warnings": [
+    "Chỉ dùng ngoài da, tránh vùng mắt",
+    "Ngưng dùng nếu da có dấu hiệu kích ứng"
+   ],
+   "ingredients": [
+    "Chiết xuất hoa hồng"
+   ]
+  }
+ }
+}

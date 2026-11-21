@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axiosClient from "../../api/axiosClient";
 import { displayOrderCode, formatCurrency, formatDate, orderStatusLabel, paymentStatusLabel } from "../../utils/formatters";
 
-const paymentMethodLabel = { COD: "COD", VNPAY: "VNPay", BANK_TRANSFER: "Chuyển khoản" };
+const paymentMethodLabel = { COD: "COD", VNPAY: "VNPay", ZALOPAY: "ZaloPay", BANK_TRANSFER: "Chuyển khoản" };
 
 export default function OrdersAdmin() {
   const [orders, setOrders] = useState([]);
@@ -32,7 +32,7 @@ export default function OrdersAdmin() {
       }
     } catch (requestError) {
       if (sequence === requestSequence.current) {
-        setError(requestError.response?.data?.message || "Không thể tải danh sách đơn hàng.");
+        setError(requestError.response?.data?.message || "Không thể tải danh sách đơn hàng");
       }
     } finally {
       if (sequence === requestSequence.current) setLoading(false);
@@ -48,11 +48,11 @@ export default function OrdersAdmin() {
       <div className="table-title">
         <div>
           <h3>Đơn hàng</h3>
-          <p>{pagination.total} đơn hàng · dữ liệu trực tiếp từ backend</p>
+          <p>{pagination.total} đơn hàng</p>
         </div>
       </div>
       <p className="admin-order-click-hint">
-        Nhấn vào <strong>mã đơn</strong> hoặc nút <strong>Mở để xác nhận</strong> để xem chi tiết và xử lý đơn hàng.
+        Nhấn vào <strong>mã đơn</strong> hoặc nút <strong>Mở để xác nhận</strong> để xem chi tiết và xử lý đơn hàng
       </p>
 
       <div className="admin-order-toolbar">
@@ -91,7 +91,7 @@ export default function OrdersAdmin() {
                   <Link key={order._id} className="admin-order-entry" to={`/admin/orders/${order._id}`} aria-label={`${actionLabel} đơn hàng ${orderCode}`}>
                     <div className="admin-order-entry-top">
                       <div className="admin-order-entry-heading">
-                        <span className="admin-order-entry-eyebrow">MÃ ĐƠN HÀNG · {formatDate(order.createdAt)}</span>
+                        <span className="admin-order-entry-eyebrow">ĐẶT LÚC {formatDate(order.createdAt)}</span>
                         <strong className="admin-order-entry-code">{orderCode}</strong>
                       </div>
                       <span className="admin-order-entry-action">{actionLabel}<ArrowRight aria-hidden="true" size={18} /></span>
@@ -111,7 +111,7 @@ export default function OrdersAdmin() {
               <span>Trang {pagination.page} / {Math.max(pagination.totalPages, 1)}</span>
               <button aria-label="Trang sau" disabled={pagination.page >= pagination.totalPages} onClick={() => { setLoading(true); load(pagination.page + 1); }}><ChevronRight /></button>
             </div>
-          </> : <div className="admin-state">Không tìm thấy đơn hàng phù hợp.</div>}
+          </> : <div className="admin-state">Không tìm thấy đơn hàng phù hợp</div>}
     </section>
   );
 }

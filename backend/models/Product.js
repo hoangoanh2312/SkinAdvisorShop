@@ -20,6 +20,7 @@ const ingredientSchema = new mongoose.Schema(
     benefits: [{ type: String, trim: true }],
     concerns: [{ type: String, enum: SKIN_CONCERNS }],
     description: { type: String, default: "" },
+    sourceUrl: { type: String, default: "", trim: true, validate: { validator: value => !value || /^https:\/\/[^\s]+$/i.test(value), message: "Nguồn thành phần phải là đường dẫn HTTPS" } },
     isPotentialIrritant: { type: Boolean, default: false },
   },
   { _id: false }
@@ -52,6 +53,8 @@ const productSchema = new mongoose.Schema(
     },
     shortDescription: { type: String, default: "" },
     description: { type: String, default: "" },
+    benefitClaims: [{ type: String, trim: true }],
+    contentSourceUrl: { type: String, default: "", trim: true, validate: { validator: value => !value || /^https:\/\/[^\s]+$/i.test(value), message: "Nguồn nội dung phải là đường dẫn HTTPS" } },
     images: [{ type: String }],
     imageAssets: { type: [imageAssetSchema], default: [] },
     skinTypes: [{ type: String, enum: PRODUCT_SKIN_TYPES }],

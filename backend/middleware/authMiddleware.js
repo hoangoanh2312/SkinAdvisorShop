@@ -44,6 +44,11 @@ const protect = async (req, res, next) => {
       });
     }
 
+    // A password change/reset invalidates every token issued before it (log out other devices).
+    if (user.passwordChangedAt && payload.iat * 1000 < user.passwordChangedAt.getTime()) {
+      return res.status(401).json({ success: false, message: "Mật khẩu đã thay đổi, vui lòng đăng nhập lại" });
+    }
+
     req.user = user;
     return next();
   } catch {

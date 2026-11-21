@@ -21,7 +21,11 @@ export function AuthProvider({ children }) {
   const login = async ({ email, password }) => saveSession((await axiosClient.post("/auth/login", { email: email.trim(), password })).data.data);
   const register = async ({ fullName, email, password }) => saveSession((await axiosClient.post("/auth/register", { fullName: fullName.trim(), email: email.trim(), password })).data.data);
   const loginWithGoogle = async (code) => saveSession((await axiosClient.post("/auth/google", { code })).data.data);
+  // Profile edits keep the session; a password change returns a new token (other devices are signed out).
+  const refreshUser = (value) => { setUser(value); localStorage.setItem("skinora_user", JSON.stringify(value)); return value; };
+  const updateProfile = async (payload) => refreshUser((await axiosClient.put("/auth/me", payload, { sessionProtected: true })).data.data.user);
+  const changePassword = async (payload) => saveSession((await axiosClient.put("/auth/me/password", payload, { sessionProtected: true })).data.data);
   const linkGoogle = async (code) => saveSession((await axiosClient.post("/auth/google/link", { code }, { sessionProtected: true })).data.data);
-  const value = useMemo(() => ({ user, token, loading, isAuthenticated: Boolean(user && token), login, register, loginWithGoogle, linkGoogle, logout }), [user, token, loading, logout]);
+  const value = useMemo(() => ({ user, token, loading, isAuthenticated: Boolean(user && token), login, register, loginWithGoogle, linkGoogle, logout, updateProfile, changePassword, refreshUser }), [user, token, loading, logout]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

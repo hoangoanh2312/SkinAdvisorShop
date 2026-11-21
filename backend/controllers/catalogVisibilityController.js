@@ -42,7 +42,7 @@ async function previewCatalogVisibility(_req, res) {
       eligible: result.eligibleIds.length,
       skipped: result.skipped,
       total: result.total,
-      message: "Xem trước, chưa thay đổi database. Sản phẩm chỉ hiện thông tin, không tự mở bán.",
+      message: "Xem trước, chưa thay đổi cơ sở dữ liệu. Sản phẩm chỉ hiện thông tin, không tự mở bán.",
     } });
   } catch (error) {
     return sendControllerError(res, error, "Không thể kiểm tra Catalog");
@@ -83,10 +83,10 @@ async function setCatalogVisibility(req, res) {
     }
     if (req.body.visible) {
       if (!completeProfile(product)) {
-        return res.status(400).json({ success: false, message: "Cần đầy đủ tên, thương hiệu, danh mục và ít nhất một ảnh URL hợp lệ" });
+        return res.status(400).json({ success: false, message: "Cần đầy đủ tên, thương hiệu, danh mục và ít nhất một đường dẫn ảnh hợp lệ" });
       }
       const hasSku = await Variant.exists({ product: product._id, price: { $gt: 0 } });
-      if (!hasSku) return res.status(400).json({ success: false, message: "Cần ít nhất một SKU có giá hợp lệ trước khi hiển thị" });
+      if (!hasSku) return res.status(400).json({ success: false, message: "Cần ít nhất một mã hàng có giá hợp lệ trước khi hiển thị" });
     }
     product.isCatalogVisible = req.body.visible;
     await product.save();
